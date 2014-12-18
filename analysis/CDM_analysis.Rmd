@@ -1,0 +1,65 @@
+---
+title: "CDM_gender"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+library(plyr)
+library(reshape2)
+library(dplyr)
+theme_set(theme_bw())
+df=read.csv("CDMlangsurvey_analysis.csv")
+library(stringr)
+library(knitr)
+library(markdown)
+```
+
+---
+ANALYSIS
+----
+Props of words
+```{r}
+quartz()
+freqs <- ddply(df, .(Word), summarise, count=length(Word))
+freqs$Word <- factor(freqs$Word, levels=with(freqs, Word[order(count, Word, decreasing = TRUE)]))
+freqs$prop <- freqs$count/sum(freqs$count)
+q <- qplot(Word, prop, geom="bar", stat="identity", 
+           data=subset(freqs, count>1 & Word != "N/A"))
+q + theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5))+ylab("Proportion of Total Utterances") + xlab("Standardized first words")
+```
+
+Age hist
+
+```{r}
+quartz()
+freqs <- ddply(df, .(Age_utterance, gender), summarise, count=length(gender))
+
+qplot(Age_utterance, fill=gender, geom = "bar", position="dodge",
+      data=subset(df, gender != "" & Age_utterance != ""))+ylab("Number of Children")+xlab("Age at time of first word")
+```
+
+```{r}
+Words by gender 
+```{r}
+quartz()
+freqs <- ddply(df, .(Word, gender), summarise, count=length(Word))
+freqs <- ddply(freqs, .(Word), mutate, total.count=sum(count))
+freqs$Word <- factor(freqs$Word, 
+                                  levels=unique(with(freqs, Word
+                                  [order(count, Word, 
+                                  decreasing = TRUE)])))
+freqs <- freqs %>%
+group_by(gender) %>%
+mutate(prop = count/sum(count)) 
+
+
+q <- qplot(Word, prop, fill=gender, 
+           position="dodge",
+           geom="bar",
+           stat="identity",
+           data=subset(freqs, total.count>3 & gender!="" ))
+q + theme(axis.text.x = element_text(angle=90, hjust = 1, vjust=.5)) + 
+  ylab("Proportion of Total Utterances") + xlab("Standardized first word") 
+```
+```
