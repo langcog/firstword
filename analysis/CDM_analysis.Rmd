@@ -21,11 +21,11 @@ ANALYSIS
 Props of words
 ```{r}
 quartz()
-freqs <- ddply(df, .(Word), summarise, count=length(Word))
-freqs$Word <- factor(freqs$Word, levels=with(freqs, Word[order(count, Word, decreasing = TRUE)]))
+freqs <- ddply(df, .(Word_standard), summarise, count=length(Word_standard))
+freqs$Word_standard <- factor(freqs$Word_standard, levels=with(freqs, Word_standard[order(count, Word_standard, decreasing = TRUE)]))
 freqs$prop <- freqs$count/sum(freqs$count)
-q <- qplot(Word, prop, geom="bar", stat="identity", 
-           data=subset(freqs, count>1 & Word != "N/A"))
+q <- qplot(Word_standard, prop, geom="bar", stat="identity", 
+           data=subset(freqs, count>1 & Word_standard != "N/A"))
 q + theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5))+ylab("Proportion of Total Utterances") + xlab("Standardized first words")
 ```
 
@@ -43,18 +43,18 @@ qplot(Age_utterance, fill=gender, geom = "bar", position="dodge",
 Words by gender 
 ```{r}
 quartz()
-freqs <- ddply(df, .(Word, gender), summarise, count=length(Word))
-freqs <- ddply(freqs, .(Word), mutate, total.count=sum(count))
-freqs$Word <- factor(freqs$Word, 
-                                  levels=unique(with(freqs, Word
-                                  [order(count, Word, 
+freqs <- ddply(df, .(Word_standard, gender), summarise, count=length(Word_standard))
+freqs <- ddply(freqs, .(Word_standard), mutate, total.count=sum(count))
+freqs$Word_standard <- factor(freqs$Word_standard, 
+                                  levels=unique(with(freqs, Word_standard
+                                  [order(count, Word_standard, 
                                   decreasing = TRUE)])))
 freqs <- freqs %>%
 group_by(gender) %>%
 mutate(prop = count/sum(count)) 
 
 
-q <- qplot(Word, prop, fill=gender, 
+q <- qplot(Word_standard, prop, fill=gender, 
            position="dodge",
            geom="bar",
            stat="identity",
@@ -62,4 +62,48 @@ q <- qplot(Word, prop, fill=gender,
 q + theme(axis.text.x = element_text(angle=90, hjust = 1, vjust=.5)) + 
   ylab("Proportion of Total Utterances") + xlab("Standardized first word") 
 ```
+```
+CDI - gender
+```{r}
+quartz()
+freqs <- ddply(df, .(CDI_cat, Word_standard, gender, Age_utterance), summarise, 
+               count=length(Word_standard))
+freqs$prop <- freqs$count/sum(freqs$count)
+
+freqs$CDI_cat <- factor(freqs$CDI_cat, 
+                                  levels=unique(with(freqs, CDI_cat
+                                  [order(freqs$prop, CDI_cat, 
+                                  decreasing = TRUE)])))
+freqs <- freqs %>%
+group_by(gender) %>%
+mutate(prop = count/sum(count)) 
+
+qplot(CDI_cat, prop, fill=gender, geom="bar", position="dodge", stat="identity",
+           data=subset(freqs, count>1 & Word_standard != "N/A" & CDI_cat != "N/A")) + 
+  theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5))+
+  ylab("Proportion of Total Words") + xlab("CDI Categories")
+```
+
+CDI - age
+
+```{r}
+quartz()
+freqs <- ddply(df, .(CDI_cat, Word_standard, gender, Age_utterance), summarise, 
+               count=length(Word_standard))
+freqs$prop <- freqs$count/sum(freqs$count)
+
+freqs$CDI_cat <- factor(freqs$CDI_cat, 
+                                  levels=unique(with(freqs, CDI_cat
+                                  [order(freqs$prop, CDI_cat, 
+                                  decreasing = TRUE)])))
+freqs <- freqs %>%
+group_by(Age_utterance) %>%
+mutate(prop = count/sum(count)) 
+
+qplot(CDI_cat, prop, fill=Age_utterance, geom="bar", position="dodge", stat="identity",
+           data=subset(freqs, count>1 & Word_standard != "N/A" & CDI_cat != "N/A")) + 
+  theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5))+
+  ylab("Proportion of Total Words") + xlab("CDI Categories")
+
+
 ```
