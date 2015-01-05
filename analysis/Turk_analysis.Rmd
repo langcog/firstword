@@ -66,6 +66,7 @@ qplot(age.grp, prop, fill=word_validation, geom="bar", stat="identity", position
 
 For comparison, here are the original first words - proportions
 ```{r}
+quartz()
 freqs <- ddply (df,  .(first_wd_original), summarise, count=length(first_wd_original))
 
 freqs$first_wd_original <- factor(freqs$first_wd_original, 
@@ -271,37 +272,44 @@ CDI category proportions - excluding Mama and Dada
 
 ```{r}
 quartz()
-freqs <- ddply(df, .(word_type, first_wd_standard), summarise, 
+freqs <- ddply(df, .(cdi_cat, first_wd_standard, gender, age.grp), summarise, 
                count=length(first_wd_standard))
 freqs$prop <- freqs$count/sum(freqs$count)
 
-freqs$word_type <- factor(freqs$word_type, 
-                                  levels=unique(with(freqs, word_type
-                                  [order(freqs$prop, word_type, 
+freqs$cdi_cat <- factor(freqs$cdi_cat, 
+                                  levels=unique(with(freqs, cdi_cat
+                                  [order(freqs$prop, cdi_cat, 
                                   decreasing = TRUE)])))
+freqs <- freqs %>%
+group_by(gender) %>%
+mutate(prop = count/sum(count)) 
 
-qplot(word_type, prop, geom="bar", stat="identity", 
-           data=subset(freqs, count>1 & first_wd_standard != "Mama" & first_wd_standard != "Dada" & first_wd_standard != "N/A")) + 
+qplot(cdi_cat, prop, fill=gender, geom="bar", position="dodge", stat="identity",
+           data=subset(freqs, count>1 & first_wd_standard != "N/A" & cdi_cat != "N/A")) + 
   theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5))+
   ylab("Proportion of Total Words") + xlab("CDI Categories")
 
 ```
 
-CDI categories - by age and gender 
+CDI categories - by age
 ```{r}
 quartz()
-freqs <- ddply(df, .(word_type, age.grp, gender, first_wd_standard), summarise, count=length(first_wd_standard))
-freqs <- ddply(freqs, .(word_type), mutate, total.count=sum(count))
-freqs <- ddply(freqs, .(age.grp), summarise, first_wd_standard=first_wd_standard, gender=gender, word_type=word_type, prop=count/sum(count))
+freqs <- ddply(df, .(cdi_cat, first_wd_standard, gender, age.grp), summarise, 
+               count=length(first_wd_standard))
 freqs$prop <- freqs$count/sum(freqs$count)
-freqs$word_type <- factor(freqs$word_type, 
-                                  levels=unique(with(freqs, word_type
-                                  [order(freqs$prop, word_type, 
+
+freqs$cdi_cat <- factor(freqs$cdi_cat, 
+                                  levels=unique(with(freqs, cdi_cat
+                                  [order(freqs$prop, cdi_cat, 
                                   decreasing = TRUE)])))
-qplot(age.grp, prop, fill=gender, geom="bar", stat="identity",
-      position="dodge", 
-      data=subset(freqs, prop>0 & age.grp != "NA" & (first_wd_standard != "N/A" & first_wd_standard != "Mama" & first_wd_standard != "Dada"))) + ylab("Proportion First Word") + 
-  theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5)) + facet_wrap(~word_type)
+freqs <- freqs %>%
+group_by(age.grp) %>%
+mutate(prop = count/sum(count)) 
+
+qplot(cdi_cat, prop, fill=age.grp, geom="bar", position="dodge", stat="identity",
+           data=subset(freqs, count>1 & first_wd_standard != "N/A" & cdi_cat != "N/A")) + 
+  theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5))+
+  ylab("Proportion of Total Words") + xlab("CDI Categories")
 
 ```
 
