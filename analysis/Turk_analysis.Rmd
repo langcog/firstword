@@ -12,7 +12,7 @@ library(plyr)
 library(reshape2)
 library(dplyr)
 theme_set(theme_bw())
-df=read.csv("FW_TurkData.csv")
+df=read.csv("../data/FW_TurkData.csv")
 library(stringr)
 df$age <- as.numeric(str_replace(as.character(df$word_age)," months",""))
 df$currage <- as.numeric(str_replace(as.character(df$current_age), " years", ""))
@@ -87,6 +87,28 @@ Age at time of first word
 quartz()
 freqs <- ddply(df, .(age, gender), summarise, count=length(gender))
 
+age.gender.freqs <- df %>%
+  group_by() %>%
+  filter(age > 4) %>%
+  group_by(gender) %>%
+  summarise(age = mean(age,na.rm=TRUE))
+
+age.gender.freqs <- df %>%
+  filter(age > 4) %>%
+  group_by(gender,age.grp) %>%
+  summarise(n = n())
+
+
+lm.age.gender <- lm(age ~ gender, data = df)
+lm.age.gender.birth <- lm(age ~ gender + as.numeric(birth), data = df)
+lm.age.gender.birth.interaction <- lm(age ~ gender * as.numeric(birth), data = df)
+
+lm.gender.age <- glm(gender ~ age, data = df,family="binomial")
+
+anova(lm.age.gender,lm.age.gender.birth)
+anova(lm.age.gender.birth,lm.age.gender.birth.interaction)
+
+quartz()
 qplot(age,breaks=0:25, fill=gender, geom = "bar", position="dodge",
       data=subset(df,first_wd_standard != "N/A"))+ylab("Number of Children")+xlab("Age at time of first word")
 ```

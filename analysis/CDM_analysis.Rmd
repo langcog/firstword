@@ -9,7 +9,7 @@ library(plyr)
 library(reshape2)
 library(dplyr)
 theme_set(theme_bw())
-df=read.csv("CDMlangsurvey_analysis.csv")
+df=read.csv("../data/CDMlangsurvey_analysis.csv")
 library(stringr)
 library(knitr)
 library(markdown)
@@ -41,7 +41,6 @@ qplot(Age_utterance, fill=gender, geom = "bar", position="dodge",
 
 ```{r}
 Words by gender 
-```{r}
 quartz()
 freqs <- ddply(df, .(Word_standard, gender), summarise, count=length(Word_standard))
 freqs <- ddply(freqs, .(Word_standard), mutate, total.count=sum(count))
@@ -62,7 +61,7 @@ q <- qplot(Word_standard, prop, fill=gender,
 q + theme(axis.text.x = element_text(angle=90, hjust = 1, vjust=.5)) + 
   ylab("Proportion of Total Utterances") + xlab("Standardized first word") 
 ```
-```
+
 CDI - gender
 ```{r}
 quartz()
