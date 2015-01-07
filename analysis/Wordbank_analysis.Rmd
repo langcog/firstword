@@ -1,0 +1,381 @@
+---
+title: "CDI First Words Analysis"
+author: "Dan Yurovsky"
+date: "January 17, 2014"
+output: html_document
+---
+`r library(knitr)`
+`r opts_chunk$set(message=FALSE, warning=FALSE)`
+
+Load required Libraries
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(RMySQL)
+library(stringr)
+library(bootstrap)
+library(magrittr)
+```
+
+Statistics helper functions
+```{r}
+## standard error of the mean
+sem <- function (x) {
+  sd(x,na.rm=TRUE) / sqrt(length(x))
+}
+
+## NA functions
+na.mean <- function(x) {mean(x,na.rm=T)}
+na.median <- function(x) {median(x,na.rm=T)}
+na.sum <- function(x) {sum(x,na.rm=T)}
+na.sd <- function(x) {sd(x,na.rm=T)}
+
+## for bootstrapping 95% confidence intervals
+theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
+ci.low <- function(x,na.rm=T) {
+  mean(x,na.rm=na.rm) - 
+    quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.025,na.rm=na.rm)}
+
+ci.high <- function(x,na.rm=T) {
+  quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) -
+    mean(x,na.rm=na.rm)}
+```
+
+Load in Wordbank tata
+```{r}
+## OPEN DATABASE CONNECTION ##
+wordbank <- src_mysql(dbname='wordbank',host="54.200.225.86", 
+                      user="wordbank",password="wordbank")
+
+## NOW LOAD TABLES ##
+admin.table <- tbl(wordbank,"common_administration")
+child.table <- tbl(wordbank,"common_child")
+wg.table <- tbl(wordbank,"instruments_wg")
+
+wg.vocab.words <- as.data.frame(select(wg.table,
+                                       basetable_ptr_id, col_baabaa:col_some)) %>%
+  rename(id = basetable_ptr_id) %>% # Rename the id
+  gather(word,produces,col_baabaa:col_some) %>% # Arrange in longform
+  mutate(word = str_replace(word, "col_", "")) %>%# Strip off col_ from words 
+  as.tbl #convert a data table
+
+# get child information out of wordbank
+admins <- admin.table %>%
+  select(data_id,child_id,age,source_id) %>%
+  rename(id = data_id, child.id = child_id,source.id = source_id) %>%
+  as.data.frame
+
+# Get demographic variables for each child
+demos <- select(child.table,id,gender,mom_ed,birth_order) %>%
+  rename(child.id = id) %>%
+  rename(birth.order = birth_order, mom.ed = mom_ed) %>%
+  as.data.frame %>%
+  group_by(child.id) %>%
+  mutate(gender = factor(gender,levels=c("F","M"),
+                         labels=c("Female","Male"),
+                         exclude = ""),
+         mom.ed = if(is.na(mom.ed)) "NA"
+                     else if (mom.ed <= 8) "Elementary School"
+                     else if(mom.ed < 12) "Some Highschool"
+                     else if(mom.ed ==  12) "Highschool"
+                     else if(mom.ed < 16) "Some College"
+                     else if(mom.ed == 16) "College"
+                     else if(mom.ed <18) "Some Grad School"
+                     else if(mom.ed == 18) "Graduate Degree",
+         birth.order = if(is.na(birth.order)) "NA"
+                          else if (birth.order == 1) "First"
+                          else if (birth.order == 2) "Second"
+                          else "Later") %>%
+  group_by() %>%
+  mutate(birth.order = factor(birth.order),
+         mom.ed = factor(mom.ed))
+# Join age and demographics together
+child.data <- as.tbl(left_join(admins,demos))
+
+# filter down
+wg.data <- left_join(wg.vocab.words, child.data) %>%
+  filter(age >= 8, age <= 16) %>%
+  select(-child.id,-source.id) #drop redundant columns
+```
+
+Subsetting the data
+```{r}
+# find only the kids with a single production
+one.word.kids <- wg.data %>% 
+  group_by(id,age,gender,mom.ed,birth.order) %>% 
+  summarise(v = sum(produces==2)) %>% 
+  filter(v == 1) %>%
+  select(-v)
+
+#find kids with no productions
+no.word.demos <- wg.data %>% 
+  group_by(id,age) %>% 
+  summarise(v = sum(produces==2)) %>% 
+  filter(v == 0) %>%
+  group_by() %>%
+  summarise(age=mean(age))
+
+# select just the first productions
+wds.produced.bykid <- wg.data %>% 
+  filter(id %in% one.word.kids$id, produces==2) %>%
+  select(-id,-produces) %>%
+  mutate(older = age >= median(age)) %>%
+  group_by(word)
+```
+
+Understood words analyses
+```{r, fig.height=5, fig.width=5}
+# get the words understood by one-word knowers
+wds.understood.bykidword <- wg.data %>% 
+  filter(id %in% one.word.kids$id, produces>=1) %>%
+  select(-produces) %>%
+  mutate(older = age >= median(age)) %>%
+  group_by(id,word)
+
+# get the words understood by *all* kids in the database
+wds.understood.bykidword.all <- wg.data %>% 
+  filter(produces>=1) %>%
+  select(-produces) %>%
+  mutate(older = age >= median(age)) %>%
+  group_by(id,word)
+
+# aggregate across words
+wds.understood.bykid <- wds.understood.bykidword %>%
+  group_by(age,id) %>%
+  summarise(num.words = n()) 
+
+# aggregate across kids
+wds.understood.byage <- wds.understood.bykid %>%
+  summarise(num.kids = n(),
+            ci.high = ci.high(num.words),
+            ci.low = ci.low(num.words),
+            num.words = na.mean(num.words)) %>%
+  filter(num.kids > 1)
+
+# aggregate across words
+wds.understood.bykid.all <- wds.understood.bykidword.all %>%
+  mutate(subset = "all") %>%
+  group_by(subset,age,id) %>%
+  summarise(num.words = n()) %>%
+  filter(age <= 14)
+
+# Fit regressions to look at effects of age on understood words
+lm.all <- lm(num.words ~ age ,data=wds.understood.bykid.all)
+lm.squared.all <- lm(num.words ~ age + I(age^2),data=wds.understood.bykid.all)
+anova(lm.all,lm.squared.all) #significant squared term
+
+lm.subset <- lm(num.words ~ age ,data=wds.understood.bykid)
+lm.squared.subset <- lm(num.words ~ age + I(age^2),data=wds.understood.bykid)
+anova(lm.subset,lm.squared.subset) #non-significant squared term
+
+# combine both subsets
+wds.understood.bykid.all <- rbind(wds.understood.bykid.all,
+                                  mutate(wds.understood.bykid,subset="one-word"))
+
+lm.both <- lm(num.words ~ age * subset,data=wds.understood.bykid.all)
+lm.squared.both <- lm(num.words ~ age*subset + I(age^2),
+                     data=wds.understood.bykid.all)
+lm.interaction.both <- lm(num.words ~ age*subset + I(age^2)*subset,
+                     data=wds.understood.bykid.all)
+anova(lm.both,lm.squared.both)
+anova(lm.squared.both,lm.interaction.both) # not enough power to detect age^2 interaction
+
+# aggregate across kids
+wds.understood.byage.all <- wds.understood.bykid.all %>%
+  summarise(num.kids = n(),
+            ci.high = ci.high(num.words),
+            ci.low = ci.low(num.words),
+            num.words = na.mean(num.words)) %>%
+  filter(num.kids > 1) %>%
+  group_by() 
+
+# compute predictions for number of understood words based on lms above
+wds.understood.byage.all %<>%
+  mutate(linear.predicted = predict.lm(lm.both,newdata = wds.understood.byage.all),
+         squared.predicted = predict.lm(lm.interaction.both,
+                                        newdata = wds.understood.byage.all))
+
+# Plot understood words for our subset of one-word knowers
+#quartz(width=5,height=5)
+ggplot(wds.understood.byage,aes(x = as.numeric(age), y = num.words)) +
+  geom_bar(stat = "identity",colour=1,fill="#e41a1c")+
+  geom_linerange(aes(ymin = num.words-ci.low,
+                      ymax = num.words+ci.high),
+                  position = position_dodge(.1),
+                  size=.8)+
+  scale_fill_brewer(palette="Set1")+
+  theme_bw(base_size = 14) +
+  scale_y_continuous( name = "Number of words understood")+
+  scale_x_continuous(name="Age (months)", limits = c(7.5,14.5),breaks = 8:14)
+
+
+# Comparison to all knowers (linera model)
+#quartz(width=5,height=5)
+ggplot(wds.understood.byage.all,aes(x = as.numeric(age), y = num.words,
+                                    colour = subset,fill=subset)) +
+  geom_pointrange(aes(ymin = num.words-ci.low,
+                      ymax = num.words+ci.high),
+                  position = position_dodge(.1),
+                  size=.8)+
+  geom_line(aes(y = linear.predicted))+
+  scale_fill_brewer(palette="Set1")+
+  scale_color_brewer(palette="Set1")+
+  theme_bw(base_size = 14) +
+  scale_y_continuous( name = "Number of words understood")+
+  scale_x_continuous(name="Age (months)", limits = c(7.5,14.5),breaks = 8:14)+
+  theme(legend.position = c(.2,.8))
+
+# Comparison to all knowers (quadratic model)
+#quartz(width=5,height=5)
+ggplot(wds.understood.byage.all,aes(x = as.numeric(age), y = num.words,
+                                    colour = subset,fill=subset)) +
+  geom_pointrange(aes(ymin = num.words-ci.low,
+                      ymax = num.words+ci.high),
+                  position = position_dodge(.1),
+                  size=.8)+
+  geom_line(aes(y = squared.predicted))+
+  scale_fill_brewer(palette="Set1")+
+  scale_color_brewer(palette="Set1")+
+  theme_bw(base_size = 14) +
+  scale_y_continuous( name = "Number of words understood")+
+  scale_x_continuous(name="Age (months)", limits = c(7.5,14.5),breaks = 8:14)+
+  theme(legend.position = c(.2,.8))
+```
+
+
+```{r}
+# quartz(width=10,height=5)
+# ggplot(wds.understood.bykid.gender,
+#        aes(x = as.numeric(age), y = num.words,colour=gender)) +
+#   geom_pointrange(aes(ymin = num.words-ci.low,
+#                       ymax = num.words+ci.high),
+#                   position = position_dodge(.1),
+#                   size=.8)+
+#   scale_fill_brewer(palette="Set1")+
+#   theme_bw(base_size = 14) +
+#   scale_y_continuous(name = "Number of words understood")+
+#   scale_x_continuous(name="Age", limits = c(7,14)) +
+#   theme(axis.text.x = element_text(angle = 90,vjust=0.5),
+#         legend.position = c(.9,.8)) +
+#   scale_colour_brewer(palette = "Set1")
+# 
+# 
+# wds.produced.bykid.gender <- wg.data %>% 
+#   filter(id %in% one.word.kids$id, produces==2,gender != "NA") %>%
+#   select(-id,-produces) %>%
+#   mutate(older = age >= median(age)) %>%
+#   group_by(word,gender)
+# 
+# wds.produced <- wds.produced.bykid %>%
+#   group_by(gender,word) %>%
+#   summarise(count = n())
+#   
+# wds.understood.bykid.gender <- wg.data %>% 
+#   filter(id %in% one.word.kids$id, produces==1,gender != "NA") %>%
+#   select(-id,-produces) %>%
+#   mutate(older = age >= median(age)) %>%
+#   group_by(word,gender)
+# 
+# wds.understood.gender <- wds.understood.bykid.gender %>%
+#   group_by(gender,word) %>%
+#   summarise(count = n())
+# 
+#   
+# wds.understood <- wds.understood.bykid %>%
+#   group_by(word) %>%
+#   summarise(count = n())
+# 
+# wds.produced <- left_join(expand(wds.produced.bykid,gender,word),wds.produced) %>%
+#   group_by(gender) %>%
+#   mutate(prop = count/sum(count,na.rm = TRUE))
+# 
+# 
+# wds.understood <- left_join(expand(wds.understood.bykid,gender,word),wds.understood) %>%
+#   group_by(gender) %>%
+#   mutate(prop = count/sum(count,na.rm = TRUE))
+# 
+# 
+# ord.produced <- wds.produced.bykid %>% 
+#   group_by(word) %>%
+#   summarise(count = n()) %>%
+#   arrange(desc(count)) 
+# 
+# 
+# ord.understood <- wds.understood.bykid %>% 
+#   group_by(word) %>%
+#   summarise(count = n()) %>%
+#   arrange(desc(count)) 
+# 
+# 
+# wds.produced$word <- factor(wds.produced$word, levels=ord.produced$word)
+# wds.understood$word <- factor(wds.understood$word, levels=ord.understood$word)
+# 
+# wds.age.dist <- wds.bykid %>%
+#   group_by(gender,age) %>%
+#   summarise(count = n()) %>%
+#   mutate(prop = count/sum(count))
+# wds.age.dist <- left_join(expand(wds.bykid,age,gender),wds.age.dist)
+# 
+# wds.bo.dist <- wds.bykid %>%
+#   group_by(birth.order,age) %>%
+#   summarise(count = n()) %>%
+#   mutate(prop = count/sum(count)) %>%
+#   filter(birth.order != "NA")
+# 
+# all.bos <- wds.bykid %>%
+#   filter(birth.order != "NA") %>%
+#   expand(age,birth.order)
+# 
+# wds.bo.dist <- left_join(all.bos,wds.bo.dist)
+# 
+# # 
+# # wds <- wds %>% 
+# #   summarise(count = n())
+# ```
+#   
+# plot
+# ```{r}
+# quartz(width=10,height=5)
+# ggplot(wds.produced,aes(x = word, y = prop, fill=gender)) +
+#   geom_bar(stat="identity",position=position_dodge(.7),width=.7) + 
+#   scale_fill_brewer(palette="Set1")+
+#   theme_bw(base_size = 14) +
+#   scale_y_continuous(limits=c(0,.25), name = "Proportion of First Utterances ")+
+#   scale_x_discrete(name="Word") +
+#   theme(axis.text.x = element_text(angle = 90,vjust=0.5),
+#         legend.position = c(.9,.8))
+# 
+# quartz(width=10,height=5)
+# ggplot(wds.understood,aes(x = word, y = prop, fill=gender)) +
+#   geom_bar(stat="identity",position=position_dodge(.7),width=.7) + 
+#   scale_fill_brewer(palette="Set1")+
+#   theme_bw(base_size = 14) +
+#   scale_y_continuous(limits=c(0,.02), name = "Proportion of First Utterances ")+
+#   scale_x_discrete(name="Word") +
+#   theme(axis.text.x = element_text(angle = 90,vjust=0.5,size=4),
+#         legend.position = c(.9,.8))
+# 
+# 
+# quartz(width=10,height=5)
+# ggplot(wds.age.dist,aes(x = age, y= prop,fill=gender)) +
+#   geom_bar(stat="identity",position=position_dodge(.7),width=.7) + 
+#   scale_fill_brewer(palette="Set1")+
+#   theme_bw(base_size = 14) +
+#   scale_x_continuous(limits=c(7.5,13.5),breaks=seq(8,13)) +
+#   scale_y_continuous(limits=c(0,.25), name = "Proportion of Children") +
+#   theme(legend.position = c(.9,.8))
+# 
+# quartz(width=10,height=5)
+# ggplot(wds.bo.dist,aes(x = age, y= prop,fill=birth.order)) +
+#   geom_bar(stat="identity",position=position_dodge(.7),width=.7) + 
+#   scale_fill_brewer(palette="Set1")+
+#   theme_bw(base_size = 14) +
+#   scale_x_continuous(limits=c(7.5,16),breaks=seq(8,16)) +
+#   scale_y_continuous(limits=c(0,.25), name = "Proportion of Children") +
+#   theme(legend.position = c(.9,.8))
+#   #scale_y_continuous(limits=c(0,.25), name = "Proportion of First Utterances ")+
+#   #theme(axis.text.x = element_text(angle = 90,vjust=0.5)) 
+#   
+#   
+```
