@@ -14,11 +14,13 @@ library(dplyr)
 theme_set(theme_bw())
 df=read.csv("../data/FW_TurkData.csv")
 library(stringr)
+library(arm)
 df$age <- as.numeric(str_replace(as.character(df$word_age)," months",""))
 df$currage <- as.numeric(str_replace(as.character(df$current_age), " years", ""))
 df$birth <- factor(df$birth_order)
 df$age.grp <- cut(df$age,breaks=c(5,10,14,18,24))
 df$currage.grp <- cut(df$currage, breaks=c(-1,2,4,6,8,10,12,14,16,18))
+df$agesplit <- cut(df$age, breaks=c(0,11,12,24))
 library(knitr)
 library(markdown)
 ```
@@ -294,7 +296,12 @@ CDI category proportions - excluding Mama and Dada
 
 ```{r}
 quartz()
-freqs <- ddply(df, .(cdi_cat, first_wd_standard, gender, age.grp), summarise, 
+
+head(mutate(df,cdi_cat = sapply(cdi_cat,function(x) gsub("cdi_cat","",x))))
+
+
+
+freqs <- ddply(df, .(cdi_cat, first_wd_standard, gender, age), summarise, 
                count=length(first_wd_standard))
 freqs$prop <- freqs$count/sum(freqs$count)
 
@@ -302,9 +309,44 @@ freqs$cdi_cat <- factor(freqs$cdi_cat,
                                   levels=unique(with(freqs, cdi_cat
                                   [order(freqs$prop, cdi_cat, 
                                   decreasing = TRUE)])))
+age.gender.freqs <- df %>%
+  group_by() %>%
+  filter(age > 4) %>%
+  group_by(gender) %>%
+  summarise(age = mean(age,na.rm=TRUE))
+
 freqs <- freqs %>%
 group_by(gender) %>%
 mutate(prop = count/sum(count)) 
+
+lm.age.cdi_cat <- lm(age ~ cdi_cat + 0, data = df)
+
+# Strip off cdi_cat from coefficient names
+names(lm.age.cdi_cat$coefficients) <- 
+  sapply(names(lm.age.cdi_cat$coefficients),function(x) gsub("cdi_cat","",x))
+
+summary(lm.age.cdi_cat)
+#lm.age.cdi_cat$cdi_cat <- as.numeric(str_replace(as.character(df$word_age)," months",""))
+quartz()
+coefplot(lm.age.cdi_cat,sort="magnitude") #this sorts by the coefficients
+
+#linear model with gender - remove intercept
+lm.gender.cdi_cat <- glm(gender ~ cdi_cat + 0, data = df, family="binomial")
+
+#strip off cdi_cat
+names(lm.gender.cdi_cat$coefficients) <- 
+  sapply(names(lm.gender.cdi_cat$coefficients),function(x) gsub("cdi_cat","",x))
+#plot coefficients, sort by magnitude --> crazy error bars throw off the scale of the x axis, how to fix this? 
+coefplot(lm.gender.cdi_cat, sort="magnitude", scales="free_x")
+
+#
+lm.age.cdi_cat.gender <- lm(age ~ cdi_cat + as.numeric(gender), data = df)
+lm.age.cdi_cat.gender.interaction <- lm(age ~ cdi_cat * as.numeric(gender), data = df)
+
+lm.gender.age <- glm(gender ~ age, data = df,family="binomial")
+
+anova(lm.age.cdi_cat,lm.age.cdi_cat.gender)
+anova(lm.age.cdi_cat.gender,lm.age.cdi_cat.gender.interaction)
 
 qplot(cdi_cat, prop, fill=gender, geom="bar", position="dodge", stat="identity",
            data=subset(freqs, count>1 & first_wd_standard != "N/A" & cdi_cat != "N/A")) + 
@@ -316,7 +358,7 @@ qplot(cdi_cat, prop, fill=gender, geom="bar", position="dodge", stat="identity",
 CDI categories - by age
 ```{r}
 quartz()
-freqs <- ddply(df, .(cdi_cat, first_wd_standard, gender, age.grp), summarise, 
+freqs <- ddply(df, .(cdi_cat, first_wd_standard, gender, age), summarise, 
                count=length(first_wd_standard))
 freqs$prop <- freqs$count/sum(freqs$count)
 
