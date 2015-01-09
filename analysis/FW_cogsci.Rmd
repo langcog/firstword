@@ -1,0 +1,78 @@
+---
+title: "FW_cogsci"
+output: html_document
+This is the uniform data analysis for data for FW cogsci paper
+---
+Preliminaries - reading in the data
+```{r}
+library(ggplot2)
+library(plyr)
+library(reshape2)
+library(dplyr)
+theme_set(theme_bw())
+df_turk=read.csv("../data/FW_TurkData.csv") #Turk data
+df_cdm=read.csv("../data/CDMlangsurvey_analysis.csv") #CDM data
+library(stringr)
+library(arm)
+#The following is for the TURK DATA
+df_turk$age <- as.numeric(str_replace(as.character(df_turk$word_age)," months",""))
+df_turk$currage <- as.numeric(str_replace(as.character(df_turk$current_age), " years", ""))
+df_turk$birth <- factor(df_turk$birth_order)
+df_turk$age.grp <- cut(df_turk$age,breaks=c(5,10,14,18,24))
+df_turk$currage.grp <- cut(df_turk$currage, breaks=c(-1,2,4,6,8,10,12,14,16,18))
+df_turk$agesplit <- cut(df_turk$age, breaks=c(0,12,24))
+
+#This is for the CDM data
+df_cdm$Age <- as.numeric(str_replace(as.character(df_cdm$Age_utterance)," months",""))
+df_cdm$agesplit <- cut(df_cdm$Age, breaks=c(9,12,14)) #there is a better way to do this, I just don't know what it is :(
+library(knitr)
+library(markdown)
+```
+
+
+CDI CATS WITH AGE SPLIT at 12m
+
+First - Turk data
+
+```{r}
+quartz()
+freqs <- ddply(df_turk, .(cdi_cat, first_wd_standard, agesplit), summarise, 
+               count=length(first_wd_standard))
+
+#Normalizing within the age split
+freqs <- freqs %>%
+group_by(agesplit) %>%
+mutate(prop = count/sum(count)) 
+#sorting so that the graph looks cool
+freqs$cdi_cat <- factor(freqs$cdi_cat, 
+                                  levels=unique(with(freqs, cdi_cat
+                                  [order(freqs$prop, cdi_cat, 
+                                  decreasing = TRUE)])))
+#plot of the proportion within the age split with CDI_cat as first word, faceted by the age split - note, N/A categories are excluded
+qplot(cdi_cat, prop, geom="bar", position="dodge", stat="identity",
+           data=subset(freqs, count>1 & first_wd_standard != "N/A" & cdi_cat != "N/A" & agesplit != "NA")) + 
+  theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5))+
+  ylab("Proportion of Children with Utterance") + xlab("CDI Categories")+facet_wrap(~agesplit)
+```
+
+Second - CDM data 
+
+```{r}
+quartz()
+freqs <- ddply(df_cdm, .(CDI_cat, Word_standard, agesplit), summarise, 
+               count=length(Word_standard))
+#normalizing
+freqs <- freqs %>%
+group_by(agesplit) %>%
+mutate(prop = count/sum(count)) 
+#sorting
+freqs$CDI_cat <- factor(freqs$CDI_cat, 
+                                  levels=unique(with(freqs, CDI_cat
+                                  [order(freqs$prop, CDI_cat, 
+                                  decreasing = TRUE)])))
+
+qplot(CDI_cat, prop, geom="bar", position="dodge", stat="identity",
+           data=subset(freqs, count>1 & Word_standard != "N/A" & CDI_cat != "N/A" & agesplit != "NA")) + 
+  theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5))+
+  ylab("Proportion of Children with Utterance") + xlab("CDI Categories")+facet_wrap(~agesplit)
+```
