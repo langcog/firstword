@@ -3,32 +3,72 @@ title: "FW_cogsci"
 output: html_document
 This is the uniform data analysis for data for FW cogsci paper
 ---
-Preliminaries - reading in the data
+Preliminaries.
 ```{r}
+rm(list=ls())
 library(ggplot2)
 library(plyr)
 library(reshape2)
 library(dplyr)
-theme_set(theme_bw())
-df_turk=read.csv("../data/FW_TurkData.csv") #Turk data
-df_cdm=read.csv("../data/CDMlangsurvey_analysis.csv") #CDM data
 library(stringr)
-library(arm)
-#The following is for the TURK DATA
-df_turk$age <- as.numeric(str_replace(as.character(df_turk$word_age)," months",""))
-df_turk$currage <- as.numeric(str_replace(as.character(df_turk$current_age), " years", ""))
-df_turk$birth <- factor(df_turk$birth_order)
-df_turk$age.grp <- cut(df_turk$age,breaks=c(5,10,14,18,24))
-df_turk$currage.grp <- cut(df_turk$currage, breaks=c(-1,2,4,6,8,10,12,14,16,18))
-df_turk$agesplit <- cut(df_turk$age, breaks=c(0,12,24))
-
-#This is for the CDM data
-df_cdm$Age <- as.numeric(str_replace(as.character(df_cdm$Age_utterance)," months",""))
-df_cdm$agesplit <- cut(df_cdm$Age, breaks=c(9,12,14)) #there is a better way to do this, I just don't know what it is :(
+# library(arm)
 library(knitr)
 library(markdown)
+library(directlabels)
+
+theme_set(theme_bw())
 ```
 
+Read data.
+
+```{r}
+df_turk=read.csv("../data/FW_TurkData.csv") #Turk data
+df_cdm=read.csv("../data/CDMlangsurvey_analysis.csv") #CDM data
+```
+
+```{r}
+df_turk$birth <- factor(df_turk$birth_order)
+df_turk$age.grp <- cut(df_turk$age,breaks=c(5,10,14,18,24))
+df_turk$currage.grp <- cut(df_turk$age_current, breaks=c(-1,2,4,6,8,10,12,14,16,18))
+df_turk$agesplit <- cut(df_turk$age, breaks=c(0,12,24))
+df_cdm$agesplit <- cut(df_cdm$age, breaks=c(0,12,24)) #there is a better way to do this, I just don't know what it is :(
+```
+
+bind together.
+
+```{r}
+df_turk$dataset <- "MTurk"
+df_cdm$dataset <- "CDM"
+
+d <- rbind.fill(df_turk,df_cdm)
+```
+
+Do analysis over all data.
+
+```{r}
+freqs <- d %>% 
+  filter(!is.na(agesplit), cdi_cat != "N/A") %>%
+  group_by(dataset, agesplit, cdi_cat) %>%
+  summarise(n = n()) %>%
+  group_by(dataset, agesplit, add=FALSE) %>%
+  mutate(prop = n / sum(n))
+```
+
+Plot.
+
+```{r}
+freqs$cdi_cat <- factor(freqs$cdi_cat, 
+                                  levels=unique(with(freqs, cdi_cat
+                                  [order(freqs$prop, cdi_cat, 
+                                  decreasing = FALSE)])))
+
+qplot(prop, cdi_cat, col=agesplit,
+      facets= . ~ dataset,
+      data=freqs) +
+  xlab("Proportion of total") +
+  ylab("MB-CDI Category")
+
+```
 
 CDI CATS WITH AGE SPLIT at 12m
 
