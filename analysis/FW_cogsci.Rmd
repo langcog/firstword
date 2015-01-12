@@ -31,7 +31,7 @@ df_turk$birth <- factor(df_turk$birth_order)
 df_turk$age.grp <- cut(df_turk$age,breaks=c(5,10,14,18,24))
 df_turk$currage.grp <- cut(df_turk$age_current, breaks=c(-1,2,4,6,8,10,12,14,16,18))
 df_turk$agesplit <- cut(df_turk$age, breaks=c(0,12,24))
-df_cdm$agesplit <- cut(df_cdm$age, breaks=c(0,12,24)) #there is a better way to do this, I just don't know what it is :(
+df_cdm$agesplit <- cut(df_cdm$age, breaks=c(0,12,24))
 ```
 
 bind together.
@@ -43,7 +43,7 @@ df_cdm$dataset <- "CDM"
 d <- rbind.fill(df_turk,df_cdm)
 ```
 
-Do analysis over all data.
+Do analysis over all data for CDI-cats.
 
 ```{r}
 freqs <- d %>% 
@@ -57,17 +57,32 @@ freqs <- d %>%
 Plot.
 
 ```{r}
+quartz()
 freqs$cdi_cat <- factor(freqs$cdi_cat, 
                                   levels=unique(with(freqs, cdi_cat
                                   [order(freqs$prop, cdi_cat, 
-                                  decreasing = FALSE)])))
+                                  decreasing = TRUE)])))
 
-qplot(prop, cdi_cat, col=agesplit,
-      facets= . ~ dataset,
-      data=freqs) +
-  xlab("Proportion of total") +
-  ylab("MB-CDI Category")
+qplot(cdi_cat, prop, fill=agesplit, geom="bar", stat="identity", position="dodge", data=subset(freqs, agesplit != "NA" & cdi_cat != "N/A"))+ylab("Proportion of Total")+xlab("MB-CDI Category") + theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5)) + facet_wrap(~dataset)
 
+```
+
+Age data - set that up. 
+```{r}
+ns <- d %>% 
+  filter(!is.na(age), age != "NA") %>%
+  group_by(dataset, age) %>%
+  summarise(n = n())
+freqs <- ns %>% mutate(cum.n = cumsum(n)) %>%
+  group_by(dataset) %>%
+  mutate(prop = cum.n / sum(n))
+```
+```
+
+Plot.
+```{r}
+quartz()
+ggplot(data = freqs, aes(x = age, y = prop, colour=dataset))+geom_smooth(se=FALSE, data=freqs, aes(x=age, y=prop, colour=dataset))
 ```
 
 CDI CATS WITH AGE SPLIT at 12m
@@ -77,7 +92,7 @@ First - Turk data
 ```{r}
 quartz()
 freqs <- ddply(df_turk, .(cdi_cat, first_wd_standard, agesplit), summarise, 
-               count=length(first_wd_standard))
+               count=length(first_wd_standard)) 
 
 #Normalizing within the age split
 freqs <- freqs %>%
