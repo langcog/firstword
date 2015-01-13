@@ -71,19 +71,28 @@ Age data - set that up.
 ```{r}
 ns <- d %>% 
   filter(!is.na(age), age != "NA") %>%
+  mutate(dataset = factor(dataset)) %>%
   group_by(dataset, age) %>%
   summarise(n = n())
-freqs <- ns %>% mutate(cum.n = cumsum(n)) %>%
+
+freqs.grid <- expand.grid(dataset=unique(ns$dataset),age=unique(ns$age)) %>%
+  arrange(dataset,age)
+
+freqs <- left_join(freqs.grid,ns) %>%
+  filter(dataset == "MTurk" | dataset == "CDM" & age >=10) %>%
+  group_by() %>%
+  mutate(n = ifelse(is.na(n), 0, n)) %>%
   group_by(dataset) %>%
-  mutate(prop = cum.n / sum(n))
+  mutate(cum.n = cumsum(n),
+         prop = cum.n / sum(n))
 ```
 ```
 
 Plot.
 ```{r}
 quartz()
-ggplot(data = freqs, aes(x = age, y = prop, colour=dataset))+geom_smooth(se=FALSE, data=freqs, aes(x=age, y=prop, colour=dataset))
-```
+ggplot(data = freqs, aes(x = age, y = prop, colour=dataset, group=dataset))+
+  geom_smooth(se=FALSE,method = "loess")
 
 CDI CATS WITH AGE SPLIT at 12m
 
