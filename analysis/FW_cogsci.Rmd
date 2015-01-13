@@ -1,7 +1,6 @@
 ---
 title: "FW_cogsci"
 output: html_document
-This is the uniform data analysis for data for FW cogsci paper
 ---
 
 `r library(knitr)`
@@ -16,8 +15,6 @@ library(reshape2)
 library(dplyr)
 library(stringr)
 library(tidyr)
-# library(arm)
-library(knitr)
 library(markdown)
 library(directlabels)
 
@@ -25,7 +22,6 @@ theme_set(theme_bw())
 ```
 
 Read data.
-
 ```{r}
 df_turk=read.csv("../data/FW_TurkData.csv") #Turk data
 df_cdm=read.csv("../data/CDMlangsurvey_analysis.csv") #CDM data
@@ -42,7 +38,6 @@ df_info$agesplit <- cut(df_info$age, breaks=c(0,12,24))
 ```
 
 bind together.
-
 ```{r}
 df_turk$dataset <- "MTurk"
 df_cdm$dataset <- "CDM"
@@ -53,8 +48,8 @@ d <- rbind.fill(df_turk,df_cdm, df_info)
 
 Pull in wordbank data
 ```{r}
-wordbank <- src_mysql(dbname='wordbank')#,host="54.149.39.46",
-                     # user="wordbank",password="wordbank")
+wordbank <- src_mysql(dbname='wordbank',host="54.200.225.86", 
+                      user="wordbank",password="wordbank")
 
 ## NOW LOAD TABLES ##
 admin.table <- tbl(wordbank,"common_administration")
@@ -102,7 +97,6 @@ wg.data <- left_join(wg.scores, child.data) %>%
 
 
 Do analysis over all data for CDI-cats.
-
 ```{r}
 freqs <- d %>% 
   filter(!is.na(agesplit), cdi_cat != "N/A") %>%
@@ -115,21 +109,22 @@ freqs <- d %>%
 Plot.
 
 ```{r}
-quartz()
 freqs$cdi_cat <- factor(freqs$cdi_cat, 
                                   levels=unique(with(freqs, cdi_cat
                                   [order(freqs$prop, cdi_cat, 
                                   decreasing = FALSE)])))
 
 
-ggplot(data = freqs, aes(x=prop, y=cdi_cat, colour=dataset, group=dataset)) + geom_point()+ylab("MB-CDI category")+xlab("Proportion of Total") +
+ggplot(data = freqs, 
+       aes(x=prop, y=cdi_cat, colour=dataset, group=dataset,shape=agesplit)) + 
+  geom_point() +
+  ylab("MB-CDI category") + 
+  xlab("Proportion of Total") +
   scale_color_discrete(name="Dataset")
-
 ```
 
 Age data - set that up. 
 ```{r}
-
 wg.producers <- wg.data %>%
   group_by(age) %>%
   summarise(prop = sum(productive > 0)/n()) %>%
@@ -137,17 +132,18 @@ wg.producers <- wg.data %>%
 
 ns <- d %>% 
   filter(!is.na(age), age != "NA") %>%
-  mutate(dataset = factor(dataset)) %>%
+  mutate(dataset = factor(dataset), 
+         age = floor(age)) %>%
   group_by(dataset, age) %>%
-  summarise(n = n())
+  summarise(n = n()) # round to the nearest complete month
 
-freqs.grid <- expand.grid(dataset=c(unique(ns$dataset),"Wordbank"),
+freqs.grid <- expand.grid(dataset=c(levels(ns$dataset),"Wordbank"),
                           age=unique(ns$age)) %>%
   arrange(dataset,age)
 
-freqs <- left_join(freqs.grid,ns)%>%
+freqs <- left_join(freqs.grid,ns) %>%
   filter(dataset == "MTurk" | dataset == "CDM" & age >= 10| 
-           dataset == "Info" & age >=10 | dataset == "Wordbank") %>%
+           dataset == "Info" & age >=10 | dataset == "Wordbank" & age >= 8) %>%
   group_by() %>%
   mutate(n = ifelse(is.na(n), 0, n)) %>%
   group_by(dataset) %>%
@@ -155,31 +151,34 @@ freqs <- left_join(freqs.grid,ns)%>%
          prop = cum.n / sum(n))
 
 freqs <- left_join(freqs,wg.producers,by=c("dataset","age")) %>%
-  mutate(prop = min(prop.x,prop.y, na.rm = TRUE)) %>%
+  group_by(dataset,age) %>%
+  mutate(prop = min(prop.x,prop.y, 1,na.rm = TRUE)) %>%
   select(-prop.x,-prop.y)
 ```
 
 Plot.
-```{r}
-quartz()
-ggplot(data = freqs, aes(x = age, y = prop, colour=dataset, group=dataset))+
-  geom_smooth(se=FALSE,method = "loess") +ylab("Proportion of Total")+xlab("Age ") + scale_color_discrete(name="Dataset")
+```{r,fig.width=5,fig.height=5}
+ggplot(data = freqs, 
+       aes(x = age, y = prop, colour=dataset, group=dataset))+
+  geom_line(size=1.5) + 
+  ylab("Cumulative Probability of First Word")+
+  xlab("Age (months)") + 
+  geom_hline(yintercept=.75, lty=3) + 
+  geom_vline(aes(xintercept=age[prop>.75][1]), lty=3) + 
+  scale_x_continuous(breaks=seq(0,24,4))+
+  scale_color_brewer(name="Dataset",palette="Set1")+
+  theme_bw(base_size=14) +
+  theme(legend.position=c(.85,.3)) 
 ```
-
-Plot.
-```{r}
-quartz()
-ggplot(data = freqs, aes(x = age, y = prop, colour=dataset, group=dataset))+
-  geom_smooth(se=FALSE,method = "loess")
 
 CDI CATS WITH AGE SPLIT at 12m
 
 First - Turk data
 
 ```{r}
-quartz()
-freqs <- ddply(df_turk, .(cdi_cat, first_wd_standard, agesplit), summarise, 
-               count=length(first_wd_standard)) 
+#quartz()
+freqs <- ddply(df_turk, .(cdi_cat, word_standard, agesplit), summarise, 
+               count=length(word_standard)) 
 
 #Normalizing within the age split
 freqs <- freqs %>%
@@ -192,7 +191,7 @@ freqs$cdi_cat <- factor(freqs$cdi_cat,
                                   decreasing = TRUE)])))
 #plot of the proportion within the age split with CDI_cat as first word, faceted by the age split - note, N/A categories are excluded
 qplot(cdi_cat, prop, geom="bar", position="dodge", stat="identity",
-           data=subset(freqs, count>1 & first_wd_standard != "N/A" & cdi_cat != "N/A" & agesplit != "NA")) + 
+           data=subset(freqs, count>1 & word_standard != "N/A" & cdi_cat != "N/A" & agesplit != "NA")) + 
   theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5))+
   ylab("Proportion of Children with Utterance") + xlab("CDI Categories")+facet_wrap(~agesplit)
 ```
@@ -200,21 +199,20 @@ qplot(cdi_cat, prop, geom="bar", position="dodge", stat="identity",
 Second - CDM data 
 
 ```{r}
-quartz()
-freqs <- ddply(df_cdm, .(CDI_cat, Word_standard, agesplit), summarise, 
-               count=length(Word_standard))
+freqs <- ddply(df_cdm, .(cdi_cat, word_standard, agesplit), summarise, 
+               count=length(word_standard))
 #normalizing
 freqs <- freqs %>%
 group_by(agesplit) %>%
 mutate(prop = count/sum(count)) 
 #sorting
-freqs$CDI_cat <- factor(freqs$CDI_cat, 
-                                  levels=unique(with(freqs, CDI_cat
-                                  [order(freqs$prop, CDI_cat, 
+freqs$cdi_cat <- factor(freqs$cdi_cat, 
+                                  levels=unique(with(freqs, cdi_cat
+                                  [order(freqs$prop, cdi_cat, 
                                   decreasing = TRUE)])))
 
-qplot(CDI_cat, prop, geom="bar", position="dodge", stat="identity",
-           data=subset(freqs, count>1 & Word_standard != "N/A" & CDI_cat != "N/A" & agesplit != "NA")) + 
+qplot(cdi_cat, prop, geom="bar", position="dodge", stat="identity",
+           data=subset(freqs, count>1 & word_standard != "N/A" & cdi_cat != "N/A" & agesplit != "NA")) + 
   theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5))+
   ylab("Proportion of Children with Utterance") + xlab("CDI Categories")+facet_wrap(~agesplit)
 ```
