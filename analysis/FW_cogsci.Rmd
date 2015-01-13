@@ -67,26 +67,30 @@ freqs$cdi_cat <- factor(freqs$cdi_cat,
                                   decreasing = FALSE)])))
 
 
-ggplot(data = freqs, aes(x=prop, y=cdi_cat, colour=dataset, group=dataset)) + geom_point()+ylab("MB-CDI category")+xlab("Proportion of Total") +
+ggplot(data = freqs, 
+       aes(x=prop, y=cdi_cat, colour=dataset, group=dataset)) + 
+  geom_point() +
+  facet_grid(.~agesplit) + 
+  ylab("MB-CDI category") + 
+  xlab("Proportion of Total") +
   scale_color_discrete(name="Dataset")
 
 ```
 
 Age data - set that up. 
+
 ```{r}
 ns <- d %>% 
   filter(!is.na(age), age != "NA") %>%
-  mutate(dataset = factor(dataset)) %>%
+  mutate(dataset = factor(dataset), 
+         age = floor(age)) %>%
   group_by(dataset, age) %>%
-  summarise(n = n())
+  summarise(n = n()) # round to the nearest complete month
 
-freqs.grid <- expand.grid(dataset=unique(ns$dataset),age=unique(ns$age)) %>%
-  arrange(dataset,age)
+# freqs.grid <- expand.grid(dataset=unique(ns$dataset),age=unique(ns$age)) %>%
+#   arrange(dataset,age)
 
-freqs <- left_join(freqs.grid,ns) %>%
-  filter(dataset == "MTurk" | dataset == "CDM" | dataset == "Info" & age >=10) %>%
-  group_by() %>%
-  mutate(n = ifelse(is.na(n), 0, n)) %>%
+freqs <- ns %>%
   group_by(dataset) %>%
   mutate(cum.n = cumsum(n),
          prop = cum.n / sum(n))
@@ -95,15 +99,16 @@ freqs <- left_join(freqs.grid,ns) %>%
 Plot.
 ```{r}
 quartz()
-ggplot(data = freqs, aes(x = age, y = prop, colour=dataset, group=dataset))+
-  geom_smooth(se=FALSE,method = "loess") +ylab("Proportion of Total")+xlab("Age ") + scale_color_discrete(name="Dataset")
+ggplot(data = freqs, 
+       aes(x = age, y = prop, colour=dataset, group=dataset))+
+  geom_line() + 
+  ylab("Proportion of Total")+
+  xlab("Age") + 
+  scale_color_discrete(name="Dataset") + 
+  geom_hline(yintercept=.75, lty=3) + 
+  geom_vline(aes(xintercept=age[prop>.75][1]), lty=3) + 
+  scale_x_continuous(breaks=c(0,4,8,12,16,20,24))
 ```
-
-Plot.
-```{r}
-quartz()
-ggplot(data = freqs, aes(x = age, y = prop, colour=dataset, group=dataset))+
-  geom_smooth(se=FALSE,method = "loess")
 
 CDI CATS WITH AGE SPLIT at 12m
 
