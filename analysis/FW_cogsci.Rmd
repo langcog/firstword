@@ -3,6 +3,10 @@ title: "FW_cogsci"
 output: html_document
 This is the uniform data analysis for data for FW cogsci paper
 ---
+
+`r library(knitr)`
+`r opts_chunk$set(message=FALSE, warning=FALSE)`
+
 Preliminaries.
 ```{r}
 rm(list=ls())
@@ -11,6 +15,7 @@ library(plyr)
 library(reshape2)
 library(dplyr)
 library(stringr)
+library(tidyr)
 # library(arm)
 library(knitr)
 library(markdown)
@@ -46,6 +51,56 @@ df_info$dataset <- "Info"
 d <- rbind.fill(df_turk,df_cdm, df_info)
 ```
 
+Pull in wordbank data
+```{r}
+wordbank <- src_mysql(dbname='wordbank')#,host="54.149.39.46",
+                     # user="wordbank",password="wordbank")
+
+## NOW LOAD TABLES ##
+admin.table <- tbl(wordbank,"common_administration")
+child.table <- tbl(wordbank,"common_child")
+wg.table <- tbl(wordbank,"instruments_wg")
+
+# Select just the MCDI words from the Words and Sentences Table
+wg.vocab.words <- select(wg.table,basetable_ptr_id,
+                         col_baabaa:col_some) %>%
+  as.data.frame %>%
+  rename(id = basetable_ptr_id) %>% # Rename the id
+  gather(word,produces,col_baabaa:col_some) %>% # Arrange in longform
+  mutate(word = str_replace(word, "col_", "")) %>%
+  as.tbl# Strip off col_ from words
+
+# Compute a productive vocabulary for each child
+wg.scores <- wg.vocab.words %>%
+  group_by(id) %>% # Group by child
+  summarise(productive = sum(produces == 2)) # Compute productive vocabulary
+```
+
+Load Demographic data for each child
+```{r, message=FALSE}
+# Get the age of each child
+admins <- admin.table %>%
+  select(data_id,child_id,age,source_id) %>%
+  rename(id = data_id, child.id = child_id,source.id = source_id) %>%
+  as.data.frame
+
+# Get demographic variables for each child
+demos <- select(child.table,id,gender,mom_ed,birth_order) %>%
+  rename(child.id = id) %>%
+  as.data.frame# Rename id fields
+
+# Join age and demographics together
+child.data <- as.tbl(left_join(admins,demos))
+```
+
+Combine MDI data and demographics
+```{r, message=FALSE}
+wg.data <- left_join(wg.scores, child.data) %>%
+  filter(age >= 8 & age <= 16) %>% # filter down to just relevant range
+  select(-child.id,-source.id) #drop redundant columns
+```
+
+
 Do analysis over all data for CDI-cats.
 
 ```{r}
@@ -74,22 +129,34 @@ ggplot(data = freqs, aes(x=prop, y=cdi_cat, colour=dataset, group=dataset)) + ge
 
 Age data - set that up. 
 ```{r}
+
+wg.producers <- wg.data %>%
+  group_by(age) %>%
+  summarise(prop = sum(productive > 0)/n()) %>%
+  mutate(dataset = "Wordbank")
+
 ns <- d %>% 
   filter(!is.na(age), age != "NA") %>%
   mutate(dataset = factor(dataset)) %>%
   group_by(dataset, age) %>%
   summarise(n = n())
 
-freqs.grid <- expand.grid(dataset=unique(ns$dataset),age=unique(ns$age)) %>%
+freqs.grid <- expand.grid(dataset=c(unique(ns$dataset),"Wordbank"),
+                          age=unique(ns$age)) %>%
   arrange(dataset,age)
 
-freqs <- left_join(freqs.grid,ns) %>%
-  filter(dataset == "MTurk" | dataset == "CDM" | dataset == "Info" & age >=10) %>%
+freqs <- left_join(freqs.grid,ns)%>%
+  filter(dataset == "MTurk" | dataset == "CDM" & age >= 10| 
+           dataset == "Info" & age >=10 | dataset == "Wordbank") %>%
   group_by() %>%
   mutate(n = ifelse(is.na(n), 0, n)) %>%
   group_by(dataset) %>%
   mutate(cum.n = cumsum(n),
          prop = cum.n / sum(n))
+
+freqs <- left_join(freqs,wg.producers,by=c("dataset","age")) %>%
+  mutate(prop = min(prop.x,prop.y, na.rm = TRUE)) %>%
+  select(-prop.x,-prop.y)
 ```
 
 Plot.
