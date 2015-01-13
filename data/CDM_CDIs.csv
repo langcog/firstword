@@ -1,1 +1,455 @@
-Date,Time,Word,Subject,Age_utterance,Age_current,gender,CDI_category 6/16/14,9:20,Feed Me ,animaletc,10mOrBefore,13plusy,female,Action Words6/11/14,11:51,Go,action,10mOrBefore,4to6y,male,Action Words6/11/14,16:21,Go,action,12m,0to3y,male,Action Words6/11/14,23:00,Go,animaletc,10mOrBefore,4to6y,female,Action Words6/11/14,10:31,Help,action,11m,13plusy,male,Action Words6/11/14,14:54,Open Close,action,10mOrBefore,0to3y,male,Action Words6/13/14,16:45,Tickle,action,12m,0to3y,male,Action Words6/11/14,10:31,Touch,action,10mOrBefore,0to3y,male,Action Words6/11/14,11:09,Catch,action,10mOrBefore,0to3y,male,Action Words6/11/14,20:14,Come,action,10mOrBefore,4to6y,male,Action Words6/11/14,10:31,More,animaletc,14mOrLater,4to6y,female,Action Words6/11/14,11:26,More,action,10mOrBefore,4to6y,female,Action Words6/11/14,8:39,More,other,10mOrBefore,0to3y,male,Action Words6/11/14,12:04,More,animaletc,dontremember,0to3y,female,Action Words6/11/14,13:35,More,animaletc,10mOrBefore,0to3y,male,Action Words6/11/14,20:57,More,other,14mOrLater,4to6y,male,Action Words6/11/14,21:45,More,animaletc,12m,0to3y,female,Action Words6/13/14,7:45,More,animaletc,10mOrBefore,7to12y,male,Action Words6/15/14,12:16,More,action,dontremember,13plusy,female,Action Words6/11/14,21:39,More ,action,12m,0to3y,male,Action Words6/11/14,10:44,More Water,action,dontremember,7to12y,female,Action Words6/11/14,21:44,No This,other,14mOrLater,4to6y,male,Action Words6/12/14,1:24,Touchdown ,,10mOrBefore,7to12y,male,Action Words6/11/14,14:02,Asterix,animaletc,12m,0to3y,female,Animal Names 6/15/14,22:19,Heron,animaletc,14mOrLater,7to12y,female,Animal Names 6/11/14,21:00,Bear,animaletc,11m,4to6y,female,Animal Names 6/11/14,10:37,Bird,animaletc,10mOrBefore,7to12y,male,Animal Names 6/11/14,10:47,Bird,animaletc,13m,7to12y,male,Animal Names 6/11/14,12:41,Bird,animaletc,10mOrBefore,0to3y,female,Animal Names 6/11/14,13:46,Bird,animaletc,14mOrLater,4to6y,female,Animal Names 6/11/14,17:15,Bird,animaletc,14mOrLater,0to3y,male,Animal Names 6/11/14,18:36,Bird,animaletc,10mOrBefore,4to6y,female,Animal Names 6/11/14,21:31,Bird,animaletc,10mOrBefore,7to12y,male,Animal Names 6/11/14,21:52,Bird,,10mOrBefore,0to3y,female,Animal Names 6/11/14,10:35,Bird ,animaletc,11m,0to3y,male,Animal Names 6/11/14,10:28,Cat,animaletc,10mOrBefore,7to12y,female,Animal Names 6/11/14,10:35,Cat,animaletc,12m,7to12y,male,Animal Names 6/11/14,11:27,Cat,animaletc,12m,4to6y,female,Animal Names 6/11/14,11:32,Cat,animaletc,11m,0to3y,male,Animal Names 6/11/14,12:59,Cat,animaletc,10mOrBefore,4to6y,female,Animal Names 6/11/14,13:18,Cat,animaletc,10mOrBefore,0to3y,female,Animal Names 6/11/14,13:33,Cat,animaletc,dontremember,0to3y,male,Animal Names 6/11/14,14:13,Cat,animaletc,14mOrLater,0to3y,female,Animal Names 6/11/14,20:13,Cat,animaletc,12m,0to3y,male,Animal Names 6/11/14,21:22,Cat,animaletc,10mOrBefore,13plusy,male,Animal Names 6/12/14,9:23,Cat,animaletc,dontremember,0to3y,male,Animal Names 6/12/14,21:38,Cat,animaletc,10mOrBefore,7to12y,female,Animal Names 6/11/14,14:07,Cow,animaletc,10mOrBefore,4to6y,male,Animal Names 6/11/14,10:25,Dog,animaletc,10mOrBefore,4to6y,female,Animal Names 6/11/14,10:29,Dog,animaletc,10mOrBefore,0to3y,male,Animal Names 6/11/14,10:31,Dog,animaletc,10mOrBefore,0to3y,female,Animal Names 6/11/14,10:32,Dog,animaletc,11m,0to3y,male,Animal Names 6/11/14,10:42,Dog,animaletc,10mOrBefore,0to3y,male,Animal Names 6/11/14,10:48,Dog,animaletc,14mOrLater,0to3y,male,Animal Names 6/11/14,11:10,Dog,animaletc,10mOrBefore,0to3y,female,Animal Names 6/11/14,11:18,Dog,animaletc,12m,0to3y,female,Animal Names 6/11/14,11:12,Dog,animaletc,10mOrBefore,0to3y,male,Animal Names 6/11/14,11:26,Dog,animaletc,10mOrBefore,0to3y,female,Animal Names 6/11/14,11:37,Dog,animaletc,11m,0to3y,male,Animal Names 6/11/14,11:47,Dog,animaletc,dontremember,0to3y,male,Animal Names 6/11/14,11:59,Dog,animaletc,14mOrLater,7to12y,female,Animal Names 6/11/14,12:25,Dog,animaletc,10mOrBefore,4to6y,female,Animal Names 6/11/14,12:36,Dog,animaletc,10mOrBefore,0to3y,male,Animal Names 6/11/14,13:40,Dog,animaletc,12m,4to6y,,Animal Names 6/11/14,14:28,Dog,animaletc,10mOrBefore,0to3y,female,Animal Names 6/11/14,16:47,Dog,animaletc,10mOrBefore,0to3y,male,Animal Names 6/11/14,19:26,Dog,animaletc,10mOrBefore,0to3y,female,Animal Names 6/11/14,20:58,Dog,animaletc,11m,0to3y,female,Animal Names 6/12/14,7:04,Dog,animaletc,10mOrBefore,0to3y,male,Animal Names 6/13/14,11:15,Dog,animaletc,11m,0to3y,male,Animal Names 6/15/14,22:23,Dog,animaletc,13m,4to6y,male,Animal Names 6/19/14,21:40,Dog,animaletc,11m,4to6y,female,Animal Names 6/11/14,10:42,Dog Dog,animaletc,10mOrBefore,0to3y,male,Animal Names 6/11/14,10:27,Doggie,animaletc,10mOrBefore,4to6y,male,Animal Names 6/11/14,13:26,Doggie,animaletc,10mOrBefore,7to12y,female,Animal Names 6/11/14,20:03,Doggie,animaletc,11m,4to6y,female,Animal Names 6/11/14,14:24,Doggy,animaletc,dontremember,4to6y,male,Animal Names 6/11/14,10:39,Duck,animaletc,10mOrBefore,7to12y,female,Animal Names 6/11/14,10:55,Duck,animaletc,11m,7to12y,female,Animal Names 6/11/14,11:20,Duck,animaletc,10mOrBefore,0to3y,female,Animal Names 6/11/14,11:44,Duck,animaletc,dontremember,4to6y,female,Animal Names 6/11/14,12:58,Duck,animaletc,10mOrBefore,0to3y,female,Animal Names 6/11/14,13:00,Duck,animaletc,10mOrBefore,4to6y,female,Animal Names 6/11/14,14:25,Duck,animaletc,10mOrBefore,7to12y,female,Animal Names 6/11/14,16:49,Duck,animaletc,10mOrBefore,7to12y,female,Animal Names 6/11/14,20:19,Duck,,,13plusy,male,Animal Names 6/11/14,21:05,Duck,animaletc,10mOrBefore,4to6y,female,Animal Names 6/11/14,21:08,Duck,animaletc,10mOrBefore,0to3y,female,Animal Names 6/11/14,20:05,Duck,animaletc,10mOrBefore,7to12y,male,Animal Names 6/12/14,12:34,Duck,animaletc,11m,4to6y,male,Animal Names 6/12/14,7:19,Duck,animaletc,11m,4to6y,female,Animal Names 6/12/14,20:21,Duck,animaletc,10mOrBefore,0to3y,male,Animal Names 6/18/14,10:49,Duck,action,10mOrBefore,7to12y,female,Animal Names 6/11/14,12:31,Fish,animaletc,14mOrLater,7to12y,female,Animal Names 6/12/14,15:55,Kitten,animaletc,12m,0to3y,male,Animal Names 6/11/14,10:53,Kitty,animaletc,10mOrBefore,0to3y,female,Animal Names 6/11/14,11:01,Kitty,animaletc,13m,7to12y,female,Animal Names 6/11/14,11:17,Kitty,animaletc,dontremember,0to3y,male,Animal Names 6/11/14,11:18,Kitty,animaletc,12m,0to3y,male,Animal Names 6/12/14,22:06,Kitty,animaletc,13m,0to3y,male,Animal Names 6/12/14,7:20,Kitty Cat,animaletc,11m,0to3y,male,Animal Names 6/11/14,20:41,Lion ,animaletc,12m,0to3y,male,Animal Names 6/11/14,10:43,Owl,animaletc,10mOrBefore,0to3y,female,Animal Names 6/11/14,15:03,Owl,animaletc,12m,0to3y,female,Animal Names 6/11/14,10:56,Tiger,animaletc,13m,7to12y,male,Animal Names 6/11/14,14:42,Tiger,animaletc,11m,4to6y,male,Animal Names 6/11/14,13:46,Turtle,animaletc,10mOrBefore,13plusy,female,Animal Names 6/11/14,22:02,Turtle,animaletc,14mOrLater,7to12y,male,Animal Names 6/12/14,13:03,Buttons,animaletc,13m,0to3y,male,Clothing6/11/14,11:23,Shoe,animaletc,11m,4to6y,female,Clothing6/11/14,15:56,Shoe,animaletc,14mOrLater,0to3y,male,Clothing6/12/14,8:03,Shoe,animaletc,14mOrLater,0to3y,male,Clothing6/11/14,10:35,Shoes,animaletc,12m,0to3y,female,Clothing6/16/14,20:59,Shoes,animaletc,14mOrLater,0to3y,male,Clothing6/11/14,10:41,Blue,,11m,13plusy,male,Descriptive Words 6/11/14,13:57,Blue,animaletc,10mOrBefore,4to6y,male,Descriptive Words 6/11/14,20:14,Blue,other,10mOrBefore,0to3y,male,Descriptive Words 6/15/14,8:53,Dirty,animaletc,12m,13plusy,female,Descriptive Words 6/11/14,16:25,Good,action,14mOrLater,0to3y,male,Descriptive Words 6/11/14,11:18,Happy,action,12m,0to3y,female,Descriptive Words 6/11/14,10:28,Hot,other,dontremember,13plusy,male,Descriptive Words 6/11/14,12:43,Hot,animaletc,dontremember,4to6y,female,Descriptive Words 6/13/14,7:02,Hot,animaletc,10mOrBefore,7to12y,female,Descriptive Words 6/13/14,13:45,Hot,animaletc,dontremember,4to6y,female,Descriptive Words 6/11/14,17:19,Hot ,animaletc,11m,0to3y,male,Descriptive Words 6/11/14,12:40,Hungry ,action,10mOrBefore,7to12y,male,Descriptive Words 6/11/14,11:20,Yuck,other,dontremember,0to3y,male,Descriptive Words 6/11/14,11:52,Purple  ,animaletc,14mOrLater,7to12y,female,Descriptive Words 6/11/14,11:13,Apple,animaletc,10mOrBefore,0to3y,female,Food and Drink6/11/14,12:12,Apple,animaletc,10mOrBefore,0to3y,male,Food and Drink6/11/14,13:02,Apple,animaletc,11m,7to12y,male,Food and Drink6/11/14,13:52,Apple,animaletc,13m,0to3y,male,Food and Drink6/11/14,14:04,Apple,animaletc,10mOrBefore,7to12y,female,Food and Drink6/11/14,10:30,Banana,animaletc,11m,0to3y,male,Food and Drink6/11/14,10:35,Banana,animaletc,10mOrBefore,4to6y,female,Food and Drink6/11/14,15:11,Banana,animaletc,10mOrBefore,4to6y,male,Food and Drink6/12/14,16:07,Banana,animaletc,10mOrBefore,7to12y,female,Food and Drink6/11/14,11:51,Banana ,animaletc,10mOrBefore,4to6y,male,Food and Drink6/11/14,11:24,Bread,animaletc,14mOrLater,0to3y,male,Food and Drink6/11/14,10:38,Cheese,animaletc,11m,0to3y,male,Food and Drink6/11/14,10:47,Cheese,animaletc,12m,0to3y,male,Food and Drink6/11/14,11:54,Cheese,animaletc,10mOrBefore,7to12y,female,Food and Drink6/11/14,13:02,Cheese,animaletc,12m,0to3y,male,Food and Drink6/11/14,21:46,Cheese,animaletc,14mOrLater,13plusy,male,Food and Drink6/13/14,10:24,Cookie,animaletc,11m,0to3y,female,Food and Drink6/11/14,10:29,Milk,animaletc,12m,0to3y,female,Food and Drink6/11/14,11:30,Pickle,animaletc,14mOrLater,7to12y,male,Food and Drink6/12/14,9:14,Sweet Carrot,animaletc,10mOrBefore,0to3y,female,Food and Drink6/11/14,16:40,Avocado ,animaletc,10mOrBefore,4to6y,female,Food and Drink 6/11/14,10:32,Dessert,animaletc,14mOrLater,0to3y,female,Food and Drink 6/11/14,10:54,Milk,animaletc,dontremember,0to3y,male,Food and Drink 6/11/14,11:12,Milk,animaletc,dontremember,0to3y,male,Food and Drink 6/11/14,11:48,Milk,animaletc,10mOrBefore,4to6y,male,Food and Drink 6/11/14,13:17,Milk,animaletc,12m,4to6y,male,Food and Drink 6/11/14,13:49,Milk,animaletc,11m,0to3y,male,Food and Drink 6/11/14,21:20,Milk,animaletc,11m,7to12y,male,Food and Drink 6/11/14,16:32,Milk,animaletc,14mOrLater,4to6y,male,Food and Drink 6/12/14,0:57,Milk,action,11m,0to3y,male,Food and Drink 6/17/14,21:02,Milk,animaletc,dontremember,0to3y,female,Food and Drink 6/11/14,10:28,Bye,action,12m,4to6y,female,Games and Routines6/11/14,10:33,Bye,action,10mOrBefore,4to6y,female,Games and Routines6/11/14,11:57,Bye,person,11m,0to3y,female,Games and Routines6/11/14,13:03,Bye,action,10mOrBefore,0to3y,female,Games and Routines6/11/14,20:04,Bye,action,10mOrBefore,0to3y,female,Games and Routines6/14/14,20:33,Bye,action,12m,0to3y,female,Games and Routines6/11/14,12:07,Bye ,action,11m,0to3y,female,Games and Routines6/4/14,10:00,Bye Bye,action,14mOrLater,7to12y,female,Games and Routines6/11/14,12:34,Bye Bye,person,10mOrBefore,4to6y,male,Games and Routines6/11/14,13:20,Bye Bye,other,14mOrLater,4to6y,male,Games and Routines6/11/14,15:17,Bye Bye,action,10mOrBefore,0to3y,female,Games and Routines6/11/14,13:14,Hello,other,10mOrBefore,,male,Games and Routines6/11/14,10:32,Hi,other,10mOrBefore,0to3y,female,Games and Routines6/11/14,10:35,Hi,action,11m,0to3y,female,Games and Routines6/11/14,10:36,Hi,other,10mOrBefore,0to3y,female,Games and Routines6/11/14,10:38,Hi,action,,4to6y,male,Games and Routines6/11/14,10:34,Hi,person,dontremember,4to6y,male,Games and Routines6/11/14,10:43,Hi,other,11m,7to12y,female,Games and Routines6/11/14,10:51,Hi,other,10mOrBefore,0to3y,female,Games and Routines6/11/14,11:20,Hi,action,10mOrBefore,0to3y,male,Games and Routines6/11/14,12:37,Hi,action,11m,4to6y,male,Games and Routines6/11/14,11:48,Hi,action,10mOrBefore,0to3y,female,Games and Routines6/11/14,11:52,Hi,animaletc,14mOrLater,7to12y,female,Games and Routines6/11/14,11:59,Hi,person,10mOrBefore,0to3y,male,Games and Routines6/11/14,15:03,Hi,other,10mOrBefore,0to3y,female,Games and Routines6/11/14,12:33,Hi,other,13m,4to6y,male,Games and Routines6/11/14,14:09,Hi,other,10mOrBefore,0to3y,male,Games and Routines6/11/14,14:17,Hi,action,13m,0to3y,female,Games and Routines6/11/14,15:03,Hi,other,10mOrBefore,7to12y,female,Games and Routines6/11/14,15:04,Hi,,12m,0to3y,female,Games and Routines6/11/14,15:13,Hi,person,10mOrBefore,0to3y,female,Games and Routines6/11/14,15:40,Hi,other,10mOrBefore,0to3y,female,Games and Routines6/11/14,16:23,Hi,other,10mOrBefore,0to3y,female,Games and Routines6/11/14,21:53,Hi,other,10mOrBefore,0to3y,male,Games and Routines6/11/14,22:23,Hi,other,13m,0to3y,female,Games and Routines6/11/14,22:44,Hi,other,10mOrBefore,0to3y,male,Games and Routines6/12/14,8:47,Hi,action,10mOrBefore,0to3y,male,Games and Routines6/12/14,9:36,Hi,action,12m,0to3y,female,Games and Routines6/12/14,12:39,Hi,other,13m,0to3y,male,Games and Routines6/12/14,21:48,Hi,other,11m,7to12y,male,Games and Routines6/16/14,16:02,Hi,person,10mOrBefore,13plusy,female,Games and Routines6/11/14,10:55,No,other,14mOrLater,0to3y,female,Games and Routines6/11/14,11:38,No,action,12m,0to3y,male,Games and Routines6/11/14,11:43,No,animaletc,10mOrBefore,4to6y,female,Games and Routines6/11/14,13:00,No,action,10mOrBefore,0to3y,male,Games and Routines6/11/14,13:07,No,other,dontremember,0to3y,female,Games and Routines6/11/14,13:16,No,action,10mOrBefore,4to6y,female,Games and Routines6/11/14,15:19,No,action,13m,7to12y,male,Games and Routines6/11/14,16:35,No,other,11m,4to6y,female,Games and Routines6/12/14,9:06,No,action,12m,0to3y,male,Games and Routines6/16/14,15:25,No,animaletc,10mOrBefore,4to6y,female,Games and Routines6/12/14,1:14,No ,animaletc,11m,4to6y,male,Games and Routines6/11/14,11:00,Please,action,11m,0to3y,male,Games and Routines6/12/14,12:54,Thank You,other,12m,0to3y,female,Games and Routines6/11/14,12:42,Thank You ,other,12m,0to3y,female,Games and Routines6/11/14,11:04,Want,action,14mOrLater,0to3y,male,Games and Routines6/11/14,10:39,Yes,action,11m,4to6y,male,Games and Routines6/11/14,10:58,Yes,other,10mOrBefore,0to3y,female,Games and Routines6/11/14,12:05,Yes,action,14mOrLater,13plusy,male,Games and Routines6/11/14,21:27,Want to Eat,action,10mOrBefore,7to12y,male,Games and Routines6/12/14,0:26,All Done,action,10mOrBefore,0to3y,male,Games and Routines6/11/14,14:19,All Done ,action,14mOrLater,0to3y,male,Games and Routines6/11/14,11:20,Cheers,action,14mOrLater,0to3y,male,Games and Routines6/11/14,12:10,Cheers ,action,10mOrBefore,0to3y,male,Games and Routines6/11/14,10:28,I Love You ,action,10mOrBefore,0to3y,male,Games and Routines6/12/14,1:15,Noo Noo,animaletc,13m,0to3y,female,Games and Routines6/11/14,14:12,Oh Cool,animaletc,10mOrBefore,4to6y,male,Games and Routines6/11/14,10:50,Oh Wow,other,10mOrBefore,0to3y,male,Games and Routines6/11/14,14:38,Okay,action,14mOrLater,4to6y,female,Games and Routines6/11/14,10:44,Wow,action,11m,0to3y,male,Games and Routines6/11/14,11:05,Wow,other,10mOrBefore,0to3y,female,Games and Routines6/11/14,13:55,Wow,,11m,4to6y,female,Games and Routines6/11/14,10:29,Wow ,action,10mOrBefore,13plusy,female,Games and Routines6/13/14,11:21,Flower,animaletc,12m,0to3y,male,Outside Things and Places to Go 6/11/14,13:22,Outside,action,14mOrLater,7to12y,male,Outside Things and Places to Go 6/11/14,13:29,Rock,animaletc,11m,4to6y,male,Outside Things and Places to Go 6/11/14,10:34,Sky,animaletc,dontremember,4to6y,male,Outside Things and Places to Go 6/13/14,6:43,Star,animaletc,10mOrBefore,4to6y,male,Outside Things and Places to Go 6/11/14,11:02,Tree,other,11m,7to12y,male,Outside Things and Places to Go 6/11/14,12:12,Tree,other,11m,4to6y,female,Outside Things and Places to Go 6/11/14,21:09,Tree,animaletc,10mOrBefore,4to6y,female,Outside Things and Places to Go 6/11/14,15:12,Water,animaletc,11m,0to3y,male,Outside Things and Places to Go 6/11/14,14:18,Water,animaletc,10mOrBefore,0to3y,female,Outside Things and Places to Go 6/12/14,20:10,Water,animaletc,dontremember,0to3y,male,Outside Things and Places to Go 6/11/14,20:31,Daisy,animaletc,10mOrBefore,4to6y,female,Outside Things and Places to Go 6/12/14,16:14,Ivy,animaletc,12m,4to6y,female,Outside Things and Places to Go 6/11/14,12:01,Park,action,dontremember,0to3y,female,Outside Things and Places to Go 6/11/14,13:50,Side,action,10mOrBefore,0to3y,male,Outside Things and Places to Go 6/11/14,10:48,Baby,person,14mOrLater,0to3y,male,Person6/11/14,15:12,Baby,person,10mOrBefore,4to6y,female,Person6/12/14,14:46,Baby,person,10mOrBefore,0to3y,female,Person6/11/14,18:01,Baby ,person,13m,4to6y,male,Person6/11/14,12:25,Brother,person,10mOrBefore,4to6y,male,Person6/14/14,14:07,Brother ,person,dontremember,0to3y,male,Person6/11/14,10:28,Dada,person,10mOrBefore,4to6y,male,Person6/11/14,10:32,Dada,other,11m,0to3y,male,Person6/11/14,11:02,Dada,person,13m,0to3y,female,Person6/11/14,11:06,Dada,person,10mOrBefore,7to12y,male,Person6/11/14,12:14,Dada,person,14mOrLater,4to6y,male,Person6/11/14,14:36,Dada,person,10mOrBefore,0to3y,female,Person6/11/14,16:30,Dada,person,10mOrBefore,0to3y,male,Person6/11/14,20:55,Dada,,10mOrBefore,0to3y,female,Person6/12/14,10:00,Dada,person,10mOrBefore,4to6y,female,Person6/12/14,7:38,Dada,person,10mOrBefore,4to6y,female,Person6/14/14,7:35,Dada,person,10mOrBefore,0to3y,female,Person6/11/14,10:40,Grandma,person,11m,0to3y,female,Person6/11/14,10:52,Grandma,person,10mOrBefore,0to3y,male,Person6/11/14,15:34,Grandma,person,10mOrBefore,4to6y,male,Person6/12/14,19:42,Grandpa,person,10mOrBefore,7to12y,female,Person6/11/14,11:33,Lady,person,dontremember,7to12y,male,Person6/11/14,10:30,Mama,,10mOrBefore,7to12y,female,Person6/11/14,13:36,Mama,animaletc,10mOrBefore,0to3y,female,Person6/11/14,18:33,Mama,,dontremember,7to12y,female,Person6/11/14,20:30,Mama,person,10mOrBefore,7to12y,female,Person6/11/14,23:06,Mama,person,10mOrBefore,7to12y,male,Person6/12/14,11:33,Mama,person,dontremember,7to12y,female,Person6/12/14,15:25,Mama,person,10mOrBefore,4to6y,male,Person6/11/14,11:55,Allah,other,10mOrBefore,4to6y,female,Person6/11/14,11:57,Allah,other,10mOrBefore,0to3y,male,Person6/11/14,15:44,Allah Akbar ,other,13m,0to3y,male,Person6/11/14,10:55,Anne,person,10mOrBefore,4to6y,male,Person6/11/14,11:22,Da Da,person,10mOrBefore,4to6y,male,Person6/11/14,10:37,David ,person,dontremember,4to6y,male,Person6/16/14,1:31,Eddy,other,12m,13plusy,male,Person6/13/14,18:09,George,animaletc,12m,0to3y,male,Person6/11/14,12:15,Giggsy ,animaletc,10mOrBefore,4to6y,female,Person6/12/14,8:10,Isla,person,10mOrBefore,4to6y,male,Person6/11/14,11:25,Ma,person,10mOrBefore,0to3y,male,Person6/11/14,10:47,Nana,action,10mOrBefore,4to6y,male,Person6/11/14,16:17,Nana,animaletc,14mOrLater,0to3y,female,Person6/11/14,12:50,Nana ,animaletc,10mOrBefore,0to3y,male,Person6/11/14,11:03,Nana  ,other,dontremember,0to3y,female,Person6/11/14,10:32,Papa,person,10mOrBefore,0to3y,female,Person6/11/14,11:47,Papa,person,10mOrBefore,7to12y,female,Person6/13/14,8:23,Papa,person,10mOrBefore,0to3y,male,Person6/11/14,10:37,Sam,animaletc,12m,4to6y,male,Person6/11/14,10:50,Sean,person,12m,7to12y,female,Person6/11/14,18:25,Sissy,person,10mOrBefore,4to6y,female,Person6/11/14,10:28,Down,action,10mOrBefore,0to3y,male,Prepositions and Locations6/11/14,12:33,There,action,11m,0to3y,male,Prepositions and Locations6/11/14,10:00,Up,action,11m,13plusy,female,Prepositions and Locations6/11/14,10:30,Up,action,11m,0to3y,male,Prepositions and Locations6/11/14,10:38,Up,action,10mOrBefore,4to6y,male,Prepositions and Locations6/11/14,11:01,Up,action,10mOrBefore,4to6y,female,Prepositions and Locations6/11/14,11:12,Up,action,12m,0to3y,male,Prepositions and Locations6/11/14,12:14,Up,action,13m,0to3y,male,Prepositions and Locations6/11/14,12:32,Up,action,14mOrLater,7to12y,male,Prepositions and Locations6/11/14,13:07,Up,action,10mOrBefore,4to6y,female,Prepositions and Locations6/11/14,21:51,Up,action,10mOrBefore,4to6y,female,Prepositions and Locations6/16/14,17:10,Up,action,10mOrBefore,0to3y,male,Prepositions and Locations6/11/14,15:20,That,action,14mOrLater,4to6y,male,Pronouns6/15/14,7:06,That,animaletc,14mOrLater,0to3y,male,Pronouns6/11/14,10:31,This,animaletc,11m,0to3y,male,Pronouns6/11/14,11:17,This,animaletc,14mOrLater,0to3y,male,Pronouns6/11/14,11:35,This,animaletc,11m,0to3y,female,Pronouns6/11/14,10:35,Light,animaletc,10mOrBefore,7to12y,female,Small Household Items6/11/14,10:52,Light,other,dontremember,4to6y,female,Small Household Items6/11/14,14:08,Light,animaletc,10mOrBefore,4to6y,male,Small Household Items6/11/14,14:17,Light,animaletc,10mOrBefore,0to3y,male,Small Household Items6/12/14,4:23,Light,animaletc,10mOrBefore,4to6y,male,Small Household Items6/11/14,20:04,Light,other,10mOrBefore,4to6y,male,Small Household Items6/11/14,22:10,Light,animaletc,10mOrBefore,13plusy,male,Small Household Items6/12/14,8:08,Light,animaletc,10mOrBefore,13plusy,female,Small Household Items6/12/14,10:42,Light,animaletc,11m,4to6y,male,Small Household Items6/12/14,19:27,Light,animaletc,10mOrBefore,0to3y,male,Small Household Items6/11/14,15:41,Light ,,dontremember,13plusy,female,Small Household Items6/14/14,23:38,Light ,animaletc,11m,4to6y,female,Small Household Items6/11/14,10:32,Vacuum,animaletc,10mOrBefore,0to3y,male,Small Household Items6/11/14,13:51,Meow,action,10mOrBefore,0to3y,female,Sound Effects/Animal Sounds6/11/14,13:23,Ouch,action,12m,4to6y,female,Sound Effects/Animal Sounds6/11/14,10:58,Quack,animaletc,12m,7to12y,female,Sound Effects/Animal Sounds6/15/14,20:50,Quack,animaletc,10mOrBefore,0to3y,female,Sound Effects/Animal Sounds6/11/14,10:34,Uh-Oh,action,10mOrBefore,7to12y,female,Sound Effects/Animal Sounds6/11/14,10:31,Uh-Oh,other,14mOrLater,0to3y,female,Sound Effects/Animal Sounds6/11/14,10:55,Uh-Oh,action,11m,7to12y,male,Sound Effects/Animal Sounds6/11/14,10:59,Uh-Oh,action,13m,0to3y,female,Sound Effects/Animal Sounds6/11/14,11:06,Uh-Oh,action,11m,4to6y,male,Sound Effects/Animal Sounds6/11/14,11:09,Uh-Oh,action,14mOrLater,0to3y,male,Sound Effects/Animal Sounds6/11/14,11:21,Uh-Oh,action,12m,0to3y,male,Sound Effects/Animal Sounds6/11/14,11:36,Uh-Oh,action,13m,0to3y,male,Sound Effects/Animal Sounds6/11/14,12:29,Uh-Oh,action,11m,0to3y,female,Sound Effects/Animal Sounds6/11/14,13:39,Uh-Oh,action,dontremember,0to3y,female,Sound Effects/Animal Sounds6/11/14,14:50,Uh-Oh,other,10mOrBefore,0to3y,male,Sound Effects/Animal Sounds6/11/14,14:51,Uh-Oh,action,11m,0to3y,female,Sound Effects/Animal Sounds6/11/14,16:26,Uh-Oh,action,10mOrBefore,0to3y,female,Sound Effects/Animal Sounds6/11/14,15:58,Uh-Oh,action,12m,0to3y,male,Sound Effects/Animal Sounds6/11/14,17:26,Uh-Oh,action,12m,0to3y,male,Sound Effects/Animal Sounds6/12/14,7:13,Uh-Oh,animaletc,12m,0to3y,female,Sound Effects/Animal Sounds6/12/14,13:59,Uh-Oh,action,11m,0to3y,female,Sound Effects/Animal Sounds6/12/14,15:52,Uh-Oh,action,10mOrBefore,0to3y,male,Sound Effects/Animal Sounds6/14/14,20:31,Uh-Oh,action,14mOrLater,4to6y,male,Sound Effects/Animal Sounds6/16/14,20:42,Uh-Oh,action,11m,0to3y,female,Sound Effects/Animal Sounds6/11/14,11:22,Uh-Oh ,action,14mOrLater,0to3y,male,Sound Effects/Animal Sounds6/19/14,19:04,Woof,animaletc,12m,7to12y,female,Sound Effects/Animal Sounds6/11/14,10:55,Yum,animaletc,11m,0to3y,male,Sound Effects/Animal Sounds6/11/14,11:23,Baba,person,,,,Sound Effects/Animal Sounds6/11/14,13:24,Baba,person,10mOrBefore,0to3y,female,Sound Effects/Animal Sounds6/11/14,16:44,Baba,person,10mOrBefore,0to3y,female,Sound Effects/Animal Sounds6/13/14,10:38,Baba,person,10mOrBefore,7to12y,female,Sound Effects/Animal Sounds6/13/14,15:46,Baba,person,10mOrBefore,4to6y,female,Sound Effects/Animal Sounds6/16/14,8:20,Baba,animaletc,10mOrBefore,4to6y,male,Sound Effects/Animal Sounds6/11/14,10:49,Baba ,,11m,0to3y,male,Sound Effects/Animal Sounds6/11/14,16:17,Baba ,animaletc,10mOrBefore,7to12y,male,Sound Effects/Animal Sounds6/11/14,21:36,Baba ,animaletc,10mOrBefore,0to3y,female,Sound Effects/Animal Sounds6/11/14,10:32,Boo,other,12m,13plusy,female,Sound Effects/Animal Sounds6/11/14,15:08,Bow,animaletc,11m,4to6y,male,Sound Effects/Animal Sounds6/12/14,8:41,Bow,animaletc,11m,0to3y,male,Sound Effects/Animal Sounds6/11/14,12:54,Brr   ,animaletc,10mOrBefore,4to6y,female,Sound Effects/Animal Sounds6/11/14,15:14,Vroom ,action,11m,0to3y,female,Sound Effects/Animal Sounds6/11/14,10:28,Ball,animaletc,dontremember,7to12y,male,Toys6/11/14,10:30,Ball,animaletc,10mOrBefore,0to3y,male,Toys6/11/14,10:30,Ball,animaletc,13m,4to6y,female,Toys6/11/14,10:30,Ball,animaletc,12m,4to6y,male,Toys6/11/14,10:32,Ball,animaletc,10mOrBefore,13plusy,male,Toys6/11/14,10:42,Ball,animaletc,10mOrBefore,0to3y,male,Toys6/11/14,10:42,Ball,animaletc,10mOrBefore,0to3y,male,Toys6/11/14,10:49,Ball,animaletc,10mOrBefore,0to3y,female,Toys6/11/14,10:50,Ball,animaletc,14mOrLater,0to3y,male,Toys6/11/14,10:50,Ball,animaletc,12m,7to12y,male,Toys6/11/14,10:49,Ball,animaletc,11m,0to3y,male,Toys6/11/14,10:54,Ball,animaletc,dontremember,0to3y,male,Toys6/11/14,10:52,Ball,animaletc,10mOrBefore,13plusy,male,Toys6/11/14,11:14,Ball,animaletc,10mOrBefore,0to3y,male,Toys6/11/14,11:13,Ball,animaletc,10mOrBefore,0to3y,male,Toys6/11/14,11:25,Ball,animaletc,11m,4to6y,male,Toys6/11/14,11:36,Ball,animaletc,10mOrBefore,0to3y,male,Toys6/11/14,12:02,Ball,animaletc,10mOrBefore,7to12y,male,Toys6/11/14,12:27,Ball,animaletc,13m,0to3y,male,Toys6/11/14,12:52,Ball,animaletc,11m,0to3y,male,Toys6/11/14,12:56,Ball,animaletc,10mOrBefore,0to3y,male,Toys6/11/14,12:56,Ball,animaletc,10mOrBefore,0to3y,male,Toys6/11/14,13:11,Ball,animaletc,12m,4to6y,male,Toys6/11/14,13:30,Ball,animaletc,10mOrBefore,0to3y,female,Toys6/11/14,12:32,Ball,animaletc,10mOrBefore,0to3y,female,Toys6/11/14,13:58,Ball,animaletc,13m,0to3y,female,Toys6/11/14,13:43,Ball,animaletc,14mOrLater,13plusy,male,Toys6/11/14,14:09,Ball,animaletc,10mOrBefore,7to12y,male,Toys6/11/14,14:12,Ball,animaletc,11m,4to6y,female,Toys6/11/14,14:31,Ball,animaletc,10mOrBefore,0to3y,female,Toys6/11/14,14:38,Ball,animaletc,10mOrBefore,4to6y,male,Toys6/11/14,14:38,Ball,animaletc,10mOrBefore,7to12y,male,Toys6/11/14,14:48,Ball,animaletc,13m,0to3y,male,Toys6/11/14,14:54,Ball,animaletc,12m,7to12y,female,Toys6/11/14,15:27,Ball,animaletc,dontremember,0to3y,female,Toys6/11/14,15:35,Ball,animaletc,12m,4to6y,male,Toys6/11/14,16:02,Ball,animaletc,10mOrBefore,0to3y,female,Toys6/11/14,19:13,Ball,animaletc,10mOrBefore,0to3y,female,Toys6/11/14,19:53,Ball,animaletc,10mOrBefore,7to12y,male,Toys6/11/14,20:45,Ball,animaletc,11m,7to12y,male,Toys6/11/14,20:43,Ball,animaletc,14mOrLater,0to3y,male,Toys6/11/14,22:30,Ball,animaletc,10mOrBefore,4to6y,male,Toys6/11/14,23:41,Ball,animaletc,12m,0to3y,male,Toys6/12/14,7:33,Ball,animaletc,dontremember,0to3y,male,Toys6/12/14,9:02,Ball,animaletc,12m,0to3y,male,Toys6/12/14,10:20,Ball,animaletc,dontremember,0to3y,male,Toys6/12/14,11:35,Ball,,10mOrBefore,0to3y,male,Toys6/12/14,20:10,Ball,animaletc,13m,13plusy,female,Toys6/12/14,20:55,Ball,animaletc,13m,0to3y,female,Toys6/13/14,11:19,Ball,animaletc,11m,0to3y,male,Toys6/14/14,18:57,Ball,animaletc,10mOrBefore,4to6y,male,Toys6/19/14,21:58,Ball,animaletc,11m,0to3y,male,Toys6/11/14,12:00,Ball ,animaletc,10mOrBefore,7to12y,female,Toys6/11/14,11:05,Book,animaletc,10mOrBefore,0to3y,male,Toys6/11/14,12:55,Book,animaletc,10mOrBefore,4to6y,female,Toys6/11/14,13:54,Book,animaletc,13m,0to3y,male,Toys6/11/14,18:31,Book,animaletc,11m,0to3y,male,Toys6/11/14,21:21,Book,animaletc,10mOrBefore,13plusy,male,Toys6/11/14,21:47,Book,animaletc,11m,4to6y,female,Toys6/11/14,10:28,Bubble,animaletc,14mOrLater,0to3y,male,Toys6/11/14,10:32,Bubble,animaletc,10mOrBefore,4to6y,female,Toys6/11/14,15:42,Bubble,animaletc,dontremember,0to3y,male,Toys6/13/14,12:07,Bubble,animaletc,10mOrBefore,4to6y,male,Toys6/11/14,20:28,Bubbles,animaletc,10mOrBefore,0to3y,male,Toys6/12/14,15:41,Ipad,other,10mOrBefore,0to3y,male,Toys6/11/14,10:38,Bus,animaletc,dontremember,13plusy,male,Vehicles6/11/14,11:47,Bus,animaletc,13m,4to6y,male,Vehicles6/11/14,13:05,Bus,animaletc,10mOrBefore,13plusy,male,Vehicles6/11/14,22:34,Bus,animaletc,14mOrLater,0to3y,male,Vehicles6/11/14,10:29,Car,animaletc,10mOrBefore,7to12y,male,Vehicles6/11/14,10:32,Car,animaletc,14mOrLater,7to12y,male,Vehicles6/11/14,10:33,Car,animaletc,12m,0to3y,male,Vehicles6/11/14,10:42,Car,animaletc,14mOrLater,0to3y,male,Vehicles6/11/14,10:53,Car,animaletc,11m,0to3y,male,Vehicles6/11/14,11:16,Car,animaletc,12m,4to6y,male,Vehicles6/11/14,11:42,Car,other,10mOrBefore,0to3y,male,Vehicles6/11/14,14:38,Car,animaletc,10mOrBefore,0to3y,male,Vehicles6/11/14,15:57,Car,animaletc,11m,0to3y,female,Vehicles6/11/14,22:47,Car,animaletc,13m,0to3y,male,Vehicles6/11/14,23:00,Car,animaletc,14mOrLater,4to6y,male,Vehicles6/12/14,23:55,Car,animaletc,dontremember,7to12y,male,Vehicles6/12/14,14:02,Car,animaletc,11m,4to6y,male,Vehicles6/18/14,13:04,Car,animaletc,dontremember,4to6y,male,Vehicles6/18/14,12:34,Truck,animaletc,12m,0to3y,male,Vehicles6/11/14,11:40,Auto,animaletc,14mOrLater,0to3y,male,Vehicles6/11/14,21:44,Auto,animaletc,10mOrBefore,4to6y,male,Vehicles
+Date,Time,Word,Subject,Age_utterance,Age_current,gender,CDI_category 
+6/16/14,9:20,Feed Me ,animaletc,10mOrBefore,13plusy,female,Action
+6/11/14,11:51,Go,action,10mOrBefore,4to6y,male,Action
+6/11/14,16:21,Go,action,12m,0to3y,male,Action
+6/11/14,23:00,Go,animaletc,10mOrBefore,4to6y,female,Action
+6/11/14,10:31,Help,action,11m,13plusy,male,Action
+6/11/14,14:54,Open Close,action,10mOrBefore,0to3y,male,Action
+6/13/14,16:45,Tickle,action,12m,0to3y,male,Action
+6/11/14,10:31,Touch,action,10mOrBefore,0to3y,male,Action
+6/11/14,11:09,Catch,action,10mOrBefore,0to3y,male,Action
+6/11/14,20:14,Come,action,10mOrBefore,4to6y,male,Action
+6/11/14,10:31,More,animaletc,14mOrLater,4to6y,female,Action
+6/11/14,11:26,More,action,10mOrBefore,4to6y,female,Action
+6/11/14,8:39,More,other,10mOrBefore,0to3y,male,Action
+6/11/14,12:04,More,animaletc,dontremember,0to3y,female,Action
+6/11/14,13:35,More,animaletc,10mOrBefore,0to3y,male,Action
+6/11/14,20:57,More,other,14mOrLater,4to6y,male,Action
+6/11/14,21:45,More,animaletc,12m,0to3y,female,Action
+6/13/14,7:45,More,animaletc,10mOrBefore,7to12y,male,Action
+6/15/14,12:16,More,action,dontremember,13plusy,female,Action
+6/11/14,21:39,More ,action,12m,0to3y,male,Action
+6/11/14,10:44,More Water,action,dontremember,7to12y,female,Action
+6/11/14,21:44,No This,other,14mOrLater,4to6y,male,Action
+6/12/14,1:24,Touchdown ,,10mOrBefore,7to12y,male,Action
+6/11/14,14:02,Asterix,animaletc,12m,0to3y,female,Animals
+6/15/14,22:19,Heron,animaletc,14mOrLater,7to12y,female,Animals
+6/11/14,21:00,Bear,animaletc,11m,4to6y,female,Animals
+6/11/14,10:37,Bird,animaletc,10mOrBefore,7to12y,male,Animals
+6/11/14,10:47,Bird,animaletc,13m,7to12y,male,Animals
+6/11/14,12:41,Bird,animaletc,10mOrBefore,0to3y,female,Animals
+6/11/14,13:46,Bird,animaletc,14mOrLater,4to6y,female,Animals
+6/11/14,17:15,Bird,animaletc,14mOrLater,0to3y,male,Animals
+6/11/14,18:36,Bird,animaletc,10mOrBefore,4to6y,female,Animals
+6/11/14,21:31,Bird,animaletc,10mOrBefore,7to12y,male,Animals
+6/11/14,21:52,Bird,,10mOrBefore,0to3y,female,Animals
+6/11/14,10:35,Bird ,animaletc,11m,0to3y,male,Animals
+6/11/14,10:28,Cat,animaletc,10mOrBefore,7to12y,female,Animals
+6/11/14,10:35,Cat,animaletc,12m,7to12y,male,Animals
+6/11/14,11:27,Cat,animaletc,12m,4to6y,female,Animals
+6/11/14,11:32,Cat,animaletc,11m,0to3y,male,Animals
+6/11/14,12:59,Cat,animaletc,10mOrBefore,4to6y,female,Animals
+6/11/14,13:18,Cat,animaletc,10mOrBefore,0to3y,female,Animals
+6/11/14,13:33,Cat,animaletc,dontremember,0to3y,male,Animals
+6/11/14,14:13,Cat,animaletc,14mOrLater,0to3y,female,Animals
+6/11/14,20:13,Cat,animaletc,12m,0to3y,male,Animals
+6/11/14,21:22,Cat,animaletc,10mOrBefore,13plusy,male,Animals
+6/12/14,9:23,Cat,animaletc,dontremember,0to3y,male,Animals
+6/12/14,21:38,Cat,animaletc,10mOrBefore,7to12y,female,Animals
+6/11/14,14:07,Cow,animaletc,10mOrBefore,4to6y,male,Animals
+6/11/14,10:25,Dog,animaletc,10mOrBefore,4to6y,female,Animals
+6/11/14,10:29,Dog,animaletc,10mOrBefore,0to3y,male,Animals
+6/11/14,10:31,Dog,animaletc,10mOrBefore,0to3y,female,Animals
+6/11/14,10:32,Dog,animaletc,11m,0to3y,male,Animals
+6/11/14,10:42,Dog,animaletc,10mOrBefore,0to3y,male,Animals
+6/11/14,10:48,Dog,animaletc,14mOrLater,0to3y,male,Animals
+6/11/14,11:10,Dog,animaletc,10mOrBefore,0to3y,female,Animals
+6/11/14,11:18,Dog,animaletc,12m,0to3y,female,Animals
+6/11/14,11:12,Dog,animaletc,10mOrBefore,0to3y,male,Animals
+6/11/14,11:26,Dog,animaletc,10mOrBefore,0to3y,female,Animals
+6/11/14,11:37,Dog,animaletc,11m,0to3y,male,Animals
+6/11/14,11:47,Dog,animaletc,dontremember,0to3y,male,Animals
+6/11/14,11:59,Dog,animaletc,14mOrLater,7to12y,female,Animals
+6/11/14,12:25,Dog,animaletc,10mOrBefore,4to6y,female,Animals
+6/11/14,12:36,Dog,animaletc,10mOrBefore,0to3y,male,Animals
+6/11/14,13:40,Dog,animaletc,12m,4to6y,,Animals
+6/11/14,14:28,Dog,animaletc,10mOrBefore,0to3y,female,Animals
+6/11/14,16:47,Dog,animaletc,10mOrBefore,0to3y,male,Animals
+6/11/14,19:26,Dog,animaletc,10mOrBefore,0to3y,female,Animals
+6/11/14,20:58,Dog,animaletc,11m,0to3y,female,Animals
+6/12/14,7:04,Dog,animaletc,10mOrBefore,0to3y,male,Animals
+6/13/14,11:15,Dog,animaletc,11m,0to3y,male,Animals
+6/15/14,22:23,Dog,animaletc,13m,4to6y,male,Animals
+6/19/14,21:40,Dog,animaletc,11m,4to6y,female,Animals
+6/11/14,10:42,Dog Dog,animaletc,10mOrBefore,0to3y,male,Animals
+6/11/14,10:27,Doggie,animaletc,10mOrBefore,4to6y,male,Animals
+6/11/14,13:26,Doggie,animaletc,10mOrBefore,7to12y,female,Animals
+6/11/14,20:03,Doggie,animaletc,11m,4to6y,female,Animals
+6/11/14,14:24,Doggy,animaletc,dontremember,4to6y,male,Animals
+6/11/14,10:39,Duck,animaletc,10mOrBefore,7to12y,female,Animals
+6/11/14,10:55,Duck,animaletc,11m,7to12y,female,Animals
+6/11/14,11:20,Duck,animaletc,10mOrBefore,0to3y,female,Animals
+6/11/14,11:44,Duck,animaletc,dontremember,4to6y,female,Animals
+6/11/14,12:58,Duck,animaletc,10mOrBefore,0to3y,female,Animals
+6/11/14,13:00,Duck,animaletc,10mOrBefore,4to6y,female,Animals
+6/11/14,14:25,Duck,animaletc,10mOrBefore,7to12y,female,Animals
+6/11/14,16:49,Duck,animaletc,10mOrBefore,7to12y,female,Animals
+6/11/14,20:19,Duck,,,13plusy,male,Animals
+6/11/14,21:05,Duck,animaletc,10mOrBefore,4to6y,female,Animals
+6/11/14,21:08,Duck,animaletc,10mOrBefore,0to3y,female,Animals
+6/11/14,20:05,Duck,animaletc,10mOrBefore,7to12y,male,Animals
+6/12/14,12:34,Duck,animaletc,11m,4to6y,male,Animals
+6/12/14,7:19,Duck,animaletc,11m,4to6y,female,Animals
+6/12/14,20:21,Duck,animaletc,10mOrBefore,0to3y,male,Animals
+6/18/14,10:49,Duck,action,10mOrBefore,7to12y,female,Animals
+6/11/14,12:31,Fish,animaletc,14mOrLater,7to12y,female,Animals
+6/12/14,15:55,Kitten,animaletc,12m,0to3y,male,Animals
+6/11/14,10:53,Kitty,animaletc,10mOrBefore,0to3y,female,Animals
+6/11/14,11:01,Kitty,animaletc,13m,7to12y,female,Animals
+6/11/14,11:17,Kitty,animaletc,dontremember,0to3y,male,Animals
+6/11/14,11:18,Kitty,animaletc,12m,0to3y,male,Animals
+6/12/14,22:06,Kitty,animaletc,13m,0to3y,male,Animals
+6/12/14,7:20,Kitty Cat,animaletc,11m,0to3y,male,Animals
+6/11/14,20:41,Lion ,animaletc,12m,0to3y,male,Animals
+6/11/14,10:43,Owl,animaletc,10mOrBefore,0to3y,female,Animals
+6/11/14,15:03,Owl,animaletc,12m,0to3y,female,Animals
+6/11/14,10:56,Tiger,animaletc,13m,7to12y,male,Animals
+6/11/14,14:42,Tiger,animaletc,11m,4to6y,male,Animals
+6/11/14,13:46,Turtle,animaletc,10mOrBefore,13plusy,female,Animals
+6/11/14,22:02,Turtle,animaletc,14mOrLater,7to12y,male,Animals
+6/12/14,13:03,Buttons,animaletc,13m,0to3y,male,Clothing
+6/11/14,11:23,Shoe,animaletc,11m,4to6y,female,Clothing
+6/11/14,15:56,Shoe,animaletc,14mOrLater,0to3y,male,Clothing
+6/12/14,8:03,Shoe,animaletc,14mOrLater,0to3y,male,Clothing
+6/11/14,10:35,Shoes,animaletc,12m,0to3y,female,Clothing
+6/16/14,20:59,Shoes,animaletc,14mOrLater,0to3y,male,Clothing
+6/11/14,10:41,Blue,,11m,13plusy,male,Descriptive
+6/11/14,13:57,Blue,animaletc,10mOrBefore,4to6y,male,Descriptive
+6/11/14,20:14,Blue,other,10mOrBefore,0to3y,male,Descriptive
+6/15/14,8:53,Dirty,animaletc,12m,13plusy,female,Descriptive
+6/11/14,16:25,Good,action,14mOrLater,0to3y,male,Descriptive
+6/11/14,11:18,Happy,action,12m,0to3y,female,Descriptive
+6/11/14,10:28,Hot,other,dontremember,13plusy,male,Descriptive
+6/11/14,12:43,Hot,animaletc,dontremember,4to6y,female,Descriptive
+6/13/14,7:02,Hot,animaletc,10mOrBefore,7to12y,female,Descriptive
+6/13/14,13:45,Hot,animaletc,dontremember,4to6y,female,Descriptive
+6/11/14,17:19,Hot ,animaletc,11m,0to3y,male,Descriptive
+6/11/14,12:40,Hungry ,action,10mOrBefore,7to12y,male,Descriptive
+6/11/14,11:20,Yuck,other,dontremember,0to3y,male,Descriptive
+6/11/14,11:52,Purple  ,animaletc,14mOrLater,7to12y,female,Descriptive
+6/11/14,11:13,Apple,animaletc,10mOrBefore,0to3y,female,Food and Drink
+6/11/14,12:12,Apple,animaletc,10mOrBefore,0to3y,male,Food and Drink
+6/11/14,13:02,Apple,animaletc,11m,7to12y,male,Food and Drink
+6/11/14,13:52,Apple,animaletc,13m,0to3y,male,Food and Drink
+6/11/14,14:04,Apple,animaletc,10mOrBefore,7to12y,female,Food and Drink
+6/11/14,10:30,Banana,animaletc,11m,0to3y,male,Food and Drink
+6/11/14,10:35,Banana,animaletc,10mOrBefore,4to6y,female,Food and Drink
+6/11/14,15:11,Banana,animaletc,10mOrBefore,4to6y,male,Food and Drink
+6/12/14,16:07,Banana,animaletc,10mOrBefore,7to12y,female,Food and Drink
+6/11/14,11:51,Banana ,animaletc,10mOrBefore,4to6y,male,Food and Drink
+6/11/14,11:24,Bread,animaletc,14mOrLater,0to3y,male,Food and Drink
+6/11/14,10:38,Cheese,animaletc,11m,0to3y,male,Food and Drink
+6/11/14,10:47,Cheese,animaletc,12m,0to3y,male,Food and Drink
+6/11/14,11:54,Cheese,animaletc,10mOrBefore,7to12y,female,Food and Drink
+6/11/14,13:02,Cheese,animaletc,12m,0to3y,male,Food and Drink
+6/11/14,21:46,Cheese,animaletc,14mOrLater,13plusy,male,Food and Drink
+6/13/14,10:24,Cookie,animaletc,11m,0to3y,female,Food and Drink
+6/11/14,10:29,Milk,animaletc,12m,0to3y,female,Food and Drink
+6/11/14,11:30,Pickle,animaletc,14mOrLater,7to12y,male,Food and Drink
+6/12/14,9:14,Sweet Carrot,animaletc,10mOrBefore,0to3y,female,Food and Drink
+6/11/14,16:40,Avocado ,animaletc,10mOrBefore,4to6y,female,Food and Drink 
+6/11/14,10:32,Dessert,animaletc,14mOrLater,0to3y,female,Food and Drink 
+6/11/14,10:54,Milk,animaletc,dontremember,0to3y,male,Food and Drink 
+6/11/14,11:12,Milk,animaletc,dontremember,0to3y,male,Food and Drink 
+6/11/14,11:48,Milk,animaletc,10mOrBefore,4to6y,male,Food and Drink 
+6/11/14,13:17,Milk,animaletc,12m,4to6y,male,Food and Drink 
+6/11/14,13:49,Milk,animaletc,11m,0to3y,male,Food and Drink 
+6/11/14,21:20,Milk,animaletc,11m,7to12y,male,Food and Drink 
+6/11/14,16:32,Milk,animaletc,14mOrLater,4to6y,male,Food and Drink 
+6/12/14,0:57,Milk,action,11m,0to3y,male,Food and Drink 
+6/17/14,21:02,Milk,animaletc,dontremember,0to3y,female,Food and Drink 
+6/11/14,10:28,Bye,action,12m,4to6y,female,Games and Routines
+6/11/14,10:33,Bye,action,10mOrBefore,4to6y,female,Games and Routines
+6/11/14,11:57,Bye,person,11m,0to3y,female,Games and Routines
+6/11/14,13:03,Bye,action,10mOrBefore,0to3y,female,Games and Routines
+6/11/14,20:04,Bye,action,10mOrBefore,0to3y,female,Games and Routines
+6/14/14,20:33,Bye,action,12m,0to3y,female,Games and Routines
+6/11/14,12:07,Bye ,action,11m,0to3y,female,Games and Routines
+6/4/14,10:00,Bye Bye,action,14mOrLater,7to12y,female,Games and Routines
+6/11/14,12:34,Bye Bye,person,10mOrBefore,4to6y,male,Games and Routines
+6/11/14,13:20,Bye Bye,other,14mOrLater,4to6y,male,Games and Routines
+6/11/14,15:17,Bye Bye,action,10mOrBefore,0to3y,female,Games and Routines
+6/11/14,13:14,Hello,other,10mOrBefore,,male,Games and Routines
+6/11/14,10:32,Hi,other,10mOrBefore,0to3y,female,Games and Routines
+6/11/14,10:35,Hi,action,11m,0to3y,female,Games and Routines
+6/11/14,10:36,Hi,other,10mOrBefore,0to3y,female,Games and Routines
+6/11/14,10:38,Hi,action,,4to6y,male,Games and Routines
+6/11/14,10:34,Hi,person,dontremember,4to6y,male,Games and Routines
+6/11/14,10:43,Hi,other,11m,7to12y,female,Games and Routines
+6/11/14,10:51,Hi,other,10mOrBefore,0to3y,female,Games and Routines
+6/11/14,11:20,Hi,action,10mOrBefore,0to3y,male,Games and Routines
+6/11/14,12:37,Hi,action,11m,4to6y,male,Games and Routines
+6/11/14,11:48,Hi,action,10mOrBefore,0to3y,female,Games and Routines
+6/11/14,11:52,Hi,animaletc,14mOrLater,7to12y,female,Games and Routines
+6/11/14,11:59,Hi,person,10mOrBefore,0to3y,male,Games and Routines
+6/11/14,15:03,Hi,other,10mOrBefore,0to3y,female,Games and Routines
+6/11/14,12:33,Hi,other,13m,4to6y,male,Games and Routines
+6/11/14,14:09,Hi,other,10mOrBefore,0to3y,male,Games and Routines
+6/11/14,14:17,Hi,action,13m,0to3y,female,Games and Routines
+6/11/14,15:03,Hi,other,10mOrBefore,7to12y,female,Games and Routines
+6/11/14,15:04,Hi,,12m,0to3y,female,Games and Routines
+6/11/14,15:13,Hi,person,10mOrBefore,0to3y,female,Games and Routines
+6/11/14,15:40,Hi,other,10mOrBefore,0to3y,female,Games and Routines
+6/11/14,16:23,Hi,other,10mOrBefore,0to3y,female,Games and Routines
+6/11/14,21:53,Hi,other,10mOrBefore,0to3y,male,Games and Routines
+6/11/14,22:23,Hi,other,13m,0to3y,female,Games and Routines
+6/11/14,22:44,Hi,other,10mOrBefore,0to3y,male,Games and Routines
+6/12/14,8:47,Hi,action,10mOrBefore,0to3y,male,Games and Routines
+6/12/14,9:36,Hi,action,12m,0to3y,female,Games and Routines
+6/12/14,12:39,Hi,other,13m,0to3y,male,Games and Routines
+6/12/14,21:48,Hi,other,11m,7to12y,male,Games and Routines
+6/16/14,16:02,Hi,person,10mOrBefore,13plusy,female,Games and Routines
+6/11/14,10:55,No,other,14mOrLater,0to3y,female,Games and Routines
+6/11/14,11:38,No,action,12m,0to3y,male,Games and Routines
+6/11/14,11:43,No,animaletc,10mOrBefore,4to6y,female,Games and Routines
+6/11/14,13:00,No,action,10mOrBefore,0to3y,male,Games and Routines
+6/11/14,13:07,No,other,dontremember,0to3y,female,Games and Routines
+6/11/14,13:16,No,action,10mOrBefore,4to6y,female,Games and Routines
+6/11/14,15:19,No,action,13m,7to12y,male,Games and Routines
+6/11/14,16:35,No,other,11m,4to6y,female,Games and Routines
+6/12/14,9:06,No,action,12m,0to3y,male,Games and Routines
+6/16/14,15:25,No,animaletc,10mOrBefore,4to6y,female,Games and Routines
+6/12/14,1:14,No ,animaletc,11m,4to6y,male,Games and Routines
+6/11/14,11:00,Please,action,11m,0to3y,male,Games and Routines
+6/12/14,12:54,Thank You,other,12m,0to3y,female,Games and Routines
+6/11/14,12:42,Thank You ,other,12m,0to3y,female,Games and Routines
+6/11/14,11:04,Want,action,14mOrLater,0to3y,male,Games and Routines
+6/11/14,10:39,Yes,action,11m,4to6y,male,Games and Routines
+6/11/14,10:58,Yes,other,10mOrBefore,0to3y,female,Games and Routines
+6/11/14,12:05,Yes,action,14mOrLater,13plusy,male,Games and Routines
+6/11/14,21:27,Want to Eat,action,10mOrBefore,7to12y,male,Games and Routines
+6/12/14,0:26,All Done,action,10mOrBefore,0to3y,male,Games and Routines
+6/11/14,14:19,All Done ,action,14mOrLater,0to3y,male,Games and Routines
+6/11/14,11:20,Cheers,action,14mOrLater,0to3y,male,Games and Routines
+6/11/14,12:10,Cheers ,action,10mOrBefore,0to3y,male,Games and Routines
+6/11/14,10:28,I Love You ,action,10mOrBefore,0to3y,male,Games and Routines
+6/12/14,1:15,Noo Noo,animaletc,13m,0to3y,female,Games and Routines
+6/11/14,14:12,Oh Cool,animaletc,10mOrBefore,4to6y,male,Games and Routines
+6/11/14,10:50,Oh Wow,other,10mOrBefore,0to3y,male,Games and Routines
+6/11/14,14:38,Okay,action,14mOrLater,4to6y,female,Games and Routines
+6/11/14,10:44,Wow,action,11m,0to3y,male,Games and Routines
+6/11/14,11:05,Wow,other,10mOrBefore,0to3y,female,Games and Routines
+6/11/14,13:55,Wow,,11m,4to6y,female,Games and Routines
+6/11/14,10:29,Wow ,action,10mOrBefore,13plusy,female,Games and Routines
+6/13/14,11:21,Flower,animaletc,12m,0to3y,male,Outside Things
+6/11/14,13:22,Outside,action,14mOrLater,7to12y,male,Outside Things
+6/11/14,13:29,Rock,animaletc,11m,4to6y,male,Outside Things
+6/11/14,10:34,Sky,animaletc,dontremember,4to6y,male,Outside Things
+6/13/14,6:43,Star,animaletc,10mOrBefore,4to6y,male,Outside Things
+6/11/14,11:02,Tree,other,11m,7to12y,male,Outside Things
+6/11/14,12:12,Tree,other,11m,4to6y,female,Outside Things
+6/11/14,21:09,Tree,animaletc,10mOrBefore,4to6y,female,Outside Things
+6/11/14,15:12,Water,animaletc,11m,0to3y,male,Outside Things
+6/11/14,14:18,Water,animaletc,10mOrBefore,0to3y,female,Outside Things
+6/12/14,20:10,Water,animaletc,dontremember,0to3y,male,Outside Things
+6/11/14,20:31,Daisy,animaletc,10mOrBefore,4to6y,female,Outside Things
+6/12/14,16:14,Ivy,animaletc,12m,4to6y,female,Outside Things
+6/11/14,12:01,Park,action,dontremember,0to3y,female,Outside Things
+6/11/14,13:50,Side,action,10mOrBefore,0to3y,male,Outside Things
+6/11/14,10:48,Baby,person,14mOrLater,0to3y,male,People
+6/11/14,15:12,Baby,person,10mOrBefore,4to6y,female,People
+6/12/14,14:46,Baby,person,10mOrBefore,0to3y,female,People
+6/11/14,18:01,Baby ,person,13m,4to6y,male,People
+6/11/14,12:25,Brother,person,10mOrBefore,4to6y,male,People
+6/14/14,14:07,Brother ,person,dontremember,0to3y,male,People
+6/11/14,10:28,Dada,person,10mOrBefore,4to6y,male,People
+6/11/14,10:32,Dada,other,11m,0to3y,male,People
+6/11/14,11:02,Dada,person,13m,0to3y,female,People
+6/11/14,11:06,Dada,person,10mOrBefore,7to12y,male,People
+6/11/14,12:14,Dada,person,14mOrLater,4to6y,male,People
+6/11/14,14:36,Dada,person,10mOrBefore,0to3y,female,People
+6/11/14,16:30,Dada,person,10mOrBefore,0to3y,male,People
+6/11/14,20:55,Dada,,10mOrBefore,0to3y,female,People
+6/12/14,10:00,Dada,person,10mOrBefore,4to6y,female,People
+6/12/14,7:38,Dada,person,10mOrBefore,4to6y,female,People
+6/14/14,7:35,Dada,person,10mOrBefore,0to3y,female,People
+6/11/14,10:40,Grandma,person,11m,0to3y,female,People
+6/11/14,10:52,Grandma,person,10mOrBefore,0to3y,male,People
+6/11/14,15:34,Grandma,person,10mOrBefore,4to6y,male,People
+6/12/14,19:42,Grandpa,person,10mOrBefore,7to12y,female,People
+6/11/14,11:33,Lady,person,dontremember,7to12y,male,People
+6/11/14,10:30,Mama,,10mOrBefore,7to12y,female,People
+6/11/14,13:36,Mama,animaletc,10mOrBefore,0to3y,female,People
+6/11/14,18:33,Mama,,dontremember,7to12y,female,People
+6/11/14,20:30,Mama,person,10mOrBefore,7to12y,female,People
+6/11/14,23:06,Mama,person,10mOrBefore,7to12y,male,People
+6/12/14,11:33,Mama,person,dontremember,7to12y,female,People
+6/12/14,15:25,Mama,person,10mOrBefore,4to6y,male,People
+6/11/14,11:55,Allah,other,10mOrBefore,4to6y,female,People
+6/11/14,11:57,Allah,other,10mOrBefore,0to3y,male,People
+6/11/14,15:44,Allah Akbar ,other,13m,0to3y,male,People
+6/11/14,10:55,Anne,person,10mOrBefore,4to6y,male,People
+6/11/14,11:22,Da Da,person,10mOrBefore,4to6y,male,People
+6/11/14,10:37,David ,person,dontremember,4to6y,male,People
+6/16/14,1:31,Eddy,other,12m,13plusy,male,People
+6/13/14,18:09,George,animaletc,12m,0to3y,male,People
+6/11/14,12:15,Giggsy ,animaletc,10mOrBefore,4to6y,female,People
+6/12/14,8:10,Isla,person,10mOrBefore,4to6y,male,People
+6/11/14,11:25,Ma,person,10mOrBefore,0to3y,male,People
+6/11/14,10:47,Nana,action,10mOrBefore,4to6y,male,People
+6/11/14,16:17,Nana,animaletc,14mOrLater,0to3y,female,People
+6/11/14,12:50,Nana ,animaletc,10mOrBefore,0to3y,male,People
+6/11/14,11:03,Nana  ,other,dontremember,0to3y,female,People
+6/11/14,10:32,Papa,person,10mOrBefore,0to3y,female,People
+6/11/14,11:47,Papa,person,10mOrBefore,7to12y,female,People
+6/13/14,8:23,Papa,person,10mOrBefore,0to3y,male,People
+6/11/14,10:37,Sam,animaletc,12m,4to6y,male,People
+6/11/14,10:50,Sean,person,12m,7to12y,female,People
+6/11/14,18:25,Sissy,person,10mOrBefore,4to6y,female,People
+6/11/14,10:28,Down,action,10mOrBefore,0to3y,male,Prepositions and Locations
+6/11/14,12:33,There,action,11m,0to3y,male,Prepositions and Locations
+6/11/14,10:00,Up,action,11m,13plusy,female,Prepositions and Locations
+6/11/14,10:30,Up,action,11m,0to3y,male,Prepositions and Locations
+6/11/14,10:38,Up,action,10mOrBefore,4to6y,male,Prepositions and Locations
+6/11/14,11:01,Up,action,10mOrBefore,4to6y,female,Prepositions and Locations
+6/11/14,11:12,Up,action,12m,0to3y,male,Prepositions and Locations
+6/11/14,12:14,Up,action,13m,0to3y,male,Prepositions and Locations
+6/11/14,12:32,Up,action,14mOrLater,7to12y,male,Prepositions and Locations
+6/11/14,13:07,Up,action,10mOrBefore,4to6y,female,Prepositions and Locations
+6/11/14,21:51,Up,action,10mOrBefore,4to6y,female,Prepositions and Locations
+6/16/14,17:10,Up,action,10mOrBefore,0to3y,male,Prepositions and Locations
+6/11/14,15:20,That,action,14mOrLater,4to6y,male,Pronouns
+6/15/14,7:06,That,animaletc,14mOrLater,0to3y,male,Pronouns
+6/11/14,10:31,This,animaletc,11m,0to3y,male,Pronouns
+6/11/14,11:17,This,animaletc,14mOrLater,0to3y,male,Pronouns
+6/11/14,11:35,This,animaletc,11m,0to3y,female,Pronouns
+6/11/14,10:35,Light,animaletc,10mOrBefore,7to12y,female,Small Household Objects
+6/11/14,10:52,Light,other,dontremember,4to6y,female,Small Household Objects
+6/11/14,14:08,Light,animaletc,10mOrBefore,4to6y,male,Small Household Objects
+6/11/14,14:17,Light,animaletc,10mOrBefore,0to3y,male,Small Household Objects
+6/12/14,4:23,Light,animaletc,10mOrBefore,4to6y,male,Small Household Objects
+6/11/14,20:04,Light,other,10mOrBefore,4to6y,male,Small Household Objects
+6/11/14,22:10,Light,animaletc,10mOrBefore,13plusy,male,Small Household Objects
+6/12/14,8:08,Light,animaletc,10mOrBefore,13plusy,female,Small Household Objects
+6/12/14,10:42,Light,animaletc,11m,4to6y,male,Small Household Objects
+6/12/14,19:27,Light,animaletc,10mOrBefore,0to3y,male,Small Household Objects
+6/11/14,15:41,Light ,,dontremember,13plusy,female,Small Household Objects
+6/14/14,23:38,Light ,animaletc,11m,4to6y,female,Small Household Objects
+6/11/14,10:32,Vacuum,animaletc,10mOrBefore,0to3y,male,Small Household Objects
+6/11/14,13:51,Meow,action,10mOrBefore,0to3y,female,Sound Effects
+6/11/14,13:23,Ouch,action,12m,4to6y,female,Sound Effects
+6/11/14,10:58,Quack,animaletc,12m,7to12y,female,Sound Effects
+6/15/14,20:50,Quack,animaletc,10mOrBefore,0to3y,female,Sound Effects
+6/11/14,10:34,Uh-Oh,action,10mOrBefore,7to12y,female,Sound Effects
+6/11/14,10:31,Uh-Oh,other,14mOrLater,0to3y,female,Sound Effects
+6/11/14,10:55,Uh-Oh,action,11m,7to12y,male,Sound Effects
+6/11/14,10:59,Uh-Oh,action,13m,0to3y,female,Sound Effects
+6/11/14,11:06,Uh-Oh,action,11m,4to6y,male,Sound Effects
+6/11/14,11:09,Uh-Oh,action,14mOrLater,0to3y,male,Sound Effects
+6/11/14,11:21,Uh-Oh,action,12m,0to3y,male,Sound Effects
+6/11/14,11:36,Uh-Oh,action,13m,0to3y,male,Sound Effects
+6/11/14,12:29,Uh-Oh,action,11m,0to3y,female,Sound Effects
+6/11/14,13:39,Uh-Oh,action,dontremember,0to3y,female,Sound Effects
+6/11/14,14:50,Uh-Oh,other,10mOrBefore,0to3y,male,Sound Effects
+6/11/14,14:51,Uh-Oh,action,11m,0to3y,female,Sound Effects
+6/11/14,16:26,Uh-Oh,action,10mOrBefore,0to3y,female,Sound Effects
+6/11/14,15:58,Uh-Oh,action,12m,0to3y,male,Sound Effects
+6/11/14,17:26,Uh-Oh,action,12m,0to3y,male,Sound Effects
+6/12/14,7:13,Uh-Oh,animaletc,12m,0to3y,female,Sound Effects
+6/12/14,13:59,Uh-Oh,action,11m,0to3y,female,Sound Effects
+6/12/14,15:52,Uh-Oh,action,10mOrBefore,0to3y,male,Sound Effects
+6/14/14,20:31,Uh-Oh,action,14mOrLater,4to6y,male,Sound Effects
+6/16/14,20:42,Uh-Oh,action,11m,0to3y,female,Sound Effects
+6/11/14,11:22,Uh-Oh ,action,14mOrLater,0to3y,male,Sound Effects
+6/19/14,19:04,Woof,animaletc,12m,7to12y,female,Sound Effects
+6/11/14,10:55,Yum,animaletc,11m,0to3y,male,Sound Effects
+6/11/14,11:23,Baba,person,,,,Sound Effects
+6/11/14,13:24,Baba,person,10mOrBefore,0to3y,female,Sound Effects
+6/11/14,16:44,Baba,person,10mOrBefore,0to3y,female,Sound Effects
+6/13/14,10:38,Baba,person,10mOrBefore,7to12y,female,Sound Effects
+6/13/14,15:46,Baba,person,10mOrBefore,4to6y,female,Sound Effects
+6/16/14,8:20,Baba,animaletc,10mOrBefore,4to6y,male,Sound Effects
+6/11/14,10:49,Baba ,,11m,0to3y,male,Sound Effects
+6/11/14,16:17,Baba ,animaletc,10mOrBefore,7to12y,male,Sound Effects
+6/11/14,21:36,Baba ,animaletc,10mOrBefore,0to3y,female,Sound Effects
+6/11/14,10:32,Boo,other,12m,13plusy,female,Sound Effects
+6/11/14,15:08,Bow,animaletc,11m,4to6y,male,Sound Effects
+6/12/14,8:41,Bow,animaletc,11m,0to3y,male,Sound Effects
+6/11/14,12:54,Brr   ,animaletc,10mOrBefore,4to6y,female,Sound Effects
+6/11/14,15:14,Vroom ,action,11m,0to3y,female,Sound Effects
+6/11/14,10:28,Ball,animaletc,dontremember,7to12y,male,Toys
+6/11/14,10:30,Ball,animaletc,10mOrBefore,0to3y,male,Toys
+6/11/14,10:30,Ball,animaletc,13m,4to6y,female,Toys
+6/11/14,10:30,Ball,animaletc,12m,4to6y,male,Toys
+6/11/14,10:32,Ball,animaletc,10mOrBefore,13plusy,male,Toys
+6/11/14,10:42,Ball,animaletc,10mOrBefore,0to3y,male,Toys
+6/11/14,10:42,Ball,animaletc,10mOrBefore,0to3y,male,Toys
+6/11/14,10:49,Ball,animaletc,10mOrBefore,0to3y,female,Toys
+6/11/14,10:50,Ball,animaletc,14mOrLater,0to3y,male,Toys
+6/11/14,10:50,Ball,animaletc,12m,7to12y,male,Toys
+6/11/14,10:49,Ball,animaletc,11m,0to3y,male,Toys
+6/11/14,10:54,Ball,animaletc,dontremember,0to3y,male,Toys
+6/11/14,10:52,Ball,animaletc,10mOrBefore,13plusy,male,Toys
+6/11/14,11:14,Ball,animaletc,10mOrBefore,0to3y,male,Toys
+6/11/14,11:13,Ball,animaletc,10mOrBefore,0to3y,male,Toys
+6/11/14,11:25,Ball,animaletc,11m,4to6y,male,Toys
+6/11/14,11:36,Ball,animaletc,10mOrBefore,0to3y,male,Toys
+6/11/14,12:02,Ball,animaletc,10mOrBefore,7to12y,male,Toys
+6/11/14,12:27,Ball,animaletc,13m,0to3y,male,Toys
+6/11/14,12:52,Ball,animaletc,11m,0to3y,male,Toys
+6/11/14,12:56,Ball,animaletc,10mOrBefore,0to3y,male,Toys
+6/11/14,12:56,Ball,animaletc,10mOrBefore,0to3y,male,Toys
+6/11/14,13:11,Ball,animaletc,12m,4to6y,male,Toys
+6/11/14,13:30,Ball,animaletc,10mOrBefore,0to3y,female,Toys
+6/11/14,12:32,Ball,animaletc,10mOrBefore,0to3y,female,Toys
+6/11/14,13:58,Ball,animaletc,13m,0to3y,female,Toys
+6/11/14,13:43,Ball,animaletc,14mOrLater,13plusy,male,Toys
+6/11/14,14:09,Ball,animaletc,10mOrBefore,7to12y,male,Toys
+6/11/14,14:12,Ball,animaletc,11m,4to6y,female,Toys
+6/11/14,14:31,Ball,animaletc,10mOrBefore,0to3y,female,Toys
+6/11/14,14:38,Ball,animaletc,10mOrBefore,4to6y,male,Toys
+6/11/14,14:38,Ball,animaletc,10mOrBefore,7to12y,male,Toys
+6/11/14,14:48,Ball,animaletc,13m,0to3y,male,Toys
+6/11/14,14:54,Ball,animaletc,12m,7to12y,female,Toys
+6/11/14,15:27,Ball,animaletc,dontremember,0to3y,female,Toys
+6/11/14,15:35,Ball,animaletc,12m,4to6y,male,Toys
+6/11/14,16:02,Ball,animaletc,10mOrBefore,0to3y,female,Toys
+6/11/14,19:13,Ball,animaletc,10mOrBefore,0to3y,female,Toys
+6/11/14,19:53,Ball,animaletc,10mOrBefore,7to12y,male,Toys
+6/11/14,20:45,Ball,animaletc,11m,7to12y,male,Toys
+6/11/14,20:43,Ball,animaletc,14mOrLater,0to3y,male,Toys
+6/11/14,22:30,Ball,animaletc,10mOrBefore,4to6y,male,Toys
+6/11/14,23:41,Ball,animaletc,12m,0to3y,male,Toys
+6/12/14,7:33,Ball,animaletc,dontremember,0to3y,male,Toys
+6/12/14,9:02,Ball,animaletc,12m,0to3y,male,Toys
+6/12/14,10:20,Ball,animaletc,dontremember,0to3y,male,Toys
+6/12/14,11:35,Ball,,10mOrBefore,0to3y,male,Toys
+6/12/14,20:10,Ball,animaletc,13m,13plusy,female,Toys
+6/12/14,20:55,Ball,animaletc,13m,0to3y,female,Toys
+6/13/14,11:19,Ball,animaletc,11m,0to3y,male,Toys
+6/14/14,18:57,Ball,animaletc,10mOrBefore,4to6y,male,Toys
+6/19/14,21:58,Ball,animaletc,11m,0to3y,male,Toys
+6/11/14,12:00,Ball ,animaletc,10mOrBefore,7to12y,female,Toys
+6/11/14,11:05,Book,animaletc,10mOrBefore,0to3y,male,Toys
+6/11/14,12:55,Book,animaletc,10mOrBefore,4to6y,female,Toys
+6/11/14,13:54,Book,animaletc,13m,0to3y,male,Toys
+6/11/14,18:31,Book,animaletc,11m,0to3y,male,Toys
+6/11/14,21:21,Book,animaletc,10mOrBefore,13plusy,male,Toys
+6/11/14,21:47,Book,animaletc,11m,4to6y,female,Toys
+6/11/14,10:28,Bubble,animaletc,14mOrLater,0to3y,male,Toys
+6/11/14,10:32,Bubble,animaletc,10mOrBefore,4to6y,female,Toys
+6/11/14,15:42,Bubble,animaletc,dontremember,0to3y,male,Toys
+6/13/14,12:07,Bubble,animaletc,10mOrBefore,4to6y,male,Toys
+6/11/14,20:28,Bubbles,animaletc,10mOrBefore,0to3y,male,Toys
+6/12/14,15:41,Ipad,other,10mOrBefore,0to3y,male,Toys
+6/11/14,10:38,Bus,animaletc,dontremember,13plusy,male,Vehicles
+6/11/14,11:47,Bus,animaletc,13m,4to6y,male,Vehicles
+6/11/14,13:05,Bus,animaletc,10mOrBefore,13plusy,male,Vehicles
+6/11/14,22:34,Bus,animaletc,14mOrLater,0to3y,male,Vehicles
+6/11/14,10:29,Car,animaletc,10mOrBefore,7to12y,male,Vehicles
+6/11/14,10:32,Car,animaletc,14mOrLater,7to12y,male,Vehicles
+6/11/14,10:33,Car,animaletc,12m,0to3y,male,Vehicles
+6/11/14,10:42,Car,animaletc,14mOrLater,0to3y,male,Vehicles
+6/11/14,10:53,Car,animaletc,11m,0to3y,male,Vehicles
+6/11/14,11:16,Car,animaletc,12m,4to6y,male,Vehicles
+6/11/14,11:42,Car,other,10mOrBefore,0to3y,male,Vehicles
+6/11/14,14:38,Car,animaletc,10mOrBefore,0to3y,male,Vehicles
+6/11/14,15:57,Car,animaletc,11m,0to3y,female,Vehicles
+6/11/14,22:47,Car,animaletc,13m,0to3y,male,Vehicles
+6/11/14,23:00,Car,animaletc,14mOrLater,4to6y,male,Vehicles
+6/12/14,23:55,Car,animaletc,dontremember,7to12y,male,Vehicles
+6/12/14,14:02,Car,animaletc,11m,4to6y,male,Vehicles
+6/18/14,13:04,Car,animaletc,dontremember,4to6y,male,Vehicles
+6/18/14,12:34,Truck,animaletc,12m,0to3y,male,Vehicles
+6/11/14,11:40,Auto,animaletc,14mOrLater,0to3y,male,Vehicles
+6/11/14,21:44,Auto,animaletc,10mOrBefore,4to6y,male,Vehicles

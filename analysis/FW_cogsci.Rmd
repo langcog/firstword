@@ -17,6 +17,7 @@ library(stringr)
 library(tidyr)
 library(markdown)
 library(directlabels)
+library(magrittr)
 
 theme_set(theme_bw())
 ```
@@ -26,28 +27,32 @@ Read data.
 df_turk=read.csv("../data/FW_TurkData.csv") #Turk data
 df_cdm=read.csv("../data/CDMlangsurvey_analysis.csv") #CDM data
 df_info=read.csv("../data/FW_childesinfo.csv") #Childesinfo data
+wg.categories <- read.csv("../data/wg_categories.csv")
 ```
 
 ```{r}
-df_turk$birth <- factor(df_turk$birth_order)
-df_turk$age.grp <- cut(df_turk$age,breaks=c(5,10,14,18,24))
-df_turk$currage.grp <- cut(df_turk$age_current, breaks=c(-1,2,4,6,8,10,12,14,16,18))
-df_turk$agesplit <- cut(df_turk$age, breaks=c(0,12,24))
+df_turk %<>%
+  mutate(birth = factor(birth_order),
+         age.grp = cut(age,breaks = c(5,10,14,18,24)),
+         currage.grp = cut(age_current,breaks = c(-1,seq(2,18,2))),
+         agesplit = cut(age,breaks = c(0,12,24)),
+         dataset = "MTurk")
+
 df_cdm$agesplit <- cut(df_cdm$age, breaks=c(0,12,24))
 df_info$agesplit <- cut(df_info$age, breaks=c(0,12,24))
 ```
 
 bind together.
 ```{r}
-df_turk$dataset <- "MTurk"
 df_cdm$dataset <- "CDM"
 df_info$dataset <- "Info"
 
-d <- rbind.fill(df_turk,df_cdm, df_info)
+d <- rbind.fill(df_turk,df_cdm,df_info) %>%
+  rename(Category = cdi_cat)
 ```
 
-Pull in wordbank data
-```{r}
+Pull in wordbank demographics
+```{r, message=FALSE}
 wordbank <- src_mysql(dbname='wordbank',host="54.200.225.86", 
                       user="wordbank",password="wordbank")
 
@@ -56,23 +61,6 @@ admin.table <- tbl(wordbank,"common_administration")
 child.table <- tbl(wordbank,"common_child")
 wg.table <- tbl(wordbank,"instruments_wg")
 
-# Select just the MCDI words from the Words and Sentences Table
-wg.vocab.words <- select(wg.table,basetable_ptr_id,
-                         col_baabaa:col_some) %>%
-  as.data.frame %>%
-  rename(id = basetable_ptr_id) %>% # Rename the id
-  gather(word,produces,col_baabaa:col_some) %>% # Arrange in longform
-  mutate(word = str_replace(word, "col_", "")) %>%
-  as.tbl# Strip off col_ from words
-
-# Compute a productive vocabulary for each child
-wg.scores <- wg.vocab.words %>%
-  group_by(id) %>% # Group by child
-  summarise(productive = sum(produces == 2)) # Compute productive vocabulary
-```
-
-Load Demographic data for each child
-```{r, message=FALSE}
 # Get the age of each child
 admins <- admin.table %>%
   select(data_id,child_id,age,source_id) %>%
@@ -88,6 +76,38 @@ demos <- select(child.table,id,gender,mom_ed,birth_order) %>%
 child.data <- as.tbl(left_join(admins,demos))
 ```
 
+Pull in wordbank data
+```{r}
+# Select just the MCDI words from the Words and Sentences Table
+wg.vocab.words <- select(wg.table,basetable_ptr_id,
+                         col_baabaa:col_some) %>%
+  as.data.frame %>%
+  rename(id = basetable_ptr_id) %>% # Rename the id
+  gather(word,produces,col_baabaa:col_some) %>% # Arrange in longform
+  mutate(word = str_replace(word, "col_", "")) %>%
+  as.tbl# Strip off col_ from words
+
+wg.vocab.words <- left_join(wg.vocab.words,wg.categories,by=c("word"="Lemma"))
+wg.vocab.words <- left_join(wg.vocab.words,child.data)
+
+one.word.kids <- wg.vocab.words%>% 
+  group_by(id,age,gender) %>% 
+  summarise(v = sum(produces==2)) %>% 
+  filter(v == 1) %>%
+  select(-v)
+
+wds.produced.bykid <- wg.vocab.words %>% 
+  filter(id %in% one.word.kids$id, produces==2) %>%
+  select(-id,-produces) %>%
+  mutate(agesplit = cut(age,breaks=c(0,12,24)),
+         dataset = "Wordbank")
+
+# Compute a productive vocabulary for each child
+wg.scores <- wg.vocab.words %>%
+  group_by(id) %>% # Group by child
+  summarise(productive = sum(produces == 2)) # Compute productive vocabulary
+```
+
 Combine MDI data and demographics
 ```{r, message=FALSE}
 wg.data <- left_join(wg.scores, child.data) %>%
@@ -98,29 +118,32 @@ wg.data <- left_join(wg.scores, child.data) %>%
 
 Do analysis over all data for CDI-cats.
 ```{r}
-freqs <- d %>% 
-  filter(!is.na(agesplit), cdi_cat != "N/A") %>%
-  group_by(dataset, agesplit, cdi_cat) %>%
+freqs <- bind_rows(select(d,Category,agesplit,dataset),
+                   select(wds.produced.bykid,Category,agesplit,dataset)) %>%
+  filter(!is.na(agesplit),Category != "N/A") %>%
+  group_by(dataset, agesplit, Category) %>%
   summarise(n = n()) %>%
   group_by(dataset, agesplit, add=FALSE) %>%
-  mutate(prop = n / sum(n))
+  mutate(prop = n / sum(n),
+         Category = factor(Category,
+                           levels = Category[order(prop,Category,
+                                                   decreasing=TRUE)])) %>%
+  filter(!is.na(Category=="NA"))
 ```
 
 Plot.
 
 ```{r}
-freqs$cdi_cat <- factor(freqs$cdi_cat, 
-                                  levels=unique(with(freqs, cdi_cat
-                                  [order(freqs$prop, cdi_cat, 
-                                  decreasing = FALSE)])))
-
-
+quartz()
 ggplot(data = freqs, 
-       aes(x=prop, y=cdi_cat, colour=dataset, group=dataset,shape=agesplit)) + 
-  geom_point() +
+       aes(x=Category, y=prop, fill=dataset, 
+           group=dataset)) + 
+  facet_grid(dataset ~ agesplit)+
+  geom_histogram(stat="identity") +
   ylab("MB-CDI category") + 
   xlab("Proportion of Total") +
-  scale_color_discrete(name="Dataset")
+  scale_fill_brewer(palette="Set1") +
+  theme(axis.text.x = element_text(angle=90, hjust = 0))
 ```
 
 Age data - set that up. 

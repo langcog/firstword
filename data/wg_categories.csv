@@ -1,0 +1,398 @@
+Lemma,Category
+baabaa,Sound Effects
+choocho,Sound Effects
+cckddld,Sound Effects
+grr,Sound Effects
+meow,Sound Effects
+moo,Sound Effects
+ouch,Sound Effects
+quckqck,Sound Effects
+uhoh,Sound Effects
+vroom,Sound Effects
+woofwof,Sound Effects
+yumyum,Sound Effects
+animal,Animals
+bear,Animals
+bee,Animals
+bird,Animals
+bug,Animals
+bunny,Animals
+butrfly,Animals
+cat,Animals
+chcken1,Animals
+cow,Animals
+deer,Animals
+dog,Animals
+donkey,Animals
+duck,Animals
+elephnt,Animals
+fish1,Animals
+frog,Animals
+giraffe,Animals
+goose,Animals
+horse,Animals
+kitty,Animals
+lamb,Animals
+lion,Animals
+monkey,Animals
+mouse,Animals
+owl,Animals
+penguin,Animals
+pig,Animals
+pony,Animals
+puppy,Animals
+sheep,Animals
+squirrl,Animals
+tedyber,Animals
+tiger,Animals
+turkey,Animals
+turtle,Animals
+airplne,Vehicles
+bicycle,Vehicles
+bus,Vehicles
+car,Vehicles
+firetrk,Vehicles
+mtrcycl,Vehicles
+stroler,Vehicles
+train,Vehicles
+truck,Vehicles
+ball,Toys
+balloon,Toys
+block,Toys
+book,Toys
+bubbles,Toys
+doll,Toys
+pen,Toys
+toy,Toys
+apple,Food and Drink
+banana,Food and Drink
+bread,Food and Drink
+butter,Food and Drink
+cake,Food and Drink
+candy,Food and Drink
+carrots,Food and Drink
+cereal,Food and Drink
+cherios,Food and Drink
+cheese,Food and Drink
+chcken2,Food and Drink
+coffee,Food and Drink
+cookie,Food and Drink
+cracker,Food and Drink
+drink1,Food and Drink
+egg,Food and Drink
+fish2,Food and Drink
+food,Food and Drink
+icecrem,Food and Drink
+juice,Food and Drink
+meat,Food and Drink
+milk,Food and Drink
+noodles,Food and Drink
+orange,Food and Drink
+peas,Food and Drink
+pizza,Food and Drink
+raisin,Food and Drink
+spghett,Food and Drink
+toast,Food and Drink
+water1,Food and Drink
+beads,Clothing
+bib,Clothing
+boots,Clothing
+button,Clothing
+coat,Clothing
+diaper,Clothing
+dress,Clothing
+hat,Clothing
+jacket,Clothing
+jeans,Clothing
+ncklace,Clothing
+pajamas,Clothing
+pants,Clothing
+shirt,Clothing
+shoe,Clothing
+shorts,Clothing
+sock,Clothing
+sweater,Clothing
+zipper,Clothing
+arm,Body Parts
+bllybtn,Body Parts
+cheek,Body Parts
+ear,Body Parts
+eye,Body Parts
+face,Body Parts
+foot,Body Parts
+finger,Body Parts
+hair,Body Parts
+hand,Body Parts
+headu,Body Parts
+headp,Body Parts
+knee,Body Parts
+leg,Body Parts
+mouth,Body Parts
+nose,Body Parts
+owie,Body Parts
+tooth,Body Parts
+toe,Body Parts
+tongue,Body Parts
+tummy,Body Parts
+bathrm,Furniture and Rooms
+bathtub,Furniture and Rooms
+bed,Furniture and Rooms
+bedroom,Furniture and Rooms
+chair,Furniture and Rooms
+couch,Furniture and Rooms
+crib,Furniture and Rooms
+door,Furniture and Rooms
+drawer,Furniture and Rooms
+garage,Furniture and Rooms
+highchr,Furniture and Rooms
+kitchen,Furniture and Rooms
+livngrm,Furniture and Rooms
+oven,Furniture and Rooms
+playpen,Furniture and Rooms
+potty,Furniture and Rooms
+rfrgrtr,Furniture and Rooms
+rcknchr,Furniture and Rooms
+sink,Furniture and Rooms
+stairs,Furniture and Rooms
+stove,Furniture and Rooms
+table,Furniture and Rooms
+tv,Furniture and Rooms
+window,Furniture and Rooms
+blanket,Small Household Objects
+bottle,Small Household Objects
+bowl,Small Household Objects
+box,Small Household Objects
+broom,Small Household Objects
+brush,Small Household Objects
+clock,Small Household Objects
+comb,Small Household Objects
+cup,Small Household Objects
+dish,Small Household Objects
+fork,Small Household Objects
+glass,Small Household Objects
+glasses,Small Household Objects
+hammer,Small Household Objects
+keys,Small Household Objects
+lamp,Small Household Objects
+light,Small Household Objects
+medicne,Small Household Objects
+money,Small Household Objects
+paper,Small Household Objects
+penny,Small Household Objects
+picture,Small Household Objects
+pillow,Small Household Objects
+plant,Small Household Objects
+plate,Small Household Objects
+purse,Small Household Objects
+radio,Small Household Objects
+scisors,Small Household Objects
+soap,Small Household Objects
+spoon,Small Household Objects
+telphon,Small Household Objects
+tthbrsh,Small Household Objects
+towel,Small Household Objects
+trash,Small Household Objects
+vacuum,Small Household Objects
+watch1,Small Household Objects
+backyrd,Outside Things
+beach,Outside Things
+church,Outside Things
+flower,Outside Things
+garden,Outside Things
+home,Outside Things
+house,Outside Things
+moon,Outside Things
+outside,Outside Things
+park,Outside Things
+party,Outside Things
+pool,Outside Things
+rain,Outside Things
+rock,Outside Things
+school,Outside Things
+shovel,Outside Things
+sky,Outside Things
+slide,Outside Things
+snow,Outside Things
+star,Outside Things
+store,Outside Things
+sun,Outside Things
+swing1,Outside Things
+tree,Outside Things
+water2,Outside Things
+work,Outside Things
+zoo,Outside Things
+aunt,People
+baby,People
+babystr,People
+namestr,People
+boy,People
+brother,People
+child,People
+daddy,People
+girl,People
+grandma,People
+grandpa,People
+lady,People
+man,People
+mommy,People
+nameslf,People
+people,People
+person,People
+sister,People
+teacher,People
+uncle,People
+bath,Games and Routines
+brkfast,Games and Routines
+bye,Games and Routines
+dinner,Games and Routines
+dont,Games and Routines
+hello,Games and Routines
+hi,Games and Routines
+lunch,Games and Routines
+nap,Games and Routines
+nghtnt,Games and Routines
+no,Games and Routines
+pttycak,Games and Routines
+peekabo,Games and Routines
+please,Games and Routines
+shh,Games and Routines
+thnkyou,Games and Routines
+wait,Games and Routines
+wanna,Games and Routines
+yes,Games and Routines
+bite,Action
+blow,Action
+break,Action
+bring,Action
+bump,Action
+clean1,Action
+close,Action
+cry,Action
+dance,Action
+draw,Action
+drink2,Action
+drive,Action
+eat,Action
+fall,Action
+feed,Action
+finish,Action
+get,Action
+give,Action
+go,Action
+help,Action
+hit,Action
+hug,Action
+hurry,Action
+jump,Action
+kick,Action
+kiss,Action
+look,Action
+love,Action
+open,Action
+play,Action
+pull,Action
+push,Action
+put,Action
+read,Action
+ride,Action
+run,Action
+say,Action
+see,Action
+show,Action
+sing,Action
+sleep,Action
+smile,Action
+splash,Action
+stop,Action
+swim,Action
+swing2,Action
+take,Action
+throw,Action
+tickle,Action
+touch,Action
+watch2,Action
+walk,Action
+wash,Action
+wipe,Action
+write,Action
+day,Time
+later,Time
+morning,Time
+night,Time
+now,Time
+today,Time
+tomrrow,Time
+tonight,Time
+allgone,Descriptive
+asleep,Descriptive
+bad,Descriptive
+big,Descriptive
+blue,Descriptive
+broken,Descriptive
+careful,Descriptive
+clean2,Descriptive
+cold,Descriptive
+cute,Descriptive
+dark,Descriptive
+dirty,Descriptive
+dry,Descriptive
+empty,Descriptive
+fast,Descriptive
+fine,Descriptive
+gentle,Descriptive
+good,Descriptive
+happy,Descriptive
+hard,Descriptive
+hot,Descriptive
+hungry,Descriptive
+hurt,Descriptive
+little,Descriptive
+naughty,Descriptive
+nice,Descriptive
+old,Descriptive
+pretty,Descriptive
+red,Descriptive
+scared,Descriptive
+sick,Descriptive
+sleepy,Descriptive
+soft,Descriptive
+thirsty,Descriptive
+tired,Descriptive
+wet,Descriptive
+yucky,Descriptive
+her,Pronouns
+his,Pronouns
+i,Pronouns
+it,Pronouns
+me,Pronouns
+mine,Pronouns
+my,Pronouns
+that,Pronouns
+this,Pronouns
+you,Pronouns
+your,Pronouns
+how,Question Words
+what,Question Words
+when,Question Words
+where,Question Words
+who,Question Words
+why,Question Words
+away,Prepositions and Locations
+back,Prepositions and Locations
+down,Prepositions and Locations
+in,Prepositions and Locations
+inside,Prepositions and Locations
+off,Prepositions and Locations
+on,Prepositions and Locations
+out,Prepositions and Locations
+there,Prepositions and Locations
+under,Prepositions and Locations
+up,Prepositions and Locations
+all,Quantifiers
+another,Quantifiers
+more,Quantifiers
+none,Quantifiers
+not,Quantifiers
+other,Quantifiers
+same,Quantifiers
+some,Quantifiers
