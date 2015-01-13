@@ -84,13 +84,20 @@ freqs.grid <- expand.grid(dataset=unique(ns$dataset),age=unique(ns$age)) %>%
   arrange(dataset,age)
 
 freqs <- left_join(freqs.grid,ns) %>%
+<<<<<<< HEAD
   filter(dataset == "MTurk" | dataset == "CDM" | dataset == "Info" & age >=10) %>%
+=======
+  filter(dataset == "MTurk" | dataset == "CDM" & age >=10) %>%
+>>>>>>> ecab2e356b2a5f448f94ce845526c8160eee9f8e
   group_by() %>%
   mutate(n = ifelse(is.na(n), 0, n)) %>%
   group_by(dataset) %>%
   mutate(cum.n = cumsum(n),
          prop = cum.n / sum(n))
+<<<<<<< HEAD
 
+=======
+>>>>>>> ecab2e356b2a5f448f94ce845526c8160eee9f8e
 ```
 
 Plot.
@@ -103,8 +110,8 @@ ggplot(data = freqs, aes(x = age, y = prop, colour=dataset, group=dataset))+
 Plot.
 ```{r}
 quartz()
-ggplot(data = freqs, aes(x = age, y = prop, colour=dataset))+geom_smooth(se=FALSE, data=freqs, aes(x=age, y=prop, colour=dataset))
-```
+ggplot(data = freqs, aes(x = age, y = prop, colour=dataset, group=dataset))+
+  geom_smooth(se=FALSE,method = "loess")
 
 CDI CATS WITH AGE SPLIT at 12m
 
