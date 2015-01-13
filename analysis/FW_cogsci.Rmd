@@ -24,6 +24,7 @@ Read data.
 ```{r}
 df_turk=read.csv("../data/FW_TurkData.csv") #Turk data
 df_cdm=read.csv("../data/CDMlangsurvey_analysis.csv") #CDM data
+df_info=read.csv("../data/FW_childesinfo.csv") #Childesinfo data
 ```
 
 ```{r}
@@ -32,6 +33,7 @@ df_turk$age.grp <- cut(df_turk$age,breaks=c(5,10,14,18,24))
 df_turk$currage.grp <- cut(df_turk$age_current, breaks=c(-1,2,4,6,8,10,12,14,16,18))
 df_turk$agesplit <- cut(df_turk$age, breaks=c(0,12,24))
 df_cdm$agesplit <- cut(df_cdm$age, breaks=c(0,12,24))
+df_info$agesplit <- cut(df_info$age, breaks=c(0,12,24))
 ```
 
 bind together.
@@ -39,8 +41,9 @@ bind together.
 ```{r}
 df_turk$dataset <- "MTurk"
 df_cdm$dataset <- "CDM"
+df_info$dataset <- "Info"
 
-d <- rbind.fill(df_turk,df_cdm)
+d <- rbind.fill(df_turk,df_cdm, df_info)
 ```
 
 Do analysis over all data for CDI-cats.
@@ -61,9 +64,11 @@ quartz()
 freqs$cdi_cat <- factor(freqs$cdi_cat, 
                                   levels=unique(with(freqs, cdi_cat
                                   [order(freqs$prop, cdi_cat, 
-                                  decreasing = TRUE)])))
+                                  decreasing = FALSE)])))
 
-qplot(cdi_cat, prop, fill=agesplit, geom="bar", stat="identity", position="dodge", data=subset(freqs, agesplit != "NA" & cdi_cat != "N/A"))+ylab("Proportion of Total")+xlab("MB-CDI Category") + theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5)) + facet_wrap(~dataset)
+
+ggplot(data = freqs, aes(x=prop, y=cdi_cat, colour=dataset, group=dataset)) + geom_point()+ylab("MB-CDI category")+xlab("Proportion of Total") +
+  scale_color_discrete(name="Dataset")
 
 ```
 
@@ -71,12 +76,28 @@ Age data - set that up.
 ```{r}
 ns <- d %>% 
   filter(!is.na(age), age != "NA") %>%
+  mutate(dataset = factor(dataset)) %>%
   group_by(dataset, age) %>%
   summarise(n = n())
-freqs <- ns %>% mutate(cum.n = cumsum(n)) %>%
+
+freqs.grid <- expand.grid(dataset=unique(ns$dataset),age=unique(ns$age)) %>%
+  arrange(dataset,age)
+
+freqs <- left_join(freqs.grid,ns) %>%
+  filter(dataset == "MTurk" | dataset == "CDM" | dataset == "Info" & age >=10) %>%
+  group_by() %>%
+  mutate(n = ifelse(is.na(n), 0, n)) %>%
   group_by(dataset) %>%
-  mutate(prop = cum.n / sum(n))
+  mutate(cum.n = cumsum(n),
+         prop = cum.n / sum(n))
+
 ```
+
+Plot.
+```{r}
+quartz()
+ggplot(data = freqs, aes(x = age, y = prop, colour=dataset, group=dataset))+
+  geom_smooth(se=FALSE,method = "loess") +ylab("Proportion of Total")+xlab("Age ") + scale_color_discrete(name="Dataset")
 ```
 
 Plot.
