@@ -140,10 +140,10 @@ ggplot(data = freqs,
            group=dataset)) + 
   facet_grid(dataset ~ agesplit)+
   geom_histogram(stat="identity") +
-  ylab("MB-CDI category") + 
-  xlab("Proportion of Total") +
+  ylab("Proportion of Total") + 
+  xlab("MB-CDI Category") +
   scale_fill_brewer(palette="Set1") +
-  theme(axis.text.x = element_text(angle=90, hjust = 0))
+  theme(axis.text.x = element_text(angle=90, hjust = 1))
 ```
 
 Age data - set that up. 
@@ -181,6 +181,7 @@ freqs <- left_join(freqs,wg.producers,by=c("dataset","age")) %>%
 
 Plot.
 ```{r,fig.width=5,fig.height=5}
+quartz()
 ggplot(data = freqs, 
        aes(x = age, y = prop, colour=dataset, group=dataset))+
   geom_line(size=1.5) + 
