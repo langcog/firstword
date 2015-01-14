@@ -154,7 +154,7 @@ wg.producers <- wg.data %>%
   mutate(dataset = "Wordbank")
 
 ns <- d %>% 
-  filter(!is.na(age), age != "NA") %>%
+  filter(!is.na(age), age != "NA", word_standard != "N/A") %>%
   mutate(dataset = factor(dataset), 
          age = floor(age)) %>%
   group_by(dataset, age) %>%
