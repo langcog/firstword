@@ -178,6 +178,41 @@ ggplot(data = freqs,
   theme(axis.text.x = element_text(angle=90, hjust = 1))
 ```
 
+
+Agesplit and word
+```{r}
+
+d.age <- d %>%
+  mutate(word = word_standard)
+
+freqs <- bind_rows(select(d.age,word,agesplit,dataset),
+                   select(wds.produced.bykid,word,agesplit,dataset)) %>%
+  filter(!is.na(agesplit),word != "N/A") %>%
+  group_by(dataset, agesplit, word) %>%
+  summarise(n = n()) %>%
+  filter(n > 4) %>%
+  group_by(dataset, agesplit, add=FALSE) %>%
+  mutate(prop = n / sum(n),
+         word = factor(word,
+                           levels = word[order(prop,word,
+                                                   decreasing=TRUE)])) %>%
+  filter(!is.na(word=="NA"))
+```
+
+Plot!
+```{r}
+quartz()
+ggplot(data = freqs, 
+       aes(x=word, y=prop, fill=dataset, 
+           group=dataset)) + 
+  facet_grid(dataset ~ agesplit)+
+  geom_histogram(stat="identity") +
+  ylab("Proportion of Total") + 
+  xlab("Word") +
+  scale_fill_brewer(palette="Set1") +
+  theme(axis.text.x = element_text(angle=90, hjust = 1))
+```
+
 Age data - set that up. 
 ```{r}
 wg.producers <- wg.data %>%
@@ -227,7 +262,7 @@ ggplot(data = freqs,
   theme(legend.position=c(.85,.3)) 
 ```
 
-CDI CATS WITH AGE SPLIT at 12m
+
 
 First - Turk data
 
