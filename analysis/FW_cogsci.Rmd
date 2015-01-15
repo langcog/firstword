@@ -28,6 +28,8 @@ df_turk=read.csv("../data/FW_TurkData.csv") #Turk data
 df_cdm=read.csv("../data/CDMlangsurvey_analysis.csv") #CDM data
 df_info=read.csv("../data/FW_childesinfo.csv") #Childesinfo data
 wg.categories <- read.csv("../data/wg_categories.csv")
+wg.codes <- read.csv("../data/WG_CODES.csv") 
+childes.freqs <- read.csv('../data/childes.freqs.csv')
 ```
 
 ```{r}
@@ -100,12 +102,42 @@ wds.produced.bykid <- wg.vocab.words %>%
   filter(id %in% one.word.kids$id, produces==2) %>%
   select(-id,-produces) %>%
   mutate(agesplit = cut(age,breaks=c(0,12,24)),
-         dataset = "Wordbank")
+         dataset = "Wordbank") 
+
+# pull in English-readable words
+wds.produced.bykid <- left_join(wds.produced.bykid,wg.codes,
+                                by = c("word"="code")) %>%
+  select(-word) %>%
+  rename(word = name)
 
 # Compute a productive vocabulary for each child
 wg.scores <- wg.vocab.words %>%
   group_by(id) %>% # Group by child
   summarise(productive = sum(produces == 2)) # Compute productive vocabulary
+
+all.first.productions <- c(as.character(
+  unique(filter(d,Category != "N/A")$word_standard)),
+  as.character(unique(wds.produced.bykid$word)))
+
+all.first.productions <- unique(sapply(all.first.productions,tolower))
+write.csv(all.first.productions,'../data/unique.productions.csv',
+          row.names = FALSE)
+
+childes.freqs %<>%
+  gather(word,frequency) %>%
+  group_by(word) %>%
+  summarise(frequency = sum(frequency)) %>%
+  mutate(word = sapply(word,function(x) gsub("\\."," ",x)))
+
+wds.produced.frequency <- wds.produced.bykid %>%
+  group_by(word) %>%
+  summarise(prod.frequency = n())
+
+wds.produced.frequency <- left_join(wds.produced.frequency,childes.freqs)
+
+cor(wds.produced.frequency$prod.frequency,
+    wds.produced.frequency$frequency,use="complete")
+  
 ```
 
 Combine MDI data and demographics
