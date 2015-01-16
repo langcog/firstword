@@ -152,7 +152,7 @@ Do analysis over all data for CDI-cats.
 ```{r}
 freqs <- bind_rows(select(d,Category,agesplit,dataset),
                    select(wds.produced.bykid,Category,agesplit,dataset)) %>%
-  filter(!is.na(agesplit),Category != "N/A") %>%
+  filter(!is.na(agesplit),Category != "N/A", word_ == "CDM" &  >= 5 ) %>%
   group_by(dataset, agesplit, Category) %>%
   summarise(n = n()) %>%
   group_by(dataset, agesplit, add=FALSE) %>%
@@ -190,7 +190,8 @@ freqs <- bind_rows(select(d.age,word,agesplit,dataset),
   filter(!is.na(agesplit),word != "N/A") %>%
   group_by(dataset, agesplit, word) %>%
   summarise(n = n()) %>%
-  filter(n > 4) %>%
+  filter(dataset == "MTurk" | dataset == "CDM" & n >= 5| 
+           dataset == "Info" & n >=2 | dataset == "Wordbank" & n >= 2) %>%
   group_by(dataset, agesplit, add=FALSE) %>%
   mutate(prop = n / sum(n),
          word = factor(word,
@@ -198,6 +199,8 @@ freqs <- bind_rows(select(d.age,word,agesplit,dataset),
                                                    decreasing=TRUE)])) %>%
   filter(!is.na(word=="NA"))
 ```
+
+
 
 Plot!
 ```{r}
@@ -306,4 +309,44 @@ qplot(cdi_cat, prop, geom="bar", position="dodge", stat="identity",
            data=subset(freqs, count>1 & word_standard != "N/A" & cdi_cat != "N/A" & agesplit != "NA")) + 
   theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5))+
   ylab("Proportion of Children with Utterance") + xlab("CDI Categories")+facet_wrap(~agesplit)
+```
+
+Entropy
+-------
+
+
+```{r}
+entropy <- function(x) {
+   probs <- x / sum(x,na.rm=TRUE)
+   h = - sum (probs * log(probs))
+   return(h)
+}
+```
+
+Start over categories. 
+
+```{r}
+d.age %>%
+  filter(dataset=="MTurk", !is.na(age)) %>%
+  mutate(older = age > median(age)) %>%
+  group_by(older, add=FALSE) %>%
+  sample_n(663, replace=FALSE) %>% ### FIXME: sample the smaller group size
+  group_by(older, Category, add=FALSE) %>%
+  summarise(n = n()) %>% 
+  group_by(older, add=FALSE) %>% 
+  summarise(h = entropy(n))
+```
+
+Now word entropy:
+
+```{r}
+d.age %>%
+  filter(dataset=="MTurk", !is.na(age)) %>%
+  mutate(older = age > median(age)) %>%
+  group_by(older, add=FALSE) %>%
+  sample_n(663, replace=FALSE) %>% ### FIXME: sample the smaller group size
+  group_by(older, word, add=FALSE) %>%
+  summarise(n = n()) %>% 
+  group_by(older, add=FALSE) %>% 
+  summarise(h = entropy(n))
 ```
