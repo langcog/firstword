@@ -30,6 +30,8 @@ df_info=read.csv("../data/FW_childesinfo.csv") #Childesinfo data
 wg.categories <- read.csv("../data/wg_categories.csv")
 wg.codes <- read.csv("../data/WG_CODES.csv") 
 childes.freqs <- read.csv('../data/childes.freqs.csv')
+phon.complexity <- read.csv('../data/complexity_childesfreqs.csv')
+
 ```
 
 ```{r}
@@ -129,14 +131,28 @@ childes.freqs %<>%
   summarise(frequency = sum(frequency)) %>%
   mutate(word = sapply(word,function(x) gsub("\\."," ",x)))
 
+
+
 wds.produced.frequency <- wds.produced.bykid %>%
   group_by(word) %>%
   summarise(prod.frequency = n())
 
 wds.produced.frequency <- left_join(wds.produced.frequency,childes.freqs)
+wds.produced.frequency <- left_join(wds.produced.frequency,phon.complexity,
+                                    by=c("word" = "Original.Word"))
 
 cor(wds.produced.frequency$prod.frequency,
-    wds.produced.frequency$frequency,use="complete")
+    log(wds.produced.frequency$frequency),use="complete")
+
+cor.test(wds.produced.frequency$prod.frequency,
+    wds.produced.frequency$unsBPAV,use="complete")
+
+lm1 <- lm(prod.frequency ~ unsTPAV + log(frequency),data=wds.produced.frequency)
+lm2 <- lm(prod.frequency ~ unsTPAV,data=wds.produced.frequency)
+
+quartz()
+ggplot(wds.produced.frequency, aes(x = word,y = prod.frequency)) + 
+  geom_bar(stat="identity")
   
 ```
 
@@ -371,6 +387,46 @@ d.age %>%
   summarise(n = n()) %>% 
   group_by(older, add=FALSE) %>% 
   summarise(h = entropy(n))
+
+entropies.age <- d.age %>%
+  filter(dataset=="MTurk", !is.na(age)) %>%
+  mutate(older = age > median(age)) %>%
+  group_by(older, add=FALSE) %>%
+  select(Category,subject,age,word)
+
+entropy.difference <- function(d,num.times) {
+  diffs <- NULL
+
+  grp.size <- min(table(d$older))
+  
+  for(i in 1:num.times) {
+    
+    d.frame <- d %>%
+      sample_n(grp.size, replace = FALSE) %>%
+      group_by(older, word, add = FALSE) %>%
+      summarise(n = n()) %>%
+      group_by(older, add= FALSE) %>%
+      summarise(h = entropy(n))
+    
+    diff <- filter(d.frame,older == TRUE)$h - filter(d.frame,older == FALSE)$h
+    
+    diffs[i] <- diff
+    }
+  
+  return(diffs)
+}
+
+
+  
+  d.age %>%
+ %>%
+  sample_n(663, replace=FALSE) %>% ### FIXME: sample the smaller group size
+  group_by(older, Category, add=FALSE) %>%
+  summarise(n = n()) %>% 
+  group_by(older, add=FALSE) %>% 
+  summarise(h = entropy(n))
+
+
 ```
 
 Now word entropy:
