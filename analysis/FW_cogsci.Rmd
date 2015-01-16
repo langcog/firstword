@@ -351,6 +351,46 @@ d.age %>%
   summarise(n = n()) %>% 
   group_by(older, add=FALSE) %>% 
   summarise(h = entropy(n))
+
+entropies.age <- d.age %>%
+  filter(dataset=="MTurk", !is.na(age)) %>%
+  mutate(older = age > median(age)) %>%
+  group_by(older, add=FALSE) %>%
+  select(Category,subject,age,word)
+
+entropy.difference <- function(d,num.times) {
+  diffs <- NULL
+
+  grp.size <- min(table(d$older))
+  
+  for(i in 1:num.times) {
+    
+    d.frame <- d %>%
+      sample_n(grp.size, replace = FALSE) %>%
+      group_by(older, word, add = FALSE) %>%
+      summarise(n = n()) %>%
+      group_by(older, add= FALSE) %>%
+      summarise(h = entropy(n))
+    
+    diff <- filter(d.frame,older == TRUE)$h - filter(d.frame,older == FALSE)$h
+    
+    diffs[i] <- diff
+    }
+  
+  return(diffs)
+}
+
+
+  
+  d.age %>%
+ %>%
+  sample_n(663, replace=FALSE) %>% ### FIXME: sample the smaller group size
+  group_by(older, Category, add=FALSE) %>%
+  summarise(n = n()) %>% 
+  group_by(older, add=FALSE) %>% 
+  summarise(h = entropy(n))
+
+
 ```
 
 Now word entropy:
