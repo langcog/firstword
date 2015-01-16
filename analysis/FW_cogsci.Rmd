@@ -59,7 +59,7 @@ wordbank <- src_mysql(dbname='wordbank',host="54.200.225.86",
                       user="wordbank",password="wordbank")
 
 ## NOW LOAD TABLES ##
-admin.table <- tbl(wordbank,"common_administration")
+admin.table <- tbl(wordbank, "common_administration")
 child.table <- tbl(wordbank,"common_child")
 wg.table <- tbl(wordbank,"instruments_wg")
 
@@ -152,7 +152,7 @@ Do analysis over all data for CDI-cats.
 ```{r}
 freqs <- bind_rows(select(d,Category,agesplit,dataset),
                    select(wds.produced.bykid,Category,agesplit,dataset)) %>%
-  filter(!is.na(agesplit),Category != "N/A", word_ == "CDM" &  >= 5 ) %>%
+  filter(!is.na(agesplit), Category != "N/A", dataset == "CDM" & age  >= 5 ) %>%
   group_by(dataset, agesplit, Category) %>%
   summarise(n = n()) %>%
   group_by(dataset, agesplit, add=FALSE) %>%
@@ -216,48 +216,84 @@ ggplot(data = freqs,
   theme(axis.text.x = element_text(angle=90, hjust = 1))
 ```
 
-Age data - set that up. 
+Age CDF graphs
+--------------
+
+New workflow required for resampling.
+
+First get wordbank CIs.
+
 ```{r}
 wg.producers <- wg.data %>%
   group_by(age) %>%
   summarise(prop = sum(productive > 0)/n()) %>%
   mutate(dataset = "Wordbank")
 
+n.samps <- 100
+
+sample.producers <- function(df) {
+  df %<>%
+    sample_n(nrow(df), replace = TRUE) %>% # resampling step
+    group_by(age) %>%
+    summarise(prop = sum(productive > 0)/n()) 
+  return(df$prop)
+}
+
+samps <- replicate(1000, sample.producers(wg.data))
+wg.producers$ci.low <- apply(samps, 1, function(x) {quantile(x, .025)})
+wg.producers$ci.high <- apply(samps, 1, function(x) {quantile(x, .975)})
+```
+
+Now do the resampling for the others.
+
+```{r}
 ns <- d %>% 
   filter(!is.na(age), age != "NA", word_standard != "N/A") %>%
   mutate(dataset = factor(dataset), 
          age = floor(age)) %>%
-  group_by(dataset, age) %>%
-  summarise(n = n()) # round to the nearest complete month
+  select(age, dataset)
 
-freqs.grid <- expand.grid(dataset=c(levels(ns$dataset),"Wordbank"),
-                          age=unique(ns$age)) %>%
-  arrange(dataset,age)
+sample.ns <- function(df) {
+  df %<>% 
+    sample_n(nrow(df), replace=TRUE) %>%
+    group_by(dataset, age) %>%
+    summarise(n = n()) %>%
+    mutate(cum.n = cumsum(n),
+         prop = cum.n / sum(n))
+  return(df)
+}
 
-freqs <- left_join(freqs.grid,ns) %>%
-  filter(dataset == "MTurk" | dataset == "CDM" & age >= 10| 
-           dataset == "Info" & age >=10 | dataset == "Wordbank" & age >= 8) %>%
-  group_by() %>%
-  mutate(n = ifelse(is.na(n), 0, n)) %>%
-  group_by(dataset) %>%
-  mutate(cum.n = cumsum(n),
+samps <- bind_rows(replicate(1000, sample.ns(ns), simplify=FALSE))
+
+samps %<>% group_by(dataset, age) %>%
+  summarise(ci.low = quantile(prop, .025), 
+            ci.high = quantile(prop, .975))
+
+ns %<>% group_by(dataset, age) %>%
+    summarise(n = n()) %>%
+    mutate(cum.n = cumsum(n),
          prop = cum.n / sum(n))
 
-freqs <- left_join(freqs,wg.producers,by=c("dataset","age")) %>%
-  group_by(dataset,age) %>%
-  mutate(prop = min(prop.x,prop.y, 1,na.rm = TRUE)) %>%
-  select(-prop.x,-prop.y)
+ns <- left_join(ns, samps)
+```
+
+Bind these two.
+
+```{r}
+freqs <- bind_rows(ns, wg.producers)
 ```
 
 Plot.
+
 ```{r,fig.width=5,fig.height=5}
-quartz()
+# quartz()
 ggplot(data = freqs, 
        aes(x = age, y = prop, colour=dataset, group=dataset))+
   geom_line(size=1.5) + 
   ylab("Cumulative Probability of First Word")+
   xlab("Age (months)") + 
   geom_hline(yintercept=.75, lty=3) + 
+  geom_ribbon(aes(ymin = ci.low, ymax= ci.high, fill=dataset), col=.,  alpha = .2) + 
   geom_vline(aes(xintercept=age[prop>.75][1]), lty=3) + 
   scale_x_continuous(breaks=seq(0,24,4))+
   scale_color_brewer(name="Dataset",palette="Set1")+
