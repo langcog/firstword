@@ -18,6 +18,7 @@ library(tidyr)
 library(markdown)
 library(directlabels)
 library(magrittr)
+library(tables)
 
 theme_set(theme_bw())
 ```
@@ -168,7 +169,7 @@ Do analysis over all data for CDI-cats.
 ```{r}
 freqs <- bind_rows(select(d,Category,agesplit,dataset),
                    select(wds.produced.bykid,Category,agesplit,dataset)) %>%
-  filter(!is.na(agesplit), Category != "N/A", dataset == "CDM" & age  >= 5 ) %>%
+  filter(!is.na(agesplit), Category != "N/A") %>%
   group_by(dataset, agesplit, Category) %>%
   summarise(n = n()) %>%
   group_by(dataset, agesplit, add=FALSE) %>%
@@ -195,41 +196,55 @@ ggplot(data = freqs,
 ```
 
 
-Agesplit and word
+Top 5 words by dataset
 ```{r}
 
 d.age <- d %>%
   mutate(word = word_standard)
 
-freqs <- bind_rows(select(d.age,word,agesplit,dataset),
-                   select(wds.produced.bykid,word,agesplit,dataset)) %>%
-  filter(!is.na(agesplit),word != "N/A") %>%
-  group_by(dataset, agesplit, word) %>%
-  summarise(n = n()) %>%
-  filter(dataset == "MTurk" | dataset == "CDM" & n >= 5| 
-           dataset == "Info" & n >=2 | dataset == "Wordbank" & n >= 2) %>%
-  group_by(dataset, agesplit, add=FALSE) %>%
-  mutate(prop = n / sum(n),
-         word = factor(word,
-                           levels = word[order(prop,word,
-                                                   decreasing=TRUE)])) %>%
-  filter(!is.na(word=="NA"))
+
+freqs <- bind_rows(select(d.age,word,dataset),
+                   select(wds.produced.bykid,word,dataset)) %>%
+  filter(!is.na(word), word != "Mama", word != "Dada", word != "NA", word != "N/A") %>%
+  group_by(dataset, word) %>%
+  summarise(n=n()) %>%
+  top_n(5) %>%
+  arrange(n, word, dataset) %>%
+  group_by(dataset)
 ```
 
-
+Plot a table of top 5 words by dataset
+```{r}
+#Tried doing this, did end up doing it correctly...needs to be done
+```
 
 Plot!
 ```{r}
-quartz()
-ggplot(data = freqs, 
-       aes(x=word, y=prop, fill=dataset, 
-           group=dataset)) + 
-  facet_grid(dataset ~ agesplit)+
-  geom_histogram(stat="identity") +
-  ylab("Proportion of Total") + 
-  xlab("Word") +
-  scale_fill_brewer(palette="Set1") +
-  theme(axis.text.x = element_text(angle=90, hjust = 1))
+# quartz()
+# ggplot(data = freqs, 
+#        aes(x=word, y=prop, fill=dataset, 
+#            group=dataset)) + 
+#   facet_grid(dataset ~ agesplit)+
+#   geom_histogram(stat="identity") +
+#   ylab("Proportion of Total") + 
+#   xlab("Word") +
+#   scale_fill_brewer(palette="Set1") +
+#   theme(axis.text.x = element_text(angle=90, hjust = 1))
+```
+
+Creating a table of most popular 5 words by dataset
+
+```{r}
+freqs <- bind_rows(select(d.age,word, dataset),
+                   select(wds.produced.bykid, word, dataset)) %>%
+  filter(word != "N/A") %>%
+  group_by(dataset, word) %>%
+  summarise(n = n()) %>%
+  group_by(dataset, add=FALSE) %>%
+  mutate(word = factor(word,
+                           levels = word[order(n,word,
+                                                   decreasing=FALSE)])) %>%
+  filter(!is.na(word=="NA"))
 ```
 
 Age CDF graphs
