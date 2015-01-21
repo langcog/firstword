@@ -18,7 +18,7 @@ library(tidyr)
 library(markdown)
 library(directlabels)
 library(magrittr)
-library(tables)
+
 
 theme_set(theme_bw())
 ```
@@ -167,9 +167,9 @@ wg.data <- left_join(wg.scores, child.data) %>%
 
 Do analysis over all data for CDI-cats.
 ```{r}
-freqs <- bind_rows(select(d,Category,agesplit,dataset),
-                   select(wds.produced.bykid,Category,agesplit,dataset)) %>%
-  filter(!is.na(agesplit), Category != "N/A") %>%
+freqs <- bind_rows(select(d,Category,agesplit,word_standard,dataset),
+                   select(wds.produced.bykid,Category,agesplit,word,dataset)) %>%
+  filter(!is.na(agesplit), Category != "N/A", dataset == "MTurk" | dataset == "CDM" | dataset == "Info" & word_standard != "Mama" & word_standard != "Dada" | dataset == "Wordbank") %>%
   group_by(dataset, agesplit, Category) %>%
   summarise(n = n()) %>%
   group_by(dataset, agesplit, add=FALSE) %>%
@@ -232,20 +232,6 @@ Plot!
 #   theme(axis.text.x = element_text(angle=90, hjust = 1))
 ```
 
-Creating a table of most popular 5 words by dataset
-
-```{r}
-freqs <- bind_rows(select(d.age,word, dataset),
-                   select(wds.produced.bykid, word, dataset)) %>%
-  filter(word != "N/A") %>%
-  group_by(dataset, word) %>%
-  summarise(n = n()) %>%
-  group_by(dataset, add=FALSE) %>%
-  mutate(word = factor(word,
-                           levels = word[order(n,word,
-                                                   decreasing=FALSE)])) %>%
-  filter(!is.na(word=="NA"))
-```
 
 Age CDF graphs
 --------------
