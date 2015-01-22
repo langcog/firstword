@@ -1,4 +1,4 @@
-% Human Simulation Analysis
+
 % Rose Schneider, Dan Yurovsky, Virginia Marchman, & Mike Frank
 % `r as.character(format(Sys.Date(), format="%B %d, %Y"))`
 
@@ -48,9 +48,9 @@ df_info$agesplit <- cut(df_info$age, breaks=c(0,12,24))
 df_info %<>%
   mutate(currage.grp = cut(age_current, breaks = c(0, seq(2,50,2)))) # grouping current age for bias analysis
 
-#hacky stuff for reporting bias
-df_cdm$age.grp <- df_cdm$age
-df_cdm$currage.grp <- df_cdm$age_current
+# #hacky stuff for reporting bias
+# df_cdm$age.grp <- df_cdm$age
+# df_cdm$currage.grp <- df_cdm$age_current
 ```
 
 bind together
@@ -208,21 +208,21 @@ ggplot(data = cat.by.age,
 ```
 
 
-Top 5 words by dataset
+Top 5 words by dataset + agesplit
 ```{r}
 
 d.age <- d %>%
   mutate(word = word_standard)
 
 
-freqs <- bind_rows(select(d.age,word,dataset),
-                   select(wds.produced.bykid, word,dataset)) %>%
-  filter(!is.na(word), dataset == "MTurk" | dataset == "CDM" | dataset == "Info" & word != "Mama" & word != "Dada" | dataset == "Wordbank") %>%
-  group_by(dataset, word) %>%
+freqs <- bind_rows(select(d.age,word,dataset, agesplit),
+                   select(wds.produced.bykid, word,dataset, agesplit)) %>%
+  filter(!is.na(word), dataset == "MTurk" | dataset == "CDM" | dataset == "Info" & word != "Mama" & word != "Dada" & agesplit != "NA" | dataset == "Wordbank") %>%
+  group_by(agesplit, dataset, word) %>%
   summarise(n=n()) %>%
-  top_n(10) %>%
-  arrange(n, word, dataset) %>%
-  group_by(dataset)
+  top_n(7) %>%
+  arrange(n, dataset) %>%
+  group_by(dataset, agesplit)
 ```
 
 ---
