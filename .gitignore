@@ -9,3 +9,14 @@
 
 # RStudio files
 .Rproj.user/
+
+# Mac Stuff
+.DS_Store
+
+# teX stuff
+*.aux
+*.log
+*.synctex.gz
+*.pdfsync
+*.bbl
+*.blg
