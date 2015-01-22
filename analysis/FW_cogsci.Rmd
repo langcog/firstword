@@ -1,16 +1,16 @@
----
-title: "FW_cogsci"
-output: html_document
----
+% Human Simulation Analysis
+% Rose Schneider, Dan Yurovsky, Virginia Marchman, & Mike Frank
+% `r as.character(format(Sys.Date(), format="%B %d, %Y"))`
 
-`r library(knitr)`
-`r opts_chunk$set(message=FALSE, warning=FALSE)`
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE, message=FALSE, warning=FALSE)
+```
 
 Preliminaries.
 ```{r}
 rm(list=ls())
 library(ggplot2)
-library(plyr)
 library(reshape2)
 library(dplyr)
 library(stringr)
@@ -18,6 +18,7 @@ library(tidyr)
 library(markdown)
 library(directlabels)
 library(magrittr)
+library(entropy)
 
 theme_set(theme_bw())
 ```
@@ -32,9 +33,6 @@ wg.codes <- read.csv("../data/WG_CODES.csv")
 childes.freqs <- read.csv('../data/childes.freqs.csv')
 phon.complexity <- read.csv('../data/complexity_childesfreqs.csv')
 
-```
-
-```{r}
 df_turk %<>%
   mutate(birth = factor(birth_order),
          age.grp = cut(age,breaks = c(5,10,14,18,24)),
@@ -46,12 +44,15 @@ df_cdm$agesplit <- cut(df_cdm$age, breaks=c(0,12,24))
 df_info$agesplit <- cut(df_info$age, breaks=c(0,12,24))
 ```
 
-bind together.
+bind together
 ```{r}
 df_cdm$dataset <- "CDM"
 df_info$dataset <- "Info"
 
-d <- rbind.fill(df_turk,df_cdm,df_info) %>%
+d <- bind_rows(df_turk,df_info) %>%
+  mutate(age_current = as.character(age_current))
+
+d <- bind_rows(d,df_cdm) %>%  #fixes an opaque binding problem for age_current
   rename(Category = cdi_cat)
 ```
 
@@ -131,8 +132,6 @@ childes.freqs %<>%
   summarise(frequency = sum(frequency)) %>%
   mutate(word = sapply(word,function(x) gsub("\\."," ",x)))
 
-
-
 wds.produced.frequency <- wds.produced.bykid %>%
   group_by(word) %>%
   summarise(prod.frequency = n())
@@ -165,10 +164,10 @@ wg.data <- left_join(wg.scores, child.data) %>%
 
 
 Do analysis over all data for CDI-cats.
-```{r}
-freqs <- bind_rows(select(d,Category,agesplit,dataset),
-                   select(wds.produced.bykid,Category,agesplit,dataset)) %>%
-  filter(!is.na(agesplit), Category != "N/A", dataset == "CDM" & age  >= 5 ) %>%
+```{r, fig.width=7,fig.height=7}
+cat.by.age <- bind_rows(select(d,Category,agesplit,dataset,age),
+                   select(wds.produced.bykid,Category,agesplit,dataset,age)) %>%
+  filter(!is.na(agesplit), Category != "N/A", age  >= 5 ) %>%
   group_by(dataset, agesplit, Category) %>%
   summarise(n = n()) %>%
   group_by(dataset, agesplit, add=FALSE) %>%
@@ -176,22 +175,24 @@ freqs <- bind_rows(select(d,Category,agesplit,dataset),
          Category = factor(Category,
                            levels = Category[order(prop,Category,
                                                    decreasing=TRUE)])) %>%
-  filter(!is.na(Category=="NA"))
-```
+  filter(!is.na(Category=="NA")) %>%
+  group_by() %>%
+  mutate(agesplit = factor(agesplit,
+                           labels=c("<12 Months Old", ">12 Months Old")))
 
-Plot.
-
-```{r}
-quartz()
-ggplot(data = freqs, 
-       aes(x=Category, y=prop, fill=dataset, 
-           group=dataset)) + 
+#Plot
+quartz(width=7,height=7)
+ggplot(data = cat.by.age, 
+       aes(x=Category, y=prop, fill=dataset, group=dataset)) + 
   facet_grid(dataset ~ agesplit)+
   geom_histogram(stat="identity") +
-  ylab("Proportion of Total") + 
-  xlab("MB-CDI Category") +
+  ylab("Proportion of First Words") + 
+  xlab("CDI Category") +
   scale_fill_brewer(palette="Set1") +
-  theme(axis.text.x = element_text(angle=90, hjust = 1))
+  theme_bw(base_size=14) +
+  theme(axis.text.x = element_text(angle=90, hjust = 1,vjust=.5),
+        axis.title.x = element_text(vjust=-.5),
+        legend.position="none")
 ```
 
 
@@ -309,7 +310,8 @@ ggplot(data = freqs,
   ylab("Cumulative Probability of First Word")+
   xlab("Age (months)") + 
   geom_hline(yintercept=.75, lty=3) + 
-  geom_ribbon(aes(ymin = ci.low, ymax= ci.high, fill=dataset), col=.,  alpha = .2) + 
+  geom_ribbon(aes(ymin = ci.low, ymax= ci.high, fill=dataset), 
+              col="black",  alpha = .2) + 
   geom_vline(aes(xintercept=age[prop>.75][1]), lty=3) + 
   scale_x_continuous(breaks=seq(0,24,4))+
   scale_color_brewer(name="Dataset",palette="Set1")+
@@ -320,7 +322,6 @@ ggplot(data = freqs,
 
 
 First - Turk data
-
 ```{r}
 #quartz()
 freqs <- ddply(df_turk, .(cdi_cat, word_standard, agesplit), summarise, 
@@ -366,66 +367,57 @@ qplot(cdi_cat, prop, geom="bar", position="dodge", stat="identity",
 Entropy
 -------
 
-
+Return samples for differences in entropy between groups
 ```{r}
-entropy <- function(x) {
-   probs <- x / sum(x,na.rm=TRUE)
-   h = - sum (probs * log(probs))
-   return(h)
+entropy.difference.samples <- function(d,split.var,group.var,num.times) {
+  
+  if(!hasArg(num.times))
+    num.times <- 1000
+  
+  # compute the size of the smaller group for fair entropy comparison
+  grp.size <- d %>%
+    group_by_(split.var,add=FALSE) %>%
+    summarise(n = n()) %>%
+    summarise(n = min(n)) %>%
+    as.numeric
+  
+  sample.diff <- function(d) {
+    d.frame <- d %>%
+    group_by_(split.var,add = FALSE) %>%
+    sample_n(grp.size, replace = FALSE) %>%
+    group_by_(split.var, group.var, add = FALSE) %>%
+    summarise(n = n()) %>%
+    group_by_(split.var, add= FALSE) %>%
+    summarise(h = entropy(n))
+    
+    diff <- d.frame[1,"h"] - d.frame[2,"h"]
+    return(as.numeric(diff))
+  }
+
+  diff <- bind_rows(replicate(1000, sample.diff(d), simplify=FALSE))
+  return(diffs)
 }
+
+entropy.difference.samples(entropies.age,"gender","Category")
+
+entropy.difference.plot(samples,split.var,group.var) <- 
+  function(d,split.var,group.var,num.times) {
+    
+    
+
 ```
 
 Start over categories. 
 
 ```{r}
-d.age %>%
-  filter(dataset=="MTurk", !is.na(age)) %>%
-  mutate(older = age > median(age)) %>%
-  group_by(older, add=FALSE) %>%
-  sample_n(663, replace=FALSE) %>% ### FIXME: sample the smaller group size
-  group_by(older, Category, add=FALSE) %>%
-  summarise(n = n()) %>% 
-  group_by(older, add=FALSE) %>% 
-  summarise(h = entropy(n))
-
 entropies.age <- d.age %>%
-  filter(dataset=="MTurk", !is.na(age)) %>%
+  filter(dataset=="MTurk", !is.na(age), !is.na(gender)) %>%
   mutate(older = age > median(age)) %>%
-  group_by(older, add=FALSE) %>%
-  select(Category,subject,age,word)
+  select(Category,subject,age,word,birth,gender)
 
-entropy.difference <- function(d,num.times) {
-  diffs <- NULL
-
-  grp.size <- min(table(d$older))
-  
-  for(i in 1:num.times) {
-    
-    d.frame <- d %>%
-      sample_n(grp.size, replace = FALSE) %>%
-      group_by(older, word, add = FALSE) %>%
-      summarise(n = n()) %>%
-      group_by(older, add= FALSE) %>%
-      summarise(h = entropy(n))
-    
-    diff <- filter(d.frame,older == TRUE)$h - filter(d.frame,older == FALSE)$h
-    
-    diffs[i] <- diff
-    }
-  
-  return(diffs)
-}
-
-
-  
-  d.age %>%
- %>%
-  sample_n(663, replace=FALSE) %>% ### FIXME: sample the smaller group size
-  group_by(older, Category, add=FALSE) %>%
-  summarise(n = n()) %>% 
-  group_by(older, add=FALSE) %>% 
-  summarise(h = entropy(n))
-
+tmp <- entropy.difference(entropies.age,
+                          split.var="gender",
+                          group.var="Category")
 
 ```
 
