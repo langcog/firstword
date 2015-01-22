@@ -70,7 +70,7 @@ Parents' responses were standardized for ease of analysis. Data cleaning involve
 We recruited 1000 parents from Amazon Mechanical Turk to complete an updated survey on their children's first words. We restricted the survey to parents in the United States. This survey allowed parents to answer for multiple children. We received 1671 responses (813 female, 858 male; M age = 10 mo, median = 10 mo). 21 children were excluded from subsequent analyses because they had not yet spoken (M age = 2.7 mo, median = 2 mo). Responses were translated into English when possible and required. Responses that were not able to be translated were excluded from further analysis (N = 1). Guardian education levels were highly diverse (Ns as follows: Elementary = 3; Some high school = 26; High school = 308; Some college = 525; College = 553; Some graduate school = 42; Graduate school = 26). 
 
 \subsection{Methods}
-This survey was an extended version of the previous one. They survey allowed for input for multiple children, and asked parents to list their highest education level, child's birth order, sex,  first word (excluding ``mama" and ``dada"), word type, addressee of the first word, word age (0 – 24+ months), current age (0 – 18+ years), word language, and home language.  Responses were validated as the survey was completed, reducing the likelihood of erroneous or false responses. 
+This survey was an extended version of the previous one. The survey allowed for input for multiple children, and asked parents to list their highest education level, child's birth order, sex,  first word (excluding ``mama" and ``dada"), word type, addressee of the first word, word age (0 – 24+ months), current age (0 – 18+ years), word language, and home language.  Responses were validated as the survey was completed, reducing the likelihood of erroneous or false responses. 
 
 \subsection{Data preparation}
 Data were handled as in Dataset 1. Due to the larger sample size, more phonological and morphological variations appeared. A final standardized form was selected, and the various original first word forms became that standardized form. For example,  ``Dog dog", ``Doggy", ``Doggie", and ``Dogie" were all treated as ``Dog" in the standardized form. We occasionally had to rely on the parent's description of the situation of the word occurrence to inform our decisions.
@@ -107,6 +107,9 @@ Why are some children producing language earlier than others, and are these word
 
 We do not find that later producers are sampling words from a different or more diverse range of conceptual categories, but instead find that children across development are speaking about the same kinds of things, and often even the same things. What makes these words more likely to be produced as a first word, if they do not significantly differ conceptually? In our next analysis, we examined both the phonetic probability of individual words within CDI categories, as well as their correlation with parental input.
 
+\subsection{Exclusion of "mama" and "dada"}
+While many parents reported that their child's first word was "mama" or "dada" (or some variant), we excluded these children from our analyses. Parents are obviously motivated to hear these words very early in babble, even when the word is not being used in a meaningful or consistent way. Therefore, we stressed in our surveys that parents were to report their children's first word $other$ than "mama" or "dada" to avoid the possibility of skewing the data. After pilot testing on Amazon Mechanical Turk, we added another question asking whether the child's first utterance was "mama" or "dada", and found that 1112 parents reported their children producing "mama" (N = 618) or "dada" (N = 494) other than another first word (N = 559).   
+
 \subsection{Age} 
 
 Conventional wisdom generally cites 12 months as the harbinger of the first word (Citation here). However, a child's first word is almost exclusively heard by a parent or other caretaker, and next to impossible to capture in a lab setting. However, that milestone is subject to the extreme variability in early language production  \cite{fenson1994} and the potential pitfalls of parental memory (as discussed above). Given the possibility of very early noun comprehension \cite{tincoff1999,tincoff2012,bergelson2012}, we wished to explore the development of first word production, especially prior to 12 months.
@@ -115,7 +118,7 @@ Across the 4 datasets, we grouped data by age and by dataset, $N_{total} = 3173$
 
 %FIGURE 1
 \begin{figure}[t]
-	\center{\includegraphics[width=.45\textwidth]{figures/agedata_4sets.pdf}}
+	\center{\includegraphics[width=.45\textwidth]{figures/Figure1.pdf}}
 	\caption{\label{fig:cdfs}  Age graph showing the cumulative probability of producing a word as a function of age.}
 \end{figure}
 
@@ -127,17 +130,17 @@ Why are some children producing language earlier than other children, and what d
 \subsection{CDI Categories} 
 Previous work has established that the CDI normative categories are not equally represented in first word production \cite{fenson1994}. If early word producers have a different distribution of CDI categories, this might suggest that linguistic development is loosely related to conceptual development, and that a later producer is sampling from a larger array of words that are conceptually available to her.
 
-In this analysis, CDI categories were assigned by the researcher based on the MB-CDI parental report form, and validated across datasets. In instances where words did not appear on the MB-CDI,  categories were assigned ad hoc and validated across datasets for consistency. Ninety-one children were excluded because their first word was unable to categorized. We grouped the data by dataset, and performed an age split at 12 months. Figure 2 shows the frequencies of the CDI categories split by age and grouped by dataset.
+In this analysis, CDI categories were assigned by the researcher based on the MB-CDI parental report form, and validated across datasets. In instances where words did not appear on the MB-CDI, categories were assigned ad hoc and validated across datasets for consistency. Ninety-one children were excluded because their first word was unable to categorized. We grouped the data by dataset, and performed an age split at 12 months. Figure 2 shows the frequencies of the CDI categories split by age and grouped by dataset.
 
 %FIGURE 2
 \begin{figure}[tb]
-	\center{\includegraphics[width=.45\textwidth]{figures/cdicats_4sets.pdf}}
+	\center{\includegraphics[width=.45\textwidth]{figures/Figure2.pdf}}
 \caption{\label{fig:cdfs} Histogram of CDI category frequencies across datasets.}
 \end{figure}
 
 Distributions of CDI category frequency across all 4 datasets quite similar. We constructed a linear model, and did not find an effect of dataset on CDI category distribution ($p > XX$). Although more children are included in the $>$ 12 month group, the distributions of the CDI category representations remain almost identical.
 
-Animals, Games and Routines, Toys, and People, followed closely by Food and Drink are frequent first word categories, and seem to be equally compelling as a first word for both early and later producers. Data for later speakers in Wordbank is sparse, because children were selected for this analysis when they were producing exactly one word, according to parental report on the MB-CDI. Only (XX) children produced only exactly word in this group.
+Animals, Games and Routines, Toys, and People, followed closely by Food and Drink are frequent first word categories, and seem to be equally compelling as a first word for both early and later producers. Data for later speakers in Wordbank is sparse, because children were selected for this analysis when they were producing exactly one word, according to parental report on the MB-CDI. Only 27 children produced only exactly word in this group.
 
 Despite producing a first word during different points in their conceptual development, both early and later producers are choosing to speak about the same semantic categories. This would suggest that children's linguistic and conceptual development are more intimately related, and the production of a first word is possibly not just the result of a cognitive shift, but an ability to produce and form words.
 
