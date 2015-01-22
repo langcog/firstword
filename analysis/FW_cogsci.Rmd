@@ -212,11 +212,11 @@ d.age <- d %>%
 
 
 freqs <- bind_rows(select(d.age,word,dataset),
-                   select(wds.produced.bykid,word,dataset)) %>%
-  filter(!is.na(word), word != "Mama", word != "Dada", word != "NA", word != "N/A") %>%
+                   select(wds.produced.bykid, word,dataset)) %>%
+  filter(!is.na(word), dataset == "MTurk" | dataset == "CDM" | dataset == "Info" & word != "Mama" & word != "Dada" | dataset == "Wordbank") %>%
   group_by(dataset, word) %>%
   summarise(n=n()) %>%
-  top_n(5) %>%
+  top_n(10) %>%
   arrange(n, word, dataset) %>%
   group_by(dataset)
 ```
@@ -224,19 +224,16 @@ freqs <- bind_rows(select(d.age,word,dataset),
 ---
 SES and age reporting biases for turk, cdm and info data
 
-First, age 
+Age ~ current age 
 ```{r}
 freqs <- bind_rows(select(d,age.grp, currage.grp,dataset)) %>%
   filter(age.grp != "NA", currage.grp != "NA", currage.grp != "0to3") %>%
   group_by(dataset, age.grp, currage.grp) %>%
   summarise(n=n()) %>%
-  group_by(dataset) %>%
-  mutate(sum = sum(n), prop = n/sum) 
+  group_by(age.grp) %>%
+  mutate(sum = sum(n), prop = n/sum)
 
-```
-
-
-```{r}
+##Test needs to be run
 
 ```
 
