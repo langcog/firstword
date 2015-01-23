@@ -27,7 +27,7 @@
 
 %ABSTRACT
 \begin{abstract}
-The first word, an intimate moment between child and caretaker, exhibits a tremendous amount of variability in semantic categorization, phonological complexity, and age of onset. Through several large datasets of parental report of children's first words, we investigate patterns in first word production, including the age of onset, distribution of MB-CDI categories, and first words in relation to parental input and phonological complexity. In three analyses, we explore the timecourse and distribution of children's first recognizable language productions. We find that, contra conventional wisdom, more than 75 percent of children in our datasets produce a first word by their first birthday. In our second analysis, we find that children consistently produce more first words in certain semantic categories. Finally, we take all the unique occurrences of words across the datasets, and try to predict first word production via parental input taken from the CHILDES corpus and the words' phonetic probabilities. Overall, we find that parental report of a child's first word yields rich and consistent data on what is typically an unobservable dyadic moment, and that consistencies in first word production across development may indicate a close relationship between conceptual and linguistic development.
+The first word, an intimate moment between child and caregiver, exhibits a tremendous amount of variability in semantic categorization, phonological complexity, and age of onset. Through several large datasets of parental report of children's first words, we investigate patterns in first word production, including the age of onset, distribution of MB-CDI categories, and first words in relation to parental input and phonological complexity. In three analyses, we explore the timecourse and distribution of children's first recognizable language productions. We find that, contra conventional wisdom, more than 75 percent of children in our datasets produce a first word by their first birthday. In our second analysis, we find that children consistently produce more first words in certain semantic categories. Finally, we take all the unique occurrences of words across the datasets, and try to predict first word production via parental input taken from the CHILDES corpus and the words' phonetic probabilities. Overall, we find that parental report of a child's first word yields rich and consistent data on what is typically an unobservable dyadic moment, and that consistencies in first word production across development may indicate a close relationship between conceptual and linguistic development.
 
 \textbf{Keywords:}
 language acquisition
@@ -35,9 +35,10 @@ language acquisition
 
 %%INTRODUCTION%%%%
 \section{Introduction}
-What can children's first words reveal about the process by which humans acquire language? Over the course of the first years, children rapidly go from speechless infants to toddlers producing and learning language at an astounding rate (citation about vocabulary acquisition here). The first word marks the beginning of productive verbal language, and is an important and measurable insight into what a child is willing and able to talk about at that point in their development. 
 
-Comprehension of language precedes its production for infants. Research from Bergelson and Swingley (2012) has suggested that as early as 6 months many children already understand what many common nouns mean, instead of just recognizing and segmenting speech sounds (cite bergelson and swingley here). Cognitively, children are capable of successfully mapping a label to an object very early; however, productive language emerges later, and goes through intense phonological and morphological changes throughout development (citation here). If children are able to grasp the meanings of words from a very early age, why does a lag exist between comprehension and production?
+What can children's first words reveal about the process by which humans acquire language? Over the course of the first years, children rapidly go from speechless infants to toddlers producing and learning language at an astounding rate \cite{fenson1994,bloom2002}. The first word marks the beginning of productive verbal language, and is an important and measurable insight into what a child is willing and able to talk about at that point in their development. 
+
+Comprehension of language precedes its production for infants. \citeA{bergelson2012} found that as early as 6 months many children already understand what many common nouns mean, instead of just recognizing and segmenting speech sounds (cite bergelson and swingley here). Cognitively, children are capable of successfully mapping a label to an object very early; however, productive language emerges later, and goes through intense phonological and morphological changes throughout development (citation here). If children are able to grasp the meanings of words from a very early age, why does a lag exist between comprehension and production?
 
 The first word is the start of productive linguistic capabilities, and is an important method for studying language acquisition. While there has been much research on the development of language over the course of the first few years, there has been less research focusing specifically first words. First word occurences are discrete and instantaneous events which almost exclusively involve only the child and parent, and are almost impossibly to observe in a lab setting. However, despite the scarcity of data, first word productions are important because they mark the very beginnings of the intersection of cognitive and linguistic capabilities. 
 
@@ -125,7 +126,7 @@ Across the 4 datasets, we grouped data by age and by dataset, $N_{total} = 3173$
 
 %FIGURE 1
 \begin{figure}[t]
-	\center{\includegraphics[width=.45\textwidth]{figures/Figure1.pdf}}
+	\center{\includegraphics[width=.45\textwidth]{figures/agedata_4sets.pdf}}
 	\caption{\label{fig:cdfs}  Age graph showing the cumulative probability of producing a word as a function of age.}
 \end{figure}
 
@@ -141,7 +142,7 @@ In this analysis, CDI categories were assigned by the researcher based on the MB
 
 %FIGURE 2
 \begin{figure}[tb]
-	\center{\includegraphics[width=.45\textwidth]{figures/Figure2.pdf}}
+	\center{\includegraphics[width=.45\textwidth]{figures/cdicats_4sets.pdf}}
 \caption{\label{fig:cdfs} Histogram of CDI category frequencies across datasets.}
 \end{figure}
 
@@ -154,18 +155,21 @@ Despite producing a first word during different points in their conceptual devel
 
 %FIGURE 3
 
-
-{\centering
-\begin{tabular}{ | c | c | c | c | }
+\begin{table}[t]
+\centering
+\begin{tabular}{cccc}
  \hline
-    CDM & MTurk & Info & Wordbank \\ \hline
-    Ball\newline(n = 51) & Dog\newline(n = 110) & Up\newline(n=3) & Baa Baa\newline(n=16) \\ \hline
-    Hi\newline(n = 29) & No\newline(n = 108) & More\newline(n = 3) & Uh-Oh\newline(n = 7) \\ \hline
-    Dog\newline(n = 29) & Ball\newline(n = 102) & Hi\newline(n = 2) & Yum Yum\newline(n = 3) \\ \hline
-    Uh-Oh\newline(n = 21) & Bottle\newline(n = 76) & Cat\newline(n = 2) & Woof Woof\newline(n=3) \\ \hline
-    Duck\newline(n = 16) & Hi\newline(n = 57) & Bye\newline(n = 2) & Hi\newline(n = 3) \\ \hline		
+    {\bf CDM} & {\bf MTurk} & {\bf Info} & {\bf Wordbank} \\ 
+\hline
+    Ball & Dog & Up  & Baa Baa \\ 
+    Hi & No & More & Uh-Oh \\
+    Dog & Ball & Hi & Yum Yum \\ 
+    Uh-Oh & Bottle & Cat & Woof Woof  \\ 
+    Duck & Hi & Bye & Hi \\ 
+\hline		
  \end{tabular}
-}
+\caption{\label{tab:top5} Top 5 first words (excluding ``mama'' and ``dada'') from each of the four datasets we examined.}
+\end{table}
 
 
 
