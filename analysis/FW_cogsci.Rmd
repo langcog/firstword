@@ -21,9 +21,29 @@ library(tidyr)
 library(markdown)
 library(directlabels)
 library(magrittr)
+library(bootstrap)
 
 
 theme_set(theme_bw())
+```
+
+Useful functions
+```{r}
+## NA functions
+na.mean <- function(x) {mean(x,na.rm=T)}
+na.median <- function(x) {median(x,na.rm=T)}
+na.sum <- function(x) {sum(x,na.rm=T)}
+na.sd <- function(x) {sd(x,na.rm=T)}
+
+## for bootstrapping 95% confidence intervals
+theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
+ci.low <- function(x,na.rm=T) {
+  mean(x,na.rm=na.rm) - 
+    quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.025,na.rm=na.rm)}
+
+ci.high <- function(x,na.rm=T) {
+  quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) -
+    mean(x,na.rm=na.rm)}
 ```
 
 Read survey data.
@@ -141,6 +161,12 @@ wds.produced.bykid <- wg.vocab.words %>%
   mutate(agesplit = cut(age,breaks=c(0,12,24)),
          dataset = "Wordbank") 
 
+
+#Also check the understood words
+wds.understood.bykidword <- wg.vocab.words %>% 
+  filter(id %in% one.word.kids$id, produces>=1) %>%
+  select(-produces) %>%
+  group_by(id,word)
 
 # Compute a productive vocabulary for each child
 wg.scores <- wg.vocab.words %>%
@@ -606,3 +632,18 @@ ggplot(data = predict.params,
   scale_fill_brewer(palette="Set1")+
   theme_bw(base_size=14) +
   theme(legend.position="none")
+
+# Now compare to understood words
+cdi.first.freq.preds <- left_join(predictors,wds.produced.bykid) %>%
+  filter(!is.na(child.id)) %>%
+  mutate(input.freq = log(input.freq+1)) %>%
+  summarise_each(funs(mean,ci.high,ci.low),c(input.freq,phones))
+
+
+cdi.understood.freq.preds <- left_join(predictors,wds.understood.bykidword) %>%
+  filter(!is.na(child.id)) %>%
+  mutate(input.freq = log(input.freq+1)) %>%
+  group_by(child.id) %>%
+  summarise_each(funs(mean),c(input.freq,phones)) %>%
+  summarise_each(funs(mean,ci.high,ci.low),c(input.freq,phones))
+  
