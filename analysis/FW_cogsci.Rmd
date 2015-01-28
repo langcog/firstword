@@ -409,7 +409,7 @@ Bind these two and plot
 first.prod.cdfs <- bind_rows(ns, wg.producers)
 
 quartz(width=5,height=4)
-ggplot(data = freqs, 
+ggplot(data = first.prod.cdfs, 
        aes(x = age, y = prop, colour=dataset, fill=dataset,
            group=dataset))+
   geom_line(size=1) + 
