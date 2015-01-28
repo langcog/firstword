@@ -54,8 +54,8 @@ df_info=read.csv("../data/FW_childesinfo.csv") #Childesinfo data
 
 df_turk %<>%
   mutate(birth = factor(birth_order),
-         age.grp = cut(age,breaks = c(5,10,14,18,24)),
-         currage.grp = cut(age_current,breaks = c(-1,seq(2,18,2))),
+         age.grp = cut(age,breaks = c(5,seq(2, 24, 2))),
+         currage.grp = cut(age_current,breaks = c(0,seq(2,18,2))),
          agesplit = cut(age,breaks = c(0,12,24)),
          dataset = "MTurk")
 
@@ -65,6 +65,9 @@ df_info$agesplit <- cut(df_info$age, breaks=c(0,12,24))
 
 df_info %<>%
   mutate(currage.grp = cut(age_current, breaks = c(0, seq(2,50,2)))) # grouping current age for bias analysis
+
+df_cdm %<>%
+  mutate(age.grp = cut(age, breaks = c(9,12,14)))
 
 # #hacky stuff for reporting bias
 # df_cdm$age.grp <- df_cdm$age
@@ -281,16 +284,32 @@ freqs <- bind_rows(select(d.age,word,dataset, agesplit),
 ---
 SES and age reporting biases for turk, cdm and info data
 
-Age ~ current age 
+current age ~ age lm
 ```{r}
-freqs <- bind_rows(select(d,age.grp, currage.grp,dataset)) %>%
-  filter(age.grp != "NA", currage.grp != "NA", currage.grp != "0to3") %>%
-  group_by(dataset, age.grp, currage.grp) %>%
+freqs <- bind_rows(select(d, age, age_current, dataset))
+
+freqs <- bind_rows(select(d,age, age_current,dataset)) %>%
+  filter(age != "NA", age_current != "NA", dataset != "CDM") %>%
+  group_by(dataset, age, age_current) %>%
   summarise(n=n()) %>%
-  group_by(age.grp) %>%
-  mutate(sum = sum(n), prop = n/sum)
+  group_by(dataset)
+
+lm.age.current <- lm(age_current ~ age, data = freqs)
+summary(lm.age.current)
+# lm.age.gender.birth <- lm(age ~ gender + as.numeric(birth), data = df)
+# lm.age.gender.birth.interaction <- lm(age ~ gender * as.numeric(birth), data = df)
+# 
+# lm.gender.age <- glm(currage.grp ~ currage.grp, data = ,family="binomial")
+# 
+# anova(lm.age.gender,lm.age.gender.birth)
+# anova(lm.age.gender.birth,lm.age.gender.birth.interaction)
 
 ##Test needs to be run
+
+```
+
+No distribution
+```{r}
 
 ```
 
