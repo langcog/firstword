@@ -76,8 +76,8 @@ df_cdm %<>%
 
 bind together
 ```{r}
-df_cdm$dataset <- "CDM"
-df_info$dataset <- "Info"
+df_cdm$dataset <- "Museum"
+df_info$dataset <- "Psycholinguists"
 
 d <- bind_rows(df_turk,df_info) %>%
   mutate(age_current = as.character(age_current))
@@ -233,7 +233,7 @@ cat.by.age <- bind_rows(cat.by.age,
                         select(wds.produced.bykid,
                                Category,agesplit,dataset,age,word)) %>%
 #   filter(!is.na(agesplit), Category != "N/A", dataset == "MTurk" | 
-#            dataset == "CDM" | dataset == "Info" & word != "Mama" &
+#            dataset == "Museum" | dataset == "Psycholinguists" & word != "Mama" &
 #            word != "Dada" | dataset == "Wordbank") %>%
   filter(!is.na(agesplit), Category != "N/A") %>%
   group_by(dataset, agesplit, Category) %>%
@@ -249,16 +249,16 @@ cat.by.age <- bind_rows(cat.by.age,
                            labels=c("<12 Months Old", ">12 Months Old")))
 
 #Plot
-quartz(width=7,height=7)
+quartz(width=8,height=6)
 ggplot(data = cat.by.age, 
        aes(x=Category, y=prop, fill=dataset, group=dataset)) + 
-  facet_grid(dataset ~ agesplit)+
+  facet_grid(agesplit ~ dataset)+
   geom_histogram(stat="identity") +
   ylab("Proportion of First Words") + 
   xlab("CDI Category") +
   scale_fill_brewer(palette="Set1") +
   theme_bw(base_size=14) +
-  theme(axis.text.x = element_text(angle=90, hjust = 1,vjust=.5),
+  theme(axis.text.x = element_text(angle=90, hjust = 1,vjust=.5, size=8),
         axis.title.x = element_text(vjust=-.5),
         legend.position="none")
 ```
@@ -273,7 +273,7 @@ d.age <- d %>%
 
 freqs <- bind_rows(select(d.age,word,dataset, agesplit),
                    select(wds.produced.bykid, word,dataset, agesplit)) %>%
-  filter(!is.na(word), dataset == "MTurk" | dataset == "CDM" | dataset == "Info" & word != "Mama" & word != "Dada" & agesplit != "NA" | dataset == "Wordbank") %>%
+  filter(!is.na(word), dataset == "MTurk" | dataset == "Museum" | dataset == "Psycholinguists" & word != "Mama" & word != "Dada" & agesplit != "NA" | dataset == "Wordbank") %>%
   group_by(agesplit, dataset, word) %>%
   summarise(n=n()) %>%
   top_n(7) %>%
@@ -282,14 +282,14 @@ freqs <- bind_rows(select(d.age,word,dataset, agesplit),
 ```
 
 ---
-SES and age reporting biases for turk, cdm and info data
+SES and age reporting biases for turk, cdm and Psycholinguists data
 
 current age ~ age lm
 ```{r}
 freqs <- bind_rows(select(d, age, age_current, dataset))
 
 freqs <- bind_rows(select(d,age, age_current,dataset)) %>%
-  filter(age != "NA", age_current != "NA", dataset != "CDM") %>%
+  filter(age != "NA", age_current != "NA", dataset != "Museum") %>%
   group_by(dataset, age, age_current) %>%
   summarise(n=n()) %>%
   group_by(dataset)
@@ -304,15 +304,35 @@ summary(lm.age.current)
 # anova(lm.age.gender,lm.age.gender.birth)
 # anova(lm.age.gender.birth,lm.age.gender.birth.interaction)
 
-##Test needs to be run
+
 
 ```
 
 No distribution
 ```{r}
+d.age <- d %>%
+  mutate(word = word_standard)
+
+#Age and gender distribution
+freqs <- bind_rows(select(d.age, word, age, gender, dataset)) %>%
+  filter(word == "No", age != "NA", age != "0", age != "1", age != "3") %>%
+  group_by(gender, age) %>%
+  summarise(n=n()) %>%
+  group_by(gender) %>%
+  mutate(prop = n/sum(n))
+
+#Plot
+quartz()
+ggplot(data = freqs, 
+       aes(x=age, y=prop, fill=gender, group=gender)) +
+  geom_bar(stat="identity", position="dodge") +
+  ylab("Proportion with 'No' as First Word") + 
+  xlab("Age") +
+  scale_fill_brewer(palette="Set1") +
+  theme_bw(base_size=14) 
+    
 
 ```
-
 Plot!
 ```{r}
 # quartz()
