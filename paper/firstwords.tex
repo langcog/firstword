@@ -14,6 +14,7 @@
 \usepackage{pbox}
 % \usepackage{soul}
 \usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[section]{placeins}
 
 % \newcommand{\hlc}[2][yellow]{ {\sethlcolor{#1} \hl{#2}} }
 
@@ -30,11 +31,10 @@
 
 %ABSTRACT
 \begin{abstract}
-First words are both an intimate moment between child and caregiver and an important step towards language. Across children, the timing of the first word varies widely, as does its semantic category and phonological complexity. Using a number of large new datasets of parent reports, we investigate patterns in children's first recognizable production of a word. We find that, contra conventional wisdom, more than 75 percent of children in our data produce a first word by their first birthday. In addition, children consistently produce more first words in certain semantic categories, across a wide range of ages. Finally, we create a predictive model of first word production using both input frequency and phonological complexity and find that both are important contributors to first word production. Throughout our analyses, we find that parental reports of a child's first word yield rich and consistent data on what is typically an unobservable dyadic moment. 
-
+A child's first word is a highly salient moment in the developmental trajectory of language acquisition. It's memorability to caregivers also makes it powerful parent-report measure for understanding the interaction between early cognitive and linguistic development. We investigated both the variability and predictability in children's first words across four large new datasets. We find, first, that children's first tend to be earlier than previously estimated: more than 75 percent of children produce their first word before their first birthday. Second, we find a high degree of consistency in the referents of children's first words independent of children's age of first production. Finally, we show that these words are are predictable from two linguistic factors: input frequency and phonological complexity. Together, our results suggest a degree of independence between early conceptual and linguistic development.
 
 \textbf{Keywords:}
-language acquisition
+Language acquisition, word learning, cognitive development
 \end{abstract}
 
 %%INTRODUCTION%%%%
@@ -115,7 +115,7 @@ While many parents reported that their child's first word was ``mama'' or ``dada
 
 \section{Analyses}
 
-\begin{table}[t!]
+\begin{table}[tb]
 \centering
 \begin{tabular}{cccc}
 \hline
@@ -138,12 +138,9 @@ Up, More & Milk &  & \textbf{Ball} \\
 
 Table \ref{tab:top10} shows the top ten words from each dataset. Overall, there is substantial consistency across the four datasets, with ``Hi'' appearing in all four, and ``Bye'', ``Ball'', ``Dog''/``Woof Woof'', and ``Cat'' appearing in three. 
 
-Although we do not include an item analysis of individual words, it is worth noting that the word "No" was a frequent first word utterance, particularly in the MTurk dataset. The concept of negation is developmentally very interesting, and various functions of negation (denial, refusal, nonexistence) emerge at different points in a child's development \cite{pea1980}. In the MTurk dataset, we coded instances of "No" 
-
+Although we do not include an item analysis of individual words, it is worth noting that the word "No" was a frequent first word utterance, particularly in the MTurk dataset. The concept of negation is developmentally very interesting, and various functions of negation (denial, refusal, nonexistence) emerge at different points in a child's development \cite{pea1982}. In the MTurk dataset, we coded instances of "No" 
 
 We use these four datasets to conduct three primary analyses. Analysis 1 examines the age of first production, Analysis 2 describes the semantic categories of these words, and Analysis 3 attempts to predict which words tend to be produced on the basis of phonological complexity and input frequency.
-
-
 
 \subsection{Analysis 1: Age of First Word} 
 
@@ -161,8 +158,8 @@ In sum, we see some evidence for over-optimism (estimating first words earlier t
 
 
 %FIGURE 1
-\begin{figure}[]
-\center{\includegraphics[scale=.4]{figures/agedata_4sets.pdf}}
+\begin{figure}[tb]
+\center{\includegraphics[width=.9\linewidth]{figures/agedata_4sets.pdf}}
 \caption{\label{fig:cdfs} Cumulative probability of a child having produced her first word across development. In all datasets, more than 75\% percent of children had produced their first word by their first birthday and more than half had produced their first word by 10 months. Shaded regions show 95\% confidence intervals computed by non-parametric bootstrap.}
 \end{figure}
 
@@ -171,12 +168,12 @@ In sum, we see some evidence for over-optimism (estimating first words earlier t
 
 The variability in children's age of first production gives us a natural tool for asking about the relationship between conceptual and linguistic development. All things being equal between samples---which they are almost certainly not, since younger language producers might be more sophisticated conceptually as well---younger children should be less conceptually sophisticated and hence might produce words for a more restricted range of concepts. Alternatively, if the concepts that children most want to talk about are present early \cite{snedeker2007,snedeker2012,gleitman1990}, we should predict no difference in the distribution of first words for older and younger children. 
 
-In our next analysis, we tested the hypothesis that the distribution of first words would differ between older and younger children. To avoid issues of data sparsity across word forms, we assigned words to the categories that appear on the CDI instrument (e.g., Animals, Games and Routines, Toys, People, etc.) and conducted our analysis over the category distribution of words (a loose proxy for their semantic distribution). We assigned CDI categories consistently across datasets for words that did not appear on the CDI word list. Ninety-one children were excluded because their first word could not be categorized. 
+In our next analyses, we ask whether older children vary more in their first productions at two levels of granularity: individual words, and the semantic categories these words come from.  To avoid issues of data sparsity across word forms, we assigned words to the categories that appear on the CDI instrument (e.g., Animals, Games and Routines, Toys, People, etc.) and conducted our analysis over the category distribution of words (a loose proxy for their semantic distribution). We assigned CDI categories consistently across datasets for words that did not appear on the CDI word list. Ninety-one children were excluded because their first word could not be categorized. 
 
 %CDI cats
-\begin{figure*}[]
+\begin{figure*}[tb]
 \begin{center}
-\includegraphics[scale = .6]{figures/cdicats_4sets.pdf}
+\includegraphics[width = .9\textwidth]{figures/cdicats_4sets.pdf}
 \end{center}
 \caption{Proportion of children's first words falling into each CDI category. The datasets showed a high degree of consistency, with most first words referring to animals or games and routines. These distributions were highly consistent between older and younger children, suggesting that first words are driven by linguistic rather than conceptual factors.}
 \label{fig:cdi_cats}
@@ -184,7 +181,23 @@ In our next analysis, we tested the hypothesis that the distribution of first wo
 
 Figure~\ref{fig:cdi_cats} shows the frequencies of the CDI categories split by age (at the first birthday) and grouped by dataset. Animals, Games and Routines, Toys, and People, followed closely by Food and Drink, were frequent first word categories. All of these seemed to be equally compelling as a first word for both early and later producers. Data for later speakers in Wordbank was sparse, because children were selected for this analysis when they were producing exactly one word, according to parental report on the CDI. Only 27 children produced only exactly word in this group.
 
-Distributions of CDI category frequency across all 4 datasets were quite similar. ENTROPY ANALYSIS HERE? We constructed a linear model, and did not find an effect of dataset on CDI category distribution ($p > XX$). Although more children are included in the $>$ 12 month group, the distributions of the CDI categories remain very similar.
+\begin{table}[tb]
+\centering
+\begin{tabular}{ccc}
+\hline
+Data Set & CDI Category & First Word \\ 
+  \hline
+  MTurk & (-0.23,0.04) & (-0.31,0.12) \\ 
+  Museum & (-0.25,0.25) & (-0.10,0.50) \\ 
+  Psycholinguists & (0.00,1.33) & (0.00,1.11) \\ 
+  Wordbank & (-0.72,0.83) & (-0.59,0.69) \\ 
+   \hline
+\end{tabular}
+\label{tab:ent_diffs}
+\caption{Differences in the entropy of First CDI Category and First Word between older and younger children. Across all datasets, for both measures, all bootstrapped 95\% Confidence intervals overlapped 0, suggesting no significant differences between older and younger children.}
+\end{table}
+
+To quantify the differences in variability across age, we asked whether the entropy of children's word or category distributions were different for our older and younger children \cite{shannon1948}. Because entropy is sensitive to sample size, for each dataset we split children into older and younger, and then down-sampled the larger group to the size of the smaller one. We then computed the difference in entropy for children in the older group as compared to the younger group at both the word and category level. For each dataset and measure, we used used non-parametric bootstrap resampling to identify whether the observed difference was significant at the $p = .05$ level. For all datasets and measures, the 95\% confidence interval for entropy differences included 0, indicate no significant difference in entropy across ages (Table~\ref{tab:ent_diffs}).
 
 In sum, despite producing a first word during different points in their conceptual development, both early and later producers in our sample chose to talk about the same semantic categories, and in many cases, the same things. This finding suggests that first words tend to reflect concepts that are available early (at least to those children who have the wherewithal to talk about them). Why then do children consistently pick certain words? In the next analysis, we examine the role of input frequency and phonological complexity in determining which words are predicted. 
 
@@ -206,8 +219,8 @@ To predict the number of observations of each of a set of a categorical outcomes
 
 Across datasets, input frequency and phonetic complexity consistently predicted the number of children who produced each word as their first word. As we hypothesized, in almost all cases candidate words were more likely to be first words if they were higher frequency in children's input, and if they had fewer phonemes (Figure~\ref{fig:hurdles}). In conjunction with the analyses above, these results suggest a high degree of consistency in children's first productions, independent of conceptual development, and dependent instead on linguistic input and speech production fluency.
 
-\begin{figure}[h!]
-\center{\includegraphics[width=.48\textwidth]{figures/hurdle_params.pdf}}
+\begin{figure}[tb]
+\center{\includegraphics[width=.9\linewidth]{figures/hurdle_params.pdf}}
 \caption{\label{fig:hurdles} Parameter estimates for hurdle models predicting children's first words. Models showed a high degree of consistency across datasets: first words tend to be higher frequency and have fewer phonemes. Intercepts are omitted for clarity.}
 \end{figure}
 

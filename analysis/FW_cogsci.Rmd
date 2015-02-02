@@ -107,8 +107,8 @@ mrc.phones <- read.table('../data/mrc.phons.txt',sep="\t",row.names=NULL,
 
 Pull in wordbank demographics
 ```{r, message=FALSE}
-wordbank <- src_mysql(dbname='wordbank',host="54.200.225.86", 
-                      user="wordbank",password="wordbank")
+wordbank <- src_mysql(dbname='wordbank')#,host="54.200.225.86", 
+                     # user="wordbank",password="wordbank")
 
 ## NOW LOAD TABLES ##
 admin.table <- tbl(wordbank, "common_administration")
@@ -249,7 +249,7 @@ cat.by.age <- bind_rows(cat.by.age,
                            labels=c("<12 Months Old", ">12 Months Old")))
 
 #Plot
-quartz(width=8,height=6)
+quartz(width=11,height=5)
 ggplot(data = cat.by.age, 
        aes(x=Category, y=prop, fill=dataset, group=dataset)) + 
   facet_grid(agesplit ~ dataset)+
@@ -260,6 +260,7 @@ ggplot(data = cat.by.age,
   theme_bw(base_size=14) +
   theme(axis.text.x = element_text(angle=90, hjust = 1,vjust=.5, size=8),
         axis.title.x = element_text(vjust=-.5),
+        panel.grid = element_blank(),
         legend.position="none")
 ```
 
@@ -408,12 +409,11 @@ Bind these two and plot
 ```{r,fig.width=5,fig.height=4}
 first.prod.cdfs <- bind_rows(ns, wg.producers)
 
-quartz(width=5,height=4)
+quartz(width=5.5,height=4)
 ggplot(data = first.prod.cdfs, 
        aes(x = age, y = prop, colour=dataset, fill=dataset,
            group=dataset))+
   geom_line(size=1) + 
-  ylab("Cumulative Probability of First Word")+
   xlab("Age (months)") + 
   geom_hline(yintercept=.75, lty=3) + 
   geom_ribbon(aes(ymin = ci.low, ymax= ci.high), 
@@ -422,8 +422,10 @@ ggplot(data = first.prod.cdfs,
   scale_x_continuous(breaks=seq(0,24,4))+
   scale_color_brewer(name="Dataset",palette="Set1")+
   scale_fill_brewer(palette="Set1")+
+  scale_y_continuous(limits = c(0,1),
+                     name = "Cumulative Probability of First Word")+
   theme_bw(base_size=14) +
-  theme(legend.position=c(.85,.3)) 
+  theme(legend.position=c(.80,.3)) 
 ```
 
 
@@ -509,21 +511,22 @@ Start over categories.
 
 ```{r}
 all.data <- d %>%
-  select(Category,agesplit,dataset,age,gender,word_standard,birth_order) %>%
+  select(Category,agesplit,dataset,age,word_standard) %>%
   rename(word = word_standard)
 
-all.data <- bind_rows(all.data,
+all.data<- bind_rows(all.data,
                         select(wds.produced.bykid,
-                               Category,agesplit,dataset,age,
-                               gender,word,birth_order)) %>%
-  filter(Category != "N/A", gender %in% c("Male","Female"),
-         agesplit %in% c("(0,12]","(12,24]"),
-         !is.na(birth_order)) %>%
-  rename(birth.order = birth_order) %>%
-  mutate(birth.order = ifelse(birth.order == 1,"First","Later"))
+                               Category,agesplit,dataset,age,word)) %>%
+  filter(!is.na(agesplit), Category != "N/A", dataset == "MTurk" | 
+            dataset == "Museum" | 
+           dataset == "Psycholinguists" & word != "Mama" & word != "Dada" |
+           dataset == "Wordbank") %>%
+  filter(!is.na(agesplit), Category != "N/A") %>%
+  mutate(agesplit = factor(agesplit,
+                           labels=c("<12 Months Old", ">12 Months Old")))
 
-samp.grid.bo <- expand.grid(dataset=unique(all.data$dataset),
-                         split.var=c("birth.order","agesplit"),
+samp.grid <- expand.grid(dataset=unique(all.data$dataset),
+                         split.var=c("agesplit"),
                          group.var=c("Category","word"),
                          stringsAsFactors=FALSE)
 
@@ -531,10 +534,10 @@ samp.helper <- function(set,split.var,group.var)
   entropy.diff.samps(filter(all.data,dataset==set),
                      split.var,group.var)
 
-ent.diffs <-mapply(samp.helper,samp.grid.bo$dataset,
-                   samp.grid.bo$split.var,samp.grid.bo$group.var)
+ent.diffs <-mapply(samp.helper,samp.grid$dataset,
+                   samp.grid$split.var,samp.grid$group.var)
 
-ent.samples <- cbind(samp.grid.bo,
+ent.samples <- cbind(samp.grid,
                      as.data.frame(t(ent.diffs),rownames==NULL)) %>%
   gather(sample,value,V1:V1000) %>%
   group_by(dataset,split.var,group.var) %>%
@@ -556,6 +559,23 @@ ggplot(data = ent.samples,
   scale_fill_brewer(palette="Set1")+
   theme_bw(base_size=14) +
   theme(legend.position="none")
+
+ent.tab <- ent.samples %>%
+  rowwise() %>%
+  mutate(diff = paste("(",
+                      paste(sprintf("%1.2f",ci.low),
+                            sprintf("%1.2f",ci.high),sep = ","),
+                      ")", sep = "")) %>%
+  select(dataset,group.var,diff) %>%
+  arrange(group.var,dataset) %>%
+  spread(group.var,diff) %>%
+ 
+  print(xtable(ent.tab,
+               align=c("l","l","l","l"),
+               label="tab:ent_diffs"),
+               include.rownames=FALSE,hline.after=c(0,nrow(ent.tab)),
+        sanitize.text.function=function(x){x})
+         
 ```
 
 Now word entropy:
@@ -657,7 +677,7 @@ predict.params <- cbind(predict.params,outputs) %>%
          param = factor(param, labels=c("Num. Phones", "Log Freq.")))
 
 
-quartz(width=6,height=5)
+quartz(width=5.5,height=5)
 ggplot(data = predict.params, 
        aes(x = dataset, y = estimate, fill=component))+
   geom_histogram(stat="identity",position="identity")+
@@ -666,11 +686,14 @@ ggplot(data = predict.params,
   facet_grid(component ~ param)+
   ylab("Parameter Estimate (+/- 95% CI)")+
   xlab("Dataset") + 
-  geom_hline(yintercept=0, lty=2) + 
+  geom_hline(yintercept=0, lty=2,size=.7) + 
   #scale_color_brewer(name="Dataset",palette="Set1")+
   scale_fill_brewer(palette="Set1")+
   theme_bw(base_size=14) +
-  theme(legend.position="none")
+  theme(legend.position="none",
+        axis.text.x = element_text(angle=-45, hjust = 0),
+        axis.title.x = element_text(vjust=-0.5),
+        panel.grid = element_blank())
 
 # Now compare to understood words
 cdi.first.freq.preds <- left_join(predictors,wds.produced.bykid) %>%
