@@ -51,7 +51,8 @@ Read survey data.
 df_turk=read.csv("../data/FW_TurkData.csv") #Turk data
 df_cdm=read.csv("../data/CDMlangsurvey_analysis.csv") #CDM data
 df_info=read.csv("../data/FW_childesinfo.csv") #Childesinfo data
-
+df_negation=read.csv("../data/FW_1000.csv") #negation data
+df_negation$agesplit <- cut(df_negation$word_age, breaks=c(0,12,24))
 df_turk %<>%
   mutate(birth = factor(birth_order),
          age.grp = cut(age,breaks = c(5,seq(2, 24, 2))),
@@ -72,6 +73,27 @@ df_cdm %<>%
 # #hacky stuff for reporting bias
 # df_cdm$age.grp <- df_cdm$age
 # df_cdm$currage.grp <- df_cdm$age_current
+```
+
+Chi-square test for age distribution
+```{r}
+freqs <- df_negation %>%
+  filter(first_wd_standard == "No", no_coding != "N/A", agesplit != "NA") %>%
+  group_by(no_coding, agesplit) %>%
+  summarise(n=n()) %>%
+  group_by(agesplit)%>%
+  mutate(count = sum(n))
+
+w <- matrix(c(10,0,5,0, 35, 11, 18, 2), nrow=2)
+chisq.test(w, correct=FALSE)
+
+ggplot(data = freqs, 
+       aes(x=no_coding, y=n, fill=agesplit, group=agesplit)) +
+  geom_bar(stat="identity", position="dodge") +
+  ylab("Count of instances of use in first word") + 
+  xlab("Function of No") +
+  scale_fill_brewer(palette="Set1") +
+  theme_bw(base_size=14)
 ```
 
 bind together
