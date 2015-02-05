@@ -67,12 +67,16 @@ We sent out a very brief survey on children's first words to subscribed members 
 
 Parents completed a web-based survey. The survey asked parents to report their child's first word (excluding ``mama'' and ``dada''), the word referent, a description of the situation surrounding the first word, the child's age at time of utterance (10 mo. or younger, 11 mo., 12 mo., 13 mo., 14 mo.), the child's current age, and sex. Parents answered for only one child in this survey. We standardized responses and corrected obvious spelling errors. When the meaning of the word was not immediately apparent, we relied on the parent's description of the circumstances surrounding the word and/or the parent's classification of the word type.
 
+\subsubsection{Exclusion of ``mama'' and ``dada''}
+
+While many parents reported that their child's first word was ``mama'' or ``dada'' (or some equivalent or variant), we excluded these children from our analyses. First, parents may be motivated to hear these words very early in babble, even when the word is not being used in a meaningful or consistent way. Second, we were interested in the range of concepts represented in the words we analyzed. Therefore, we stressed in our surveys that parents were to report their children's first word \emph{other} than ``mama'' or ``dada'' to avoid this possibility and to detect a larger range of conceptual types. Additionaly in the MTurk dataset, we included a question asking whether the child's first word was ``mama'', ``dada,'' or another first word. In total, 1112/1650 (67\%) of children were reported to produce ``mama'' (N = 618) or ``dada'' (N = 489) first rather than another word (N = 543).
+
 %SURVEY2
 \subsection{Dataset 2: Amazon Mechanical Turk}
 
 \subsubsection{Participants}
 
-We recruited 1000 parents from Amazon Mechanical Turk to complete an in-depth survey on their children's first words. We restricted the survey to parents in the United States. This survey allowed parents to answer for multiple children. We received responses for 1671 children (813 female, 858 male; M age = 10 mo., median = 10 mo.). Responses from 21 children were excluded from subsequent analyses because they had not yet spoken (M age = 2.7 mo., median = 2 mo.). Responses in other languages were translated into English where possible; one response was excluded. Caregiver education levels were highly diverse (Elementary = 3; Some high school = 15; High school = 166; Some college = 309; College = 346; Some graduate school = 26; Graduate school = 131; Total = 996).
+We recruited 1000 parents from Amazon Mechanical Turk (Mturk) to complete an in-depth survey on their children's first words. We restricted the survey to parents in the United States. This survey allowed parents to answer for multiple children. We received responses for 1671 children (813 female, 858 male; M age = 10 mo., median = 10 mo.). Responses from 21 children were excluded from subsequent analyses because they had not yet spoken (M age = 2.7 mo., median = 2 mo.). Responses in other languages were translated into English where possible; one response was excluded. Caregiver education levels were highly diverse (Elementary = 3; Some high school = 15; High school = 166; Some college = 309; College = 346; Some graduate school = 26; Graduate school = 131; N = 996).
 
 \subsubsection{Method}
 
@@ -104,9 +108,6 @@ As responses were taken directly from the CDI, no data preparation was necessary
 
 %Analyses
 
-\subsubsection{Exclusion of ``mama'' and ``dada''}
-
-
 \begin{table}[tb]
 \centering
 \begin{tabular}{cccc}
@@ -128,9 +129,6 @@ Up, More & Milk &  & \textbf{Ball} \\
 \caption{\label{tab:top10} Top ten first words (excluding ``mama'' and ``dada'') from each of the four datasets we examined. Words repeated across more than 2 datasets are bolded. Included are only words with more than 1 instance.}
 \vspace{-3em}
 \end{table}
-
-
-While many parents reported that their child's first word was ``mama'' or ``dada'' (or some equivalent or variant), we excluded these children from our analyses. First, parents may be motivated to hear these words very early in babble, even when the word is not being used in a meaningful or consistent way. Second, we were interested in the range of concepts represented in the words we analyzed. Therefore, we stressed in our surveys that parents were to report their children's first word \emph{other} than ``mama'' or ``dada'' to avoid this possibility and to detect a larger range of conceptual types. Additionaly in the MTurk dataset, we included a question asking whether the child's first word was ``mama'', ``dada,'' or another first word. In total, 1112/1650 (67\%) of children were reported to produce ``mama'' (N = 618) or ``dada'' (N = 489) first rather than another word (N = 543).
 
 \section{Analyses}
 
@@ -167,7 +165,7 @@ The variability in children's age of first production gives us a natural tool fo
 
 We ask here whether older children show a different distribution of first words.  We assigned words to the categories that appear on the CDI instrument (e.g., animals, games and routines, toys, people, etc.) and conducted our analysis over the category distribution of words (a loose proxy for their semantic distribution). We assigned CDI categories consistently across datasets for words that did not appear on the CDI word list. Ninety-one children were excluded because their first word could not be categorized. 
 
-Figure~\ref{fig:cdi_cats} shows the frequencies of the CDI categories split by age (at the first birthday) and grouped by dataset. Especially in the two larger datasets, the distribution across categories was virtually indistinguishable. Animals, Games and Routines, Toys, and People were all frequent first word categories, and all seemed equally compelling as a first word for both early and later producers. Data for later speakers in Wordbank was sparse, because children were selected for this analysis when they were producing exactly one word, according to parental report on the CDI, and only 27 children met this criterion.
+Figure~\ref{fig:cdi_cats} shows the frequencies of the CDI categories split by age (\textless{12 mo.}, \textgreater{12 mo.}) and grouped by dataset. Especially in the two larger datasets, the distribution across categories was virtually indistinguishable. Animals, Games and Routines, Toys, and People were all frequent first word categories, and all seemed equally compelling as a first word for both early and later producers. Data for later speakers in Wordbank was sparse, because children were selected for this analysis when they were producing exactly one word, according to parental report on the CDI, and only 27 children met this criterion.
 
 
 %CDI cats
@@ -197,7 +195,7 @@ Data Set & CDI Category & First Word \\
 \vspace{-1em}
 \end{table}
 
-To quantify differences in variability across age, we asked whether the entropy of children's word or category distributions were different for our older and younger children \cite{shannon1948}. Differences in entropy would signal differences in the breadth of the distribution across words or categories. Because entropy is sensitive to sample size, for each dataset we split children into older and younger groups, and then down-sampled the larger group to the size of the smaller one. We then computed the difference in entropy for children in the older group as compared to the younger group at both the word and category level. For each dataset and for both words and CDI categories, we used non-parametric bootstrap resampling to identify whether the observed difference in entropy was significant at the $p = .05$ level. For all datasets and measures, the 95\% confidence interval for entropy differences included 0, indicating no significant difference in entropy across ages (Table~\ref{tab:ent_diffs}).
+To quantify differences in variability across age, we asked whether the entropy of children's word or category distributions were different for our older and younger children \cite{shannon1948}. Differences in entropy would signal differences in the breadth of the distribution across words or categories. Because entropy is sensitive to sample size, for each dataset we split children into older and younger groups, and then down-sampled the larger group to the size of the smaller one. We then computed the difference in entropy for children in the older group as compared to the younger group at both the word and category level. For each dataset and for both words and CDI categories, we used non-parametric bootstrap resampling to identify whether the observed difference in entropy was significant at the $p = .05$ level. For all datasets and measures, the 95\% confidence interval for entropy differences included 0, indicating no significant difference in entropy across ages (Table\ref{tab:ent_diffs}).
 
 In our exploration of the data, we found one word that was both highly frequent and potentially linked to conceptual development: ``no.'' Negation is a complex construct, and various functions of negation (denial, refusal, nonexistence) are posited to emerge at different points in a child's development \cite{pea1982}. We coded instances of ``no'' (in the MTurk data, where the majority of instances were reported) based on parent descriptions of the situation surrounding the first word. Of 108 children producing ``no'' as a first word, 40\% did so as a refusal; there were no instances of ``no'' being used as denial, which is acquired later \cite{pea1982}. 
 
@@ -236,7 +234,7 @@ What can children's first words reveal about their conceptual and linguistic dev
 
 A child's first word is a highly salient moment whose memorability to caregivers also makes it ideally suited for use in parent-report measures. Nonetheless, even when analyzed at this scale, parent report is limited by observer bias. We dealt with this issue in several ways, including by seeking converging evidence across multiple, distinct datasets and by testing explicitly for retrospective biases (which we did not find). Nevertheless, the possibility of bias is present, and future studies should consider the possibility of prospective report or dense recording techniques to extend and validate our findings. 
 
-We began by asking about the lag between comprehension and production in early language. One possible explanation for this lag is that there is a period during early infancy in which word knowledge consists of associations between auditory and visual stimuli and so there is no drive to communicate through production. In contrast to this hypothesis, our data suggest that many children are striving to communicate even quite early on. Confirming other studies of early vocabulary \cite{tardif2007}, the productions that parents reported also included functional and communicative items---``hi,'' ``more,'' and ``no''---as well as common nouns. In sum, our work suggests that studying the very first emergence of productive speech is a rich method for adding to our understanding of language development.
+We began by asking about the lag between comprehension and production in early language. One possible explanation for this lag is that there is a period during early infancy in which word knowledge consists of associations between auditory and visual stimuli and so there is no drive to communicate through production. In contrast to this hypothesis, our data suggest that many children are striving to communicate even quite early on. Consistent with other studies of early vocabulary \cite{tardif2007}, the productions that parents reported also included functional and communicative items---``hi,'' ``more,'' and ``no''---as well as common nouns. In sum, our work suggests that studying the very first emergence of productive speech is a rich method for adding to our understanding of language development.
 
 \section{Acknowledgements}
 
