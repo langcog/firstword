@@ -22,11 +22,20 @@ library(markdown)
 library(directlabels)
 library(magrittr)
 library(bootstrap)
+library(RMySQL)
+library(RCurl)
+
 
 
 theme_set(theme_bw())
 ```
 
+interface for pulling data out of wordbank
+```{r}
+url <- 'https://raw.githubusercontent.com/langcog/wordbank/master/shiny_apps/data_loading.R'
+script <- getURL(url, ssl.verifypeer = FALSE)
+eval(parse(text = script))
+```
 Useful functions
 ```{r}
 ## NA functions
@@ -52,6 +61,7 @@ df_turk=read.csv("../data/FW_TurkData.csv") #Turk data
 df_cdm=read.csv("../data/CDMlangsurvey_analysis.csv") #CDM data
 df_info=read.csv("../data/FW_childesinfo.csv") #Childesinfo data
 df_negation=read.csv("../data/FW_1000.csv") #negation data
+df_mbcdi=read.csv("../data/mbcdi.csv")#plain old MB-CDI for baseline
 df_negation$agesplit <- cut(df_negation$word_age, breaks=c(0,12,24))
 df_turk %<>%
   mutate(birth = factor(birth_order),
@@ -129,34 +139,53 @@ mrc.phones <- read.table('../data/mrc.phons.txt',sep="\t",row.names=NULL,
 
 Pull in wordbank demographics
 ```{r, message=FALSE}
-wordbank <- src_mysql(dbname='wordbank')#,host="54.200.225.86", 
-                     # user="wordbank",password="wordbank")
+#NOTE: section is under construction because Wordbank has been updated since original code written 
+
+#connect to wordbank
+wordbank <- src_mysql(dbname='wordbank', host="54.149.39.46", 
+                      user="wordbank", password="wordbank")
 
 ## NOW LOAD TABLES ##
-admin.table <- tbl(wordbank, "common_administration")
-child.table <- tbl(wordbank,"common_child")
+common.tables <- get.common.tables(wordbank)
+instrument.tables <- get.instrument.tables(wordbank, common.tables$instrumentsmap)
+admins <- get.administration.data(common.tables$momed,
+                                  common.tables$child,
+                                  common.tables$instrumentsmap,
+                                  common.tables$administration)
+
+#Load in item data
+#This is giving and error about categories.tables
+items <- get.item.data(common.tables$wordmapping,
+                       common.tables$instrumentsmap)
+
+
+#don't need this anymore...
+# admin.table <- tbl(wordbank, "common_administration")
+# child.table <- tbl(wordbank,"common_child")
+
+#Have to fix this because things aren't working
 wg.table <- tbl(wordbank,"instruments_wg")
 
-# Get the age of each child
-admins <- admin.table %>%
-  select(data_id,child_id,age,source_id) %>%
-  rename(id = data_id, child.id = child_id,source.id = source_id) %>%
+# Get the child id, and demographics 
+admin.data <- admins %>%
+  select(data_id,age,language, sex, momed.level, birth.order, momed.order) %>%
+  filter(language == "English") %>%
+  rename(child.id = data_id, language=language) %>%
+  mutate(sex = factor(sex,levels=c("F","M"),
+                         labels=c("Female","Male"))) %>%
   as.data.frame
 
-# Get demographic variables for each child
-demos <- select(child.table,id,gender,mom_ed,birth_order) %>%
-  as.data.frame %>%# Rename id fields
-  rename(child.id = id) %>%
-  mutate(gender = factor(gender,levels=c("F","M"),
-                         labels=c("Female","Male")))
-
-
-# Join age and demographics together
-child.data <- as.tbl(left_join(admins,demos))
+#Don't need this anymore
+# # demos <- select(common.tables$child,sex,momed_id,birth_order) %>%
+# #   as.data.frame %>%# Rename id fields
+#  # Join age and demographics together
+# child.data <- as.tbl(left_join(admins,demos, by="sex"))
 ```
 
 Pull in wordbank data
 ```{r}
+#To be fixed after item mappings
+
 # Select just the MCDI words from the Words and Sentences Table
 wg.vocab.words <- select(wg.table,basetable_ptr_id,
                          col_baabaa:col_some) %>%
@@ -285,6 +314,31 @@ ggplot(data = cat.by.age,
         panel.grid = element_blank(),
         legend.position="none")
 ```
+
+Baseline CDI - what does the regular distribution look like? 
+```{r}
+freqs <- select(df_mbcdi, cdi_cat, word) %>%
+  group_by(cdi_cat) %>%
+  summarise(n=n()) %>%
+  group_by() %>%
+  mutate(prop = n/sum(n), total=sum(n), cdi_cat = factor(cdi_cat,
+                           levels = cdi_cat[order(prop,cdi_cat,
+                                                   decreasing=TRUE)])) 
+
+
+
+quartz()
+ggplot(data=freqs, aes(x=cdi_cat, y=prop))+
+  geom_histogram(stat="identity") +
+  ylab("Proportion of Words in MB-CDI") + 
+  xlab("CDI Category") +
+  scale_fill_brewer(palette="Set1") +
+  theme(axis.text.x = element_text(angle=90, hjust = 1,vjust=.5, size=8),
+        axis.title.x = element_text(vjust=-.5))
+
+
+```
+
 
 
 Top 5 words by dataset + agesplit
@@ -452,48 +506,9 @@ ggplot(data = first.prod.cdfs,
 
 
 
-First - Turk data
-```{r}
-#quartz()
-freqs <- ddply(df_turk, .(cdi_cat, word_standard, agesplit), summarise, 
-               count=length(word_standard)) 
 
-#Normalizing within the age split
-freqs <- freqs %>%
-group_by(agesplit) %>%
-mutate(prop = count/sum(count)) 
-#sorting so that the graph looks cool
-freqs$cdi_cat <- factor(freqs$cdi_cat, 
-                                  levels=unique(with(freqs, cdi_cat
-                                  [order(freqs$prop, cdi_cat, 
-                                  decreasing = TRUE)])))
-#plot of the proportion within the age split with CDI_cat as first word, faceted by the age split - note, N/A categories are excluded
-qplot(cdi_cat, prop, geom="bar", position="dodge", stat="identity",
-           data=subset(freqs, count>1 & word_standard != "N/A" & cdi_cat != "N/A" & agesplit != "NA")) + 
-  theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5))+
-  ylab("Proportion of Children with Utterance") + xlab("CDI Categories")+facet_wrap(~agesplit)
-```
 
-Second - CDM data 
 
-```{r}
-freqs <- ddply(df_cdm, .(cdi_cat, word_standard, agesplit), summarise, 
-               count=length(word_standard))
-#normalizing
-freqs <- freqs %>%
-group_by(agesplit) %>%
-mutate(prop = count/sum(count)) 
-#sorting
-freqs$cdi_cat <- factor(freqs$cdi_cat, 
-                                  levels=unique(with(freqs, cdi_cat
-                                  [order(freqs$prop, cdi_cat, 
-                                  decreasing = TRUE)])))
-
-qplot(cdi_cat, prop, geom="bar", position="dodge", stat="identity",
-           data=subset(freqs, count>1 & word_standard != "N/A" & cdi_cat != "N/A" & agesplit != "NA")) + 
-  theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5))+
-  ylab("Proportion of Children with Utterance") + xlab("CDI Categories")+facet_wrap(~agesplit)
-```
 
 Entropy
 -------
@@ -730,4 +745,73 @@ cdi.understood.freq.preds <- left_join(predictors,wds.understood.bykidword) %>%
   group_by(child.id) %>%
   summarise_each(funs(mean),c(input.freq,phones)) %>%
   summarise_each(funs(mean,ci.high,ci.low),c(input.freq,phones))
+```
+---
+M+V appendix - some quick stuff
+
+Word histogram
+```{r}
+df <- read.csv("../data/MVapp.csv") #read in MV app data
+#histogram of words in all languages by prop
+freqs <- df %>%
+  filter(word_standard != "N/A") %>%
+  group_by(word_standard, agesplit) %>%
+  summarise(n=n()) %>%
+  group_by() %>%
+  mutate(prop = n/sum(n))
+
+freqs$word_standard <- factor(freqs$word_standard, 
+                                  levels=unique(with(freqs, word_standard
+                                  [order(freqs$prop, word_standard, 
+                                  decreasing = TRUE)])))
+quartz()
+ggplot(data = freqs, 
+       aes(x=word_standard, y=prop)) +
+  geom_bar(stat="identity", position="dodge") +
+  ylab("Proportion as first word") + 
+  xlab("Word") +
+  scale_fill_brewer(palette="Set1") + 
+  theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5, size=8))
+
+#Top words by Language
+freqs <- df %>%
+  filter(word_standard != "N/A") %>%
+  group_by(language, word_standard) %>%
+  summarise(n=n()) %>%
+  top_n(5) %>%
+  arrange(n, language) %>%
+  group_by(language)
+
+#CDI cats by agesplit
+freqs <- df %>%
+  filter(word_standard != "N/A") %>%
+  group_by(cdi_cat, agesplit) %>%
+  summarise(n = n()) %>%
+  group_by(agesplit,add=FALSE) %>%
+  mutate(total = sum(n), prop=n/total)
+freqs$cdi_cat <- factor(freqs$cdi_cat, 
+                                  levels=unique(with(freqs, cdi_cat
+                                  [order(freqs$prop, cdi_cat, 
+                                  decreasing = TRUE)])))
+
+quartz()
+ggplot(data = freqs, 
+       aes(x=cdi_cat, y=prop)) +
+  geom_bar(stat="identity", position="dodge") +
+  ylab("Proportion as first word") + 
+  xlab("Word") +
+  scale_fill_brewer(palette="Set1") + 
+  theme(axis.text.x=element_text(angle=90, hjust=1, vjust=.5, size=8)) + facet_wrap(~agesplit)
+
+#Age - CDF
+
+
+
+```
+
+CDI-categories with age split
+```{r}
+
+
+```
   
