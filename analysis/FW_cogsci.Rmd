@@ -154,16 +154,22 @@ admins <- get.administration.data(common.tables$momed,
                                   common.tables$administration)
 
 #Load in item data
-#This is giving and error about categories.tables
 items <- get.item.data(common.tables$wordmapping,
-                       common.tables$instrumentsmap)
+                       common.tables$instrumentsmap, common.tables$category)
 
 
 #don't need this anymore...
 # admin.table <- tbl(wordbank, "common_administration")
 # child.table <- tbl(wordbank,"common_child")
 
-#Have to fix this because things aren't working
+#get word data - but I'm not sure what is going on here...
+word.data <- items %>%
+  filter(language == "English") %>%
+  select(id, item, category_id, gloss, definition) %>%
+  rename(word=definition, child.id=id) %>%
+  as.data.frame
+
+
 wg.table <- tbl(wordbank,"instruments_wg")
 
 # Get the child id, and demographics 
@@ -179,6 +185,9 @@ admin.data <- admins %>%
 # # demos <- select(common.tables$child,sex,momed_id,birth_order) %>%
 # #   as.data.frame %>%# Rename id fields
 #  # Join age and demographics together
+
+
+wordbank.data <- as.tbl(left_join(word.data,admin.data, by="sex"))
 # child.data <- as.tbl(left_join(admins,demos, by="sex"))
 ```
 
