@@ -36,7 +36,7 @@ url <- 'https://raw.githubusercontent.com/langcog/wordbank/master/shiny_apps/dat
 script <- getURL(url, ssl.verifypeer = FALSE)
 eval(parse(text = script))
 ```
-Useful functions
+Useful functions for confidence intervals, means, etc.
 ```{r}
 ## NA functions
 na.mean <- function(x) {mean(x,na.rm=T)}
@@ -55,14 +55,20 @@ ci.high <- function(x,na.rm=T) {
     mean(x,na.rm=na.rm)}
 ```
 
-Read survey data.
+Read in Turk, Museum, and Psycholinguist survey data - also read in MB-CDI 
 ```{r}
 df_turk=read.csv("../data/FW_TurkData.csv") #Turk data
 df_cdm=read.csv("../data/CDMlangsurvey_analysis.csv") #CDM data
 df_info=read.csv("../data/FW_childesinfo.csv") #Childesinfo data
 df_negation=read.csv("../data/FW_1000.csv") #negation data
-df_mbcdi=read.csv("../data/mbcdi.csv")#plain old MB-CDI for baseline
+df_mbcdi=read.csv("../data/mbcdi.csv") #plain old MB-CDI for baseline
+```
+
+Do agesplits for data for analyses
+```{r}
+
 df_negation$agesplit <- cut(df_negation$word_age, breaks=c(0,12,24))
+
 df_turk %<>%
   mutate(birth = factor(birth_order),
          age.grp = cut(age,breaks = c(5,seq(2, 24, 2))),
@@ -71,21 +77,19 @@ df_turk %<>%
          dataset = "MTurk")
 
 df_cdm$agesplit <- cut(df_cdm$age, breaks=c(0,12,24))
-df_info$age.grp <- (cut(df_info$age, breaks = c(-0, seq(2, 30, 2))))
+df_info$age.grp <- (cut(df_info$age, breaks = c(0, seq(2, 30, 2))))
 df_info$agesplit <- cut(df_info$age, breaks=c(0,12,24))
 
 df_info %<>%
-  mutate(currage.grp = cut(age_current, breaks = c(0, seq(2,50,2)))) # grouping current age for bias analysis
+  mutate(currage.grp = cut(age_current, breaks = c(0, seq(1,50,2)))) # grouping current age for bias analysis
 
 df_cdm %<>%
   mutate(age.grp = cut(age, breaks = c(9,12,14)))
-
-# #hacky stuff for reporting bias
-# df_cdm$age.grp <- df_cdm$age
-# df_cdm$currage.grp <- df_cdm$age_current
 ```
 
-Chi-square test for age distribution
+
+
+Look at "No" distribution in Turk Data
 ```{r}
 freqs <- df_negation %>%
   filter(first_wd_standard == "No", no_coding != "N/A", agesplit != "NA") %>%
@@ -93,7 +97,10 @@ freqs <- df_negation %>%
   summarise(n=n()) %>%
   group_by(agesplit)%>%
   mutate(count = sum(n))
+```
 
+Chi squared test for age bias
+```{r}
 w <- matrix(c(10,0,5,0, 35, 11, 18, 2), nrow=2)
 chisq.test(w, correct=FALSE)
 
@@ -106,7 +113,7 @@ ggplot(data = freqs,
   theme_bw(base_size=14)
 ```
 
-bind together
+Below, bind info, cdm, and turk together to create the main dataframe, d
 ```{r}
 df_cdm$dataset <- "Museum"
 df_info$dataset <- "Psycholinguists"
@@ -116,30 +123,64 @@ d <- bind_rows(df_turk,df_info) %>%
 
 d <- bind_rows(d,df_cdm) %>%  #fixes an opaque binding problem for age_current
   rename(Category = cdi_cat)
+
+d %<>%
+  rename(id=date)
 ```
 
-Read in word descriptors
+
+Get the current ages of the kids at time of testing - survey data
+```{r}
+freqs <- select(d, dataset, currage.grp) %>%
+  filter(dataset != "Wordbank")%>%
+  group_by(currage.grp) %>%
+  summarise(n=n()) %>%
+  group_by() %>%
+  mutate(prop = n/sum(n), total=sum(n), currage.grp = factor(currage.grp,
+                           levels = currage.grp[order(prop,currage.grp,
+                                                   decreasing=TRUE)]))  
+
+#Plot - "NA" kids are those younger than one year
+
+quartz()
+ggplot(data=freqs, aes(x=currage.grp, y=prop))+
+  geom_histogram(stat="identity") +
+  ylab("Proportion in Survey Data") + 
+  xlab("Current Age Group (in years)") +
+  scale_fill_brewer(palette="Set1") +
+  theme(axis.text.x = element_text(angle=90, hjust = 1,vjust=.5, size=8),
+        axis.title.x = element_text(vjust=-.5))
+
+```
+
+Read in word descriptors for words and gestures
 ```{r}
 wg.categories <- read.csv("../data/wg_categories.csv")
 wg.codes <- read.csv("../data/WG_CODES.csv") 
+```
+
+Read in information for hurdle model
+```{r}
+#childes frequency
 childes.freqs <- read.csv('../data/childes.freqs.csv',check.names=FALSE) %>%
   gather(word,input.freq) %>%
   group_by(word) %>%
   summarise(input.freq = sum(input.freq))
-#phon.complexity <- read.csv('../data/complexity_childesfreqs.csv')
+phon.complexity <- read.csv('../data/complexity_childesfreqs.csv')
 
-# cmu.dict <- read.table('../data/cmudict-0.7b.txt',sep="\t",quote="",
-#                        row.names=NULL,header=TRUE) %>%
-#   filter(!str_detect(word,"[^[:alpha:]]") | word == "DON\'T") %>%
-#   mutate(word = tolower(word))
+#cmu glyphs
+cmu.dict <- read.table('../data/cmudict-0.7b.txt',sep="\t",quote="",
+                       row.names=NULL,header=TRUE) %>%
+  filter(!str_detect(word,"[^[:alpha:]]") | word == "DON\'T") %>%
+  mutate(word = tolower(word))
 
+#phonemes
 mrc.phones <- read.table('../data/mrc.phons.txt',sep="\t",row.names=NULL,
                          header = TRUE,quote="",stringsAsFactors=FALSE)
 ```
 
-Pull in wordbank demographics
+Pull in wordbank information - first connect to wordbank, then get relevant tables
 ```{r, message=FALSE}
-#NOTE: section is under construction because Wordbank has been updated since original code written 
 
 #connect to wordbank
 wordbank <- src_mysql(dbname='wordbank', host="54.149.39.46", 
@@ -155,148 +196,155 @@ admins <- get.administration.data(common.tables$momed,
 
 #Load in item data
 items <- get.item.data(common.tables$wordmapping,
-                       common.tables$instrumentsmap, common.tables$category)
+                       common.tables$instrumentsmap, common.tables$category) %>%
+  filter(language=="English",form=="WG",type=="word")
+```
 
 
-#don't need this anymore...
-# admin.table <- tbl(wordbank, "common_administration")
-# child.table <- tbl(wordbank,"common_child")
-
-#get word data - but I'm not sure what is going on here...
-word.data <- items %>%
-  filter(language == "English") %>%
-  select(id, item, category_id, gloss, definition) %>%
-  rename(word=definition, child.id=id) %>%
-  as.data.frame
-
-
-wg.table <- tbl(wordbank,"instruments_wg")
-
-# Get the child id, and demographics 
+Below, we're putting together the wordbank data for one-word kids
+```{r}
+#getting the demographic data for all kids on the English WG form
 admin.data <- admins %>%
-  select(data_id,age,language, sex, momed.level, birth.order, momed.order) %>%
-  filter(language == "English") %>%
+  filter(language == "English", form == "WG") %>%
   rename(child.id = data_id, language=language) %>%
   mutate(sex = factor(sex,levels=c("F","M"),
                          labels=c("Female","Male"))) %>%
   as.data.frame
 
-#Don't need this anymore
-# # demos <- select(common.tables$child,sex,momed_id,birth_order) %>%
-# #   as.data.frame %>%# Rename id fields
-#  # Join age and demographics together
-
-
-wordbank.data <- as.tbl(left_join(word.data,admin.data, by="sex"))
-# child.data <- as.tbl(left_join(admins,demos, by="sex"))
+#filter this down to one-word kids
+one.word.kids <- admin.data%>% 
+  filter(production == 1)
 ```
 
-Pull in wordbank data
+Pull together Word-item mappings, put together with the demographic data
 ```{r}
-#To be fixed after item mappings
+#getting English items from WG
+wg.table <- filter(instrument.tables,language =="English",form == "WG")$table[1] %>%
+  as.data.frame
 
-# Select just the MCDI words from the Words and Sentences Table
-wg.vocab.words <- select(wg.table,basetable_ptr_id,
-                         col_baabaa:col_some) %>%
+#getting the appropriate one-word-items
+one.word.items <- wg.table %>%
+  as.data.frame %>%
+  filter(basetable_ptr_id %in% one.word.kids$child.id) %>%
+  select_(.dots = c("basetable_ptr_id",unique(items$item.id))) %>%
+  gather(word,value,-basetable_ptr_id) %>%
+  filter(value == "produces") %>%
+  left_join(one.word.kids,by=c("basetable_ptr_id"="child.id")) %>%
+  as.data.frame  
+
+#getting word-item mappings for English data
+wordmaps <- items %>%
+  filter(language == "English", form == "WG") %>%
+  select(item.id, definition, category)
+```
+
+Here, we're just getting kids who have produced something in Wordbank - this will be used later in the the age CDF analysis
+```{r}
+all.word.kids <- admin.data %>%
+  filter(production >= 1) 
+```
+
+Below, we actually put together the wordbank data - join word mappings with demographic data
+```{r}
+#wordbank data!
+#below the demo data is joined with the word data from above, dropping kids with null values for pertinent demographic analyses
+wordbank.data <- as.tbl(left_join(wordmaps, one.word.items, by=c("item.id"="word"))) %>%
+  filter(basetable_ptr_id != "NA", value == "produces", age != "NA", language == "English", sex != "NA", momed.level != "NA", category != "NA")#this is not the best way to do it
+
+```
+
+Make wordbank data better
+```{r}
+# Rename things to make life easier when you pull this data into the main data frame
+wordbank.data %<>% 
   as.data.frame %>%
   rename(id = basetable_ptr_id) %>% # Rename the id
-  gather(word,produces,col_baabaa:col_some) %>% # Arrange in longform
-  mutate(word = str_replace(word, "col_", "")) %>%
-  as.tbl# Strip off col_ from words
+  mutate(word = str_replace(definition, "*", "")) %>% #strips the star off some words
+  rename(Category=category)%>%
+  select(-language)%>%
+  as.tbl
 
-wg.vocab.words <- left_join(wg.vocab.words,wg.categories,by=c("word"="Lemma"))
-wg.vocab.words <- left_join(wg.vocab.words,child.data)
+#Rename categories in wordbank.data so they match the WG codes
+wordbank.data$Category %<>%
+  str_replace("sounds", "Sound Effects") %>%
+  str_replace("animals", "Animals") %>%
+  str_replace("toys", "Toys") %>% 
+  str_replace("food_drink", "Food and Drink") %>%
+  str_replace("household", "Small Household Objects") %>%
+  str_replace("outside", "Outside Things") %>%
+  str_replace("people", "People") %>%
+  str_replace("games_routines", "Games and Routines") %>%
+  str_replace("action_words", "Action") %>%
+  str_replace("descriptive_words", "Descriptive") %>%
+  str_replace("pronouns", "Pronouns") %>%
+  str_replace("locations", "Locations")
 
-wg.vocab.words <- left_join(wg.vocab.words,wg.codes,
-                                by = c("word"="code")) %>%
-  select(-word) %>%
-  rename(word = name)
+wordbank.data$word %<>%
+  str_replace("daddy*", "dada") %>%
+  str_replace("mommy*", "mama")
 
-one.word.kids <- wg.vocab.words%>% 
-  group_by(id,age,gender) %>% 
-  summarise(v = sum(produces==2)) %>% 
-  filter(v == 1) %>%
-  select(-v)
 
-wds.produced.bykid <- wg.vocab.words %>% 
-  filter(id %in% one.word.kids$id, produces==2) %>%
-  select(-id,-produces) %>%
+#creating a better dataset for wordbank
+wordbank.data %<>%  
+  select(-item.id,-definition, -id, -momed.order, -production) %>%
   mutate(agesplit = cut(age,breaks=c(0,12,24)),
-         dataset = "Wordbank") 
-
-
-#Also check the understood words
-wds.understood.bykidword <- wg.vocab.words %>% 
-  filter(id %in% one.word.kids$id, produces>=1) %>%
-  select(-produces) %>%
-  group_by(id,word)
-
-# Compute a productive vocabulary for each child
-wg.scores <- wg.vocab.words %>%
-  group_by(id) %>% # Group by child
-  summarise(productive = sum(produces == 2)) # Compute productive vocabulary
-
-# Not using this anymore
-# 
-# all.first.productions <- c(as.character(
-#   unique(filter(d,Category != "N/A")$word_standard)),
-#   as.character(unique(wds.produced.bykid$word)))
-# 
-# all.first.productions <- unique(sapply(all.first.productions,tolower))
-# write.csv(all.first.productions,'../data/unique.productions.csv',
-#           row.names = FALSE)
-
-# childes.freqs %<>%
-#   gather(word,frequency) %>%
-#   group_by(word) %>%
-#   summarise(frequency = sum(frequency)) %>%
-#   mutate(word = sapply(word,function(x) gsub("\\."," ",x)))
-# 
-# wds.produced.frequency <- wds.produced.bykid %>%
-#   group_by(word) %>%
-#   summarise(prod.frequency = n())
-# 
-# wds.produced.frequency <- left_join(wds.produced.frequency,childes.freqs)
-# wds.produced.frequency <- left_join(wds.produced.frequency,phon.complexity,
-#                                     by=c("word" = "Original.Word"))
-# 
-# cor(wds.produced.frequency$prod.frequency,
-#     log(wds.produced.frequency$frequency),use="complete")
-# 
-# cor.test(wds.produced.frequency$prod.frequency,
-#     wds.produced.frequency$unsBPAV,use="complete")
-# 
-# lm1 <- lm(prod.frequency ~ unsTPAV + log(frequency),data=wds.produced.frequency)
-# lm2 <- lm(prod.frequency ~ unsTPAV,data=wds.produced.frequency)
-# 
-# quartz()
-# ggplot(wds.produced.frequency, aes(x = word,y = prod.frequency)) + 
-#   geom_bar(stat="identity")
+         dataset = "Wordbank") %>% #agesplit for CDI analysis
+  rename(guardian_ed=momed.level,
+         gender = sex, 
+         birth_order = birth.order, 
+         word_standard = word)
 ```
 
-Combine MDI data and demographics
+Bind wordbank to current df
 ```{r, message=FALSE}
-wg.data <- left_join(wg.scores, child.data) %>%
-  filter(age >= 8 & age <= 16) %>% # filter down to just relevant range
-  select(-child.id,-source.id) #drop redundant columns
+d <- bind_rows(d,wordbank.data) %>%  #fixes an opaque binding problem for age_current
+  mutate(age_current = as.character(age_current))
+
+#this is bringing in the real MBCDI words, and checking our words against those
+d %<>%
+  mutate(real = factor(d$word_standard %in% df_mbcdi$word_standard,
+                           labels=c("Not", "Real")))
+
 ```
+
+
+Baseline CDI - what does the regular distribution look like? 
+```{r}
+cdi <- select(df_mbcdi, cdi_cat, word) %>%
+  group_by(cdi_cat) %>%
+  summarise(n=n()) %>%
+  group_by() %>%
+  mutate(prop = n/sum(n), total=sum(n), cdi_cat = factor(cdi_cat,
+                           levels = cdi_cat[order(prop,cdi_cat,
+                                                   decreasing=TRUE)])) 
+
+
+
+quartz()
+ggplot(data=cdi, aes(x=cdi_cat, y=prop))+
+  geom_histogram(stat="identity") +
+  ylab("Proportion of Words in MB-CDI") + 
+  xlab("CDI Category") +
+  scale_fill_brewer(palette="Set1") +
+  theme(axis.text.x = element_text(angle=90, hjust = 1,vjust=.5, size=8),
+        axis.title.x = element_text(vjust=-.5))
+
+
+```
+
 
 
 Do analysis over all data for CDI-cats.
 
 ```{r, fig.width=7,fig.height=7}
 cat.by.age <- d %>%
-  select(Category,agesplit,dataset,age,word_standard) %>%
-  rename(word = word_standard)
+  select(Category,agesplit,dataset,age,word_standard, real)
 
-cat.by.age <- bind_rows(cat.by.age,
-                        select(wds.produced.bykid,
-                               Category,agesplit,dataset,age,word)) %>%
-#   filter(!is.na(agesplit), Category != "N/A", dataset == "MTurk" | 
-#            dataset == "Museum" | dataset == "Psycholinguists" & word != "Mama" &
-#            word != "Dada" | dataset == "Wordbank") %>%
+#analysis over entire dataset
+cat.by.age %<>%
   filter(!is.na(agesplit), Category != "N/A") %>%
-  group_by(dataset, agesplit, Category) %>%
+  group_by(dataset, agesplit, real, Category) %>%
+  mutate(n.real = real == "Real") %>%
   summarise(n = n()) %>%
   group_by(dataset, agesplit, add=FALSE) %>%
   mutate(prop = n / sum(n),
@@ -307,6 +355,10 @@ cat.by.age <- bind_rows(cat.by.age,
   group_by() %>%
   mutate(agesplit = factor(agesplit,
                            labels=c("<12 Months Old", ">12 Months Old")))
+
+
+cdi.data <- as.tbl(intersect(cat.by.age, df_mbcdi))%>%
+  filter(basetable_ptr_id != "NA", value == "produces", age != "NA", language == "English", sex != "NA", momed.level != "NA", category != "NA")#this is not the best way to do it
 
 #Plot
 quartz(width=11,height=5)
@@ -324,29 +376,6 @@ ggplot(data = cat.by.age,
         legend.position="none")
 ```
 
-Baseline CDI - what does the regular distribution look like? 
-```{r}
-freqs <- select(df_mbcdi, cdi_cat, word) %>%
-  group_by(cdi_cat) %>%
-  summarise(n=n()) %>%
-  group_by() %>%
-  mutate(prop = n/sum(n), total=sum(n), cdi_cat = factor(cdi_cat,
-                           levels = cdi_cat[order(prop,cdi_cat,
-                                                   decreasing=TRUE)])) 
-
-
-
-quartz()
-ggplot(data=freqs, aes(x=cdi_cat, y=prop))+
-  geom_histogram(stat="identity") +
-  ylab("Proportion of Words in MB-CDI") + 
-  xlab("CDI Category") +
-  scale_fill_brewer(palette="Set1") +
-  theme(axis.text.x = element_text(angle=90, hjust = 1,vjust=.5, size=8),
-        axis.title.x = element_text(vjust=-.5))
-
-
-```
 
 
 
@@ -401,7 +430,7 @@ d.age <- d %>%
 
 #Age and gender distribution
 freqs <- bind_rows(select(d.age, word, age, gender, dataset)) %>%
-  filter(word == "No", age != "NA", age != "0", age != "1", age != "3") %>%
+  filter(word == "No", age != "NA", age > 3) %>%
   group_by(gender, age) %>%
   summarise(n=n()) %>%
   group_by(gender) %>%
@@ -434,26 +463,37 @@ Plot!
 ```
 
 
-Age CDF graphs --- with resampling!
+Age CDF graphs --- with resampling! - Note, there is an issue here that is making the Wordbank data look super wonky
 --------------
-First get wordbank CIs.
-```{r}
-n.samps <- 1000
 
-wg.producers <- wg.data %>%
- group_by(age) %>%
-  summarise(prop = sum(productive > 0)/n()) %>%
+First, get Wordbank CIs
+```{r}
+#first, look at the proportion that we should expect
+wg.producers <- admin.data %>%
+  mutate(producer = production >= 1) %>%
+  group_by(age) %>%
+  summarise(n.producers = sum(producer),
+            n.total = n()) %>%
+  mutate(prop = n.producers / n.total) %>%
   mutate(dataset = "Wordbank")
+
+admin.data %<>%
+  mutate(producer = production >= 1)
+
+ggplot(wg.producers, aes(x=age,y=prop)) + geom_smooth()
 
 sample.producers <- function(df) {
   df %<>%
     sample_n(nrow(df), replace = TRUE) %>% # resampling step
     group_by(age) %>%
-    summarise(prop = sum(productive > 0)/n()) 
+    summarise(n.producers = sum(producer),
+            n.total = n()) %>%
+  mutate(prop = n.producers / n.total)
   return(df$prop)
 }
 
-samps <- replicate(n.samps, sample.producers(wg.data))
+n.samps <- 1000
+samps <- replicate(n.samps, sample.producers(admin.data))
 wg.producers$ci.low <- apply(samps, 1, function(x) {quantile(x, .025)})
 wg.producers$ci.high <- apply(samps, 1, function(x) {quantile(x, .975)})
 ```
@@ -492,7 +532,7 @@ ns <- left_join(ns, samps)
 
 Bind these two and plot
 ```{r,fig.width=5,fig.height=4}
-first.prod.cdfs <- bind_rows(ns, wg.producers)
+first.prod.cdfs <- ns
 
 quartz(width=5.5,height=4)
 ggplot(data = first.prod.cdfs, 
@@ -519,7 +559,7 @@ ggplot(data = first.prod.cdfs,
 
 
 
-Entropy
+Entropy Analysis
 -------
 
 Return samples for differences in entropy between groups
