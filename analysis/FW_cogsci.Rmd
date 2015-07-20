@@ -139,16 +139,14 @@ wordbank <- src_mysql(dbname='wordbank', host="54.149.39.46",
 
 ## NOW LOAD TABLES ##
 common.tables <- get.common.tables(wordbank)
-instrument.tables <- get.instrument.tables(wordbank, common.tables$instrumentsmap)
-admins <- get.administration.data(common.tables$momed,
-                                  common.tables$child,
-                                  common.tables$instrumentsmap,
-                                  common.tables$administration)
+instrument.tables <- get.instrument.tables(wordbank, common.tables) #things need to be changed here!
+admins <- get.administration.data(common.tables)
 
 #Load in item data
-items <- get.item.data(common.tables$wordmapping,
-                       common.tables$instrumentsmap, common.tables$category) %>%
+items <- get.item.data(common.tables)%>%
   filter(language=="English",form=="WG",type=="word")
+
+  
 ```
 
 
@@ -316,7 +314,7 @@ Now do the resampling for the others.
 
 ```{r}
 ns <- d %>% 
-  filter(!is.na(age), age != "NA", word_standard != "N/A", dataset != "Wordbank") %>%
+  filter(!is.na(age), age != "NA", word_standard != "N/A", word_standard != "Mama", word_standard != "Dada", dataset != "Wordbank") %>%
   mutate(dataset = factor(dataset), 
          age = floor(age)) %>%
   select(age, dataset)
@@ -395,7 +393,7 @@ cat.by.age %<>%
                                                    decreasing=TRUE)])) %>%
   group_by() %>%
   mutate(agesplit = factor(agesplit,
-                           labels=c("<12 Months Old", ">12 Months Old")))
+                           labels=c("<12 Months", ">12 Months")))
 
 
 #This is getting the CDI baseline
@@ -416,16 +414,16 @@ cdi_duplicated <- bind_rows(sapply(unique(cat.by.age$dataset), function(x) dupli
 
 
 #Plot
-quartz(width=11,height=5)
+quartz(width=8,height=4)
 ggplot(data = cat.by.age, 
        aes(x=Category, y=prop, fill=dataset, group=dataset)) + 
-  facet_grid(agesplit ~ dataset)+
+  facet_grid(dataset ~ agesplit)+
   geom_histogram(stat="identity") +
   geom_line(data=cdi_duplicated, linetype = "dashed", color = "grey") +
   ylab("Proportion of First Words") + 
   xlab("CDI Category") +
   scale_fill_brewer(palette="Set1") +
-  theme_bw(base_size=14) +
+  theme_bw(base_size=12) +
   theme(axis.text.x = element_text(angle=90, hjust = 1,vjust=.5, size=8),
         axis.title.x = element_text(vjust=-.5),
         panel.grid = element_blank(),
@@ -490,9 +488,7 @@ all.data <- d %>%
   select(Category,agesplit,dataset,age,word_standard) %>%
   rename(word = word_standard)
 
-all.data<- bind_rows(all.data,
-                        select(wds.produced.bykid,
-                               Category,agesplit,dataset,age,word)) %>%
+all.data %<>%
   filter(!is.na(agesplit), Category != "N/A", dataset == "MTurk" | 
             dataset == "Museum" | 
            dataset == "Psycholinguists" & word != "Mama" & word != "Dada" |
@@ -570,10 +566,62 @@ d.age %>%
 
 Phonological complexity
 ```{r}
-cdi.first.freq <- wds.produced.bykid %>%
-  group_by(word) %>%
-  summarise(n = n()) %>%
-  mutate(dataset = "Wordbank")
+
+# Make null model dataframes (just phones and freqs for all CDI words)
+hurdle.baselines <- left_join(mrc.phones,childes.freqs)
+hurdle.baselines[is.na(hurdle.baselines[,"input.freq"]),"input.freq"] <-0 
+  
+
+# Compute parameter estimates for null models by resampling
+sample.hurdle.params <- function(wordlist,num.children,num.samples=1000) {
+
+  # Get phone coefficient from a poisson regression
+  hurd.phones <- function(data) {
+    model <- glm(n ~ phones + log(input.freq+1), data = data,
+                 family="poisson")
+    return(model$coefficients["phones"])
+  }
+  
+  # Get freq coefficient from a poisson regression
+  hurd.freqs <- function(data) {
+    model <- glm(n ~ phones + log(input.freq+1), data = data,
+                 family="poisson")
+    return(model$coefficients["log(input.freq + 1)"])
+  }
+
+  # Resample children from a null distribution, compute predictors
+  sample.hurd.params <- function(data,n.samples) {
+    d.frame <- data %>%
+      sample_n(n.samples,replace = TRUE) %>% #resample kids
+      group_by(word,phones,input.freq) %>%
+      summarise(n = n()) 
+    
+    # Add back in the null dataframe in case any observations are 0
+    d.frame <- left_join(mutate(data,n=0),d.frame,
+                         by=c("word","phones","input.freq")) %>%
+      rowwise() %>%
+      mutate(n = as.numeric(ifelse(is.na(n.y),0,n.y))) %>%
+      select(-n.x,-n.y) %>%
+      ungroup() 
+    
+    # Get coefficients
+    d.phones <- d.frame %>%
+      do(phones = hurd.phones(.))
+    d.freqs <- d.frame %>%
+      do(freqs = hurd.freqs(.))
+    
+    # bind together all coefficients
+    return(c(unlist(d.phones),unlist(d.freqs)))
+  }
+
+  # Replicate
+  params <- replicate(num.samples, sample.hurd.params(wordlist,num.children),simplify=FALSE)
+
+  # Make a dataframe of the coefficients from each run
+  Reduce(rbind,params)
+}
+
+params <- sample.hurdle.params(hurdle.baselines,num.children = nrow(d),num.samples = 200)
 
 d.first.freq <- d %>%
   select(word_standard,Category,dataset) %>%
@@ -612,7 +660,7 @@ d.first.freq <- d %>%
   summarise(n = n())%>%
   select(dataset,word,n)
 
-all.first.freq <- bind_rows(cdi.first.freq,d.first.freq)
+all.first.freq <- d.first.freq
 
 predictors <- expand.grid(word = childes.freqs$word,
                           dataset = unique(all.first.freq$dataset))
