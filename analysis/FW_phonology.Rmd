@@ -1,0 +1,93 @@
+---
+title: "FW_phonology"
+output: html_document
+---
+
+Setup
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE, message=FALSE, warning=FALSE)
+```
+
+libraries
+```{r}
+rm(list=ls())
+library(ggplot2)
+library(reshape2)
+library(entropy)
+library(pscl)
+library(dplyr)
+library(stringr)
+library(tidyr)
+library(markdown)
+library(directlabels)
+library(magrittr)
+library(bootstrap)
+library(RMySQL)
+library(RCurl)
+library(RColorBrewer)
+
+theme_set(theme_bw())
+```
+
+read in FW_turk data
+```{r}
+d <- read.csv("../data/FW_TurkData.csv")
+
+#set up agesplit
+d %<>%
+  filter(age > 4, word_standard != "Mama", word_standard != "Dada")%>%
+   mutate(agesplit = cut(age, breaks=c(0, 12, 24)),
+         agesplit = factor(agesplit,
+                            labels=c("< 12 months", "> 12 months"))) 
+```
+
+What are the top 10 words in this dataset?
+```{r}
+##first, remove kids that are too young
+d_top <- d %>%
+  group_by(word_standard) %>%
+  summarise(n=n()) %>%
+  top_n(10)
+
+top_words <- d %>%
+  filter(word_standard == "Ball" | word_standard == "Baba" | word_standard == "Bye" | word_standard == "Bottle" |
+           word_standard == "Dog" | word_standard == "Cat" | word_standard == "Hi" | word_standard == "No" | 
+           word_standard == "Milk" | word_standard == "Kitty") %>%
+  group_by(word_standard, agesplit)%>%
+  summarise(n = n())%>%
+  group_by(agesplit)%>%
+  mutate(prop = n/sum(n))
+
+#graph
+ggplot(data = top_words, aes(x=reorder(word_standard, prop), y=prop, fill=agesplit)) + 
+  geom_histogram(stat="identity", position = "dodge") +
+  ylab("Proportion") + 
+  xlab("Word") +
+  scale_fill_brewer(palette="Set1") +
+  theme_bw(base_size=12) +
+  theme(axis.text.x = element_text(angle=90, hjust = 1,vjust=.5, size=8),
+        axis.title.x = element_text(vjust=-.5),
+        panel.grid = element_blank())
+```
+
+How many phonological variations are there for each first word? 
+```{r}
+d_phon <- d %>%
+  filter(word_standard == "Ball" | word_standard == "Baba" | word_standard == "Bye" | word_standard == "Bottle" |
+           word_standard == "Dog" | word_standard == "Cat" | word_standard == "Hi" | word_standard == "No" | 
+           word_standard == "Milk" | word_standard == "Kitty") %>%
+  group_by(agesplit, word_standard, word_original)%>%
+  summarise(n = n())%>%
+  group_by(word_standard) %>%
+  mutate(prop = n/sum(n))
+
+ggplot(data = d_phon, aes(x=reorder(word_standard, prop), y=prop, fill=agesplit)) + 
+  geom_histogram(stat="identity", position = "dodge") +
+  scale_fill_brewer(palette="Set1") +
+  theme_bw(base_size=12) +
+  theme(axis.text.x = element_text(angle=90, hjust = 1,vjust=.5, size=8),
+        axis.title.x = element_text(vjust=-.5),
+        panel.grid = element_blank())
+
+```

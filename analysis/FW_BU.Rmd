@@ -1,0 +1,82 @@
+---
+title: "FW_BU"
+Rose Schneider
+---
+
+Set up Rmd parameters
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE, message=FALSE, warning=FALSE)
+```
+
+Preliminaries.
+```{r}
+rm(list=ls())
+library(ggplot2)
+library(reshape2)
+library(entropy)
+library(pscl)
+library(dplyr)
+library(stringr)
+library(tidyr)
+library(markdown)
+library(directlabels)
+library(magrittr)
+library(bootstrap)
+library(RMySQL)
+library(RCurl)
+
+
+
+theme_set(theme_bw())
+
+```
+
+Read in the M&V appendix
+```{r}
+df_mv <- read.csv("../data/MVapp.csv")
+```
+
+Look at the first words - English only first
+```{r}
+freqs <- df_mv %>%
+  filter(language == "American English") %>%
+  group_by(word) %>%
+  summarise(n=n())%>%
+  group_by()%>%
+  mutate(count = n, 
+         word = factor(word,
+                           levels = word[order(n,word,
+                                                   decreasing=TRUE)]))
+
+quartz()
+ggplot(freqs, aes(x=word, y=count)) + geom_bar(stat = "identity", position = "dodge") + theme(axis.text.x = element_text(angle=90, hjust = 1,vjust=.5, size=8),
+        axis.title.x = element_text(vjust=-.5))
+
+
+```
+
+Then look at CDIs - this time for all kids, plus agesplit
+```{r}
+cat.by.age <- df_mv %>%
+  group_by(cdi_cat, agesplit) %>%
+  rename(Category = cdi_cat) %>%
+  summarise(n = n()) %>%
+  group_by(agesplit) %>%
+  mutate(prop = n / sum(n))
+
+quartz(width=11,height=5)
+ggplot(data = cat.by.age, 
+       aes(x=Category, y=prop, fill=agesplit, group=agesplit)) + 
+  facet_grid(. ~ agesplit) +
+  geom_histogram(stat="identity") +
+  ylab("Proportion of First Words") + 
+  xlab("CDI Category") +
+  scale_fill_brewer(palette="Set1") +
+  theme_bw(base_size=14) +
+  theme(axis.text.x = element_text(angle=90, hjust = 1,vjust=.5, size=8),
+        axis.title.x = element_text(vjust=-.5),
+        panel.grid = element_blank(),
+        legend.position="none")
+```
+
