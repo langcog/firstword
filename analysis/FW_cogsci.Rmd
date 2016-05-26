@@ -25,12 +25,600 @@ library(bootstrap)
 library(RMySQL)
 library(RCurl)
 library(RColorBrewer)
-
-
+library(wordbankr)
+library(langcog)
 
 theme_set(theme_bw())
 ```
 
+Misc functions
+```{r}
+## NA functions
+na.mean <- function(x) {mean(x,na.rm=T)}
+na.median <- function(x) {median(x,na.rm=T)}
+na.sum <- function(x) {sum(x,na.rm=T)}
+na.sd <- function(x) {sd(x,na.rm=T)}
+
+## for bootstrapping 95% confidence intervals
+theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
+ci.low <- function(x,na.rm=T) {
+  mean(x,na.rm=na.rm) - 
+    quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.025,na.rm=na.rm)}
+
+ci.high <- function(x,na.rm=T) {
+  quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) -
+    mean(x,na.rm=na.rm)}
+```
+
+Load original datasets
+```{r}
+df_turk=read.csv("../data/FW_TurkData.csv")%>%
+  dplyr::select(-date, -subject, - addressee)%>%
+  rename(language = lang,
+         Category = cdi_cat)%>%#Turk data
+  mutate(dataset = "Turk", 
+         Category = as.factor(Category))
+df_cdm=read.csv("../data/CDMlangsurvey_analysis.csv")%>%
+  dplyr::rename(Category = cdi_cat)%>%
+  mutate(dataset = "Museum", 
+         Category = as.factor(Category))#CDM data
+df_info=read.csv("../data/FW_childesinfo.csv")%>%
+  dplyr::select(birth_order, gender, word_original, word_standard, cdi_cat,
+         age, age_current)%>%#Childesinfo data
+  dplyr::rename(Category = cdi_cat)%>%
+  mutate(dataset = "Psycholinguists", 
+         Category = as.factor(Category))
+```
+
+Load MBCDI for baselines
+```{r}
+df_cdi <- read.csv("../data/mbcdi.csv")
+```
+
+Agesplits, dataframe management
+```{r}
+df_turk %<>%
+  mutate(birth = factor(birth_order),
+         age.grp = cut(age, breaks = c(5, seq(2, 24, 2))),
+         currage.grp = cut(age_current, breaks = c(0, seq(2, 18, 2))),
+         agesplit = cut(age, breaks = c(0, 12, 24)),
+         dataset = "MTurk")
+
+df_cdm$agesplit <- cut(df_cdm$age, breaks = c(0, 12, 24))
+
+df_info$age.grp <- cut(df_info$age, breaks = c(0, seq(2, 30, 2)))
+
+df_info$agesplit <- cut(df_info$age, breaks = c(0,12,24))
+
+df_info %<>%
+  mutate(currage.grp = cut(age_current, breaks = c(0, seq(1,50,2))))
+
+df_cdm %<>%
+  mutate(age.grp = cut(age, breaks = c(9,12,14)))
+```
+
+Binding info, cdm, and turk together to create the main dataframe, d
+```{r}
+df_cdm$dataset <- "Museum"
+df_info$dataset <- "Psycholinguists"
+
+d <- bind_rows(df_turk, df_info)%>%
+  mutate(age_current = as.character(age_current))
+
+d <- bind_rows(d, df_cdm)
+
+d %<>%
+  rename(id = date)
+
+d %<>%
+  filter(word_standard != "Mama", word_standard != "Dada", !is.na(agesplit), na.rm = TRUE)
+```
+
+Get Wordbank data
+```{r}
+#get data from wordbank
+english_wg_admins <- get_administration_data("English", "WG")
+english_items <- get_item_data("English", "WG")
+english_instrument <- get_instrument_data(instrument_language = "English",
+                                          instrument_form = "WG",
+                                          administrations = english_wg_admins,
+                                          iteminfo = english_items)
+#Get one-word kids
+wordbank.data <- english_instrument %>%
+  filter(production == 1, value == "produces") %>%
+  dplyr::select(data_id, age, definition, ethnicity, sex, mom_ed, category)%>%
+  dplyr::rename(Category=category)%>%
+  dplyr::filter(definition != "daddy*" & 
+                  definition != "mommy*")%>%#filter out kids with Mama and Dada
+ dplyr:: mutate(agesplit = cut(age,breaks=c(0,12,24)),
+         dataset = "Wordbank")
+
+#Get all word kids for CDF later
+all.word.kids <- english_instrument %>%
+  dplyr::filter(value == "produces")%>%
+  dplyr::select(data_id, age, definition, ethnicity, sex, mom_ed, category)%>%
+  dplyr::mutate(agesplit = cut(age, breaks = c(0,12,24)))
+
+#make wordbank df easier to work with
+wordbank.data$definition%<>%
+  str_replace("grandma*", "grandma")
+  
+wordbank.data$Category %<>%
+  str_replace("sounds", "Sound Effects") %>%
+  str_replace("animals", "Animals") %>%
+  str_replace("toys", "Toys") %>% 
+  str_replace("food_drink", "Food and Drink") %>%
+  str_replace("household", "Small Household Objects") %>%
+  str_replace("outside", "Outside Things") %>%
+  str_replace("people", "People") %>%
+  str_replace("games_routines", "Games and Routines") %>%
+  str_replace("action_words", "Action") %>%
+  str_replace("descriptive_words", "Descriptive") %>%
+  str_replace("pronouns", "Pronouns") %>%
+  str_replace("locations", "Locations")
+
+wordbank.data %<>%
+  rename(word_standard = definition)
+```
+
+Read in information for hurdle model
+```{r}
+#childes frequency
+childes.freqs <- read.csv('../data/childes.freqs.csv',check.names=FALSE) %>%
+  gather(word,input.freq) %>%
+  dplyr::group_by(word) %>%
+  dplyr::summarise(input.freq = sum(input.freq))
+phon.complexity <- read.csv('../data/complexity_childesfreqs.csv')
+
+#cmu glyphs
+cmu.dict <- read.table('../data/cmudict-0.7b.txt',sep="\t",quote="",
+                       row.names=NULL,header=TRUE) %>%
+  dplyr::filter(!str_detect(word,"[^[:alpha:]]") | word == "DON\'T") %>%
+  dplyr::mutate(word = tolower(word))
+
+#phonemes
+mrc.phones <- read.table('../data/mrc.phons.txt',sep="\t",row.names=NULL,
+                         header = TRUE,quote="",stringsAsFactors=FALSE)
+```
+
+Bind current df to wordbank
+```{r}
+d <- bind_rows(d, wordbank.data)%>%
+  mutate(age_current = as.character(age_current))
+```
+
+-----
+#Age CDF analysis - with resampling
+
+First, for wordbank
+Note - this takes a very long time to run! It's not broken, just takes forever.
+```{r}
+n.samps <- 1000
+
+admin.data <- english_instrument %>%
+  mutate(producer = production >= 1)
+
+wg.producers <- admin.data %>%
+ group_by(age) %>%
+  mutate(producer = production >= 1) %>%
+  summarise(prop = sum(producer > 0)/n(),
+            n.producers = sum(producer),
+            n.total = n()) %>%
+  mutate(dataset = "Wordbank")
+
+sample.producers <- function(df) {
+  df %<>%
+    sample_n(nrow(df), replace = TRUE) %>% # resampling step
+    group_by(age) %>%
+    summarise(prop = sum(producer > 0)/n()) 
+  return(df$prop)
+}
+
+samps <- replicate(n.samps, sample.producers(admin.data))
+wg.producers$ci.low <- apply(samps, 1, function(x) {quantile(x, .025)})
+wg.producers$ci.high <- apply(samps, 1, function(x) {quantile(x, .975)})
+```
+
+Now resampling for other datasets - this is much faster.
+```{r}
+ns <- d %>% 
+  filter(!is.na(age), age != "NA", word_standard != "N/A", dataset != "Wordbank") %>%
+  mutate(dataset = factor(dataset), 
+         age = floor(age)) %>%
+  dplyr:::select(age, dataset)
+
+sample.ns <- function(df) {
+  df %<>% 
+    sample_n(nrow(df), replace=TRUE) %>%
+    group_by(dataset, age) %>%
+    summarise(n = n()) %>%
+    mutate(cum.n = cumsum(n),
+         prop = cum.n / sum(n))
+  return(df)
+}
+
+samps <- bind_rows(replicate(n.samps, sample.ns(ns), simplify=FALSE)) %>%
+  group_by(dataset, age) %>%
+  summarise(ci.low = quantile(prop, .025), 
+            ci.high = quantile(prop, .975))
+
+ns %<>% group_by(dataset, age) %>%
+    summarise(n = n()) %>%
+    mutate(cum.n = cumsum(n),
+         prop = cum.n / sum(n))
+
+ns <- left_join(ns, samps)
+
+wg.producers %<>%
+  rename(n = n.producers, 
+         cum.n = n.total)
+
+first.prod.cdfs <- bind_rows(ns, wg.producers)
+```
+
+Plot - Wordbank data has very small confidence intervals because there's so much more data now.
+```{r}
+first.prod.cdfs %<>%
+  mutate(dataset = factor(dataset, levels = c("MTurk", "Museum", 
+                                              "Psycholinguists", "Wordbank") ))
+
+quartz(width=5.5,height=4)
+ggplot(data = first.prod.cdfs, 
+       aes(x = age, y = prop, colour=dataset, fill=dataset,
+           group=dataset))+
+  geom_line(size=1) + 
+  xlab("Age (months)") + 
+  geom_hline(yintercept=.75, lty=3) + 
+  geom_ribbon(aes(ymin = ci.low, ymax= ci.high), 
+               alpha = .2,show_guide=FALSE,linetype=0) + 
+  geom_vline(aes(xintercept=age[prop>.75][1]), lty=3) + 
+  scale_x_continuous(breaks=seq(0,24,4))+
+  scale_color_brewer(name="Dataset",palette="Set1")+
+  scale_fill_brewer(palette="Set1")+
+  scale_y_continuous(limits = c(0,1),
+                     name = "Cumulative Probability of First Word")+
+  theme_bw(base_size=14) +
+  theme(legend.position=c(.80,.3)) 
+```
+
+---
+#CDI analysis
+Do analysis over all data for CDI categories
+```{r}
+cat.by.age <- d %>%
+  dplyr::select(Category, agesplit, dataset, age, word_standard)%>%
+  mutate(Category = as.factor(Category))
+
+cat.by.age %<>%
+  filter(!is.na(agesplit), Category != "N/A", word_standard != "Mama",
+         word_standard != "Dada")%>%
+  group_by(dataset, agesplit, Category)%>%
+  summarise(n = n())%>%
+  group_by(dataset, agesplit, add = FALSE)%>%
+  mutate(prop = n/sum(n)) %>%
+  group_by()%>%
+  mutate(agesplit = factor(agesplit, 
+                           labels = c("<12 Months Old", ">12 Months Old")))%>%
+  filter(Category != "N/A", Category != "NaN", na.rm = TRUE)%>%
+  mutate(Category= factor(Category, levels = c("Games and Routines", "Animals", 
+                                                     "Food and Drink", "People", 
+                                                     "Toys", "Action", "Sound Effects",
+                                                     "Descriptive", "Vehicles",
+                                                     "Small Household Objects",
+                                                     "Outside Things", "Pronouns", 
+                                                     "Phrase", "Clothing", 
+                                                     "Body Parts",
+                                                     "Furniture and Rooms", 
+                                                     "Quantifiers", 
+                                                     "Prepositions and Locations",
+                                                     "Time", 
+                                                      "Question Words", "Locations")))
+
+#This is getting the CDI baseline
+cdi <- dplyr::select(df_cdi, cdi_cat, word) %>%
+  group_by(cdi_cat) %>%
+  rename(Category = cdi_cat) %>%
+  summarise(n=n()) %>%
+  group_by() %>%
+  filter(Category %in% levels(cat.by.age$Category)) %>%
+  mutate(prop = n/sum(n), total=sum(n),
+         Category = factor(Category, levels = levels(cat.by.age$Category)))
+
+duplicate_cdi <- function(dataset)
+  cdi %>% mutate(dataset = dataset) 
+  
+cdi_duplicated <- bind_rows(sapply(unique(cat.by.age$dataset), function(x) duplicate_cdi(x),
+                                          simplify = FALSE))
+```  
+
+Now graph
+```{r}
+cat.by.age %<>%
+  mutate(dataset = factor(dataset, levels = c("MTurk", "Museum", "Psycholinguists",
+                                              "Wordbank", "MV")))
+
+#Plot
+quartz()
+ggplot(data = cat.by.age, 
+       aes(x=Category, y=prop, fill=dataset, group=dataset)) + 
+  geom_bar(stat="identity") +
+  geom_line(data=cdi_duplicated, linetype = "dashed", color = "grey") +
+  ylab("Proportion of First Words") + 
+  xlab("CDI Category") +
+  scale_fill_brewer(palette="Set1") +
+  theme_bw(base_size=12) +
+  theme(axis.text.x = element_text(angle=90, hjust = 1,vjust=.5, size=8),
+        axis.title.x = element_text(vjust=-.5),
+        panel.grid = element_blank(),
+        legend.position="none") + 
+  facet_grid(agesplit~dataset, scales = "free_x")
+```
+
+---
+Entropy Analysis
+---
+```{r}
+d2 <- d 
+d2$dataset <- "Combined"
+d2 %<>%
+  bind_rows(d, d2)
+
+all.data <- d2 %>%
+  dplyr::select(Category,agesplit,dataset,age,word_standard) %>%
+  rename(word = word_standard)
+```
+
+Return samples for differences in entropy between groups
+```{r}
+entropy.diff.samps <- function(d,split.var,group.var,num.times) {
+  
+  if(!hasArg(num.times))
+    num.times <- 1000
+  
+  # compute the size of the smaller group for fair entropy comparison
+  grp.size <- d2 %>%
+    group_by_(split.var,add=FALSE) %>%
+    summarise(n = n()) %>%
+    summarise(n = min(n)) %>%
+    as.numeric
+  
+  sample.diff <- function(d) {
+    d.frame <- d2 %>%
+      group_by_(split.var,add = FALSE) %>%
+      sample_n(grp.size, replace = TRUE) %>%
+      group_by_(split.var, group.var, add = FALSE) %>%
+      summarise(n = n()) %>%
+      group_by_(split.var, add= FALSE) %>%
+      summarise(h = entropy(n))
+    
+    diff <- d.frame[1,"h"] - d.frame[2,"h"]
+    return(as.numeric(diff))
+  }
+
+  return(replicate(num.times, sample.diff(d)))
+}
+```
+
+Start over categories
+```{r}
+all.data %<>%
+  filter(!is.na(agesplit), Category != "N/A", Category != "NaN") %>%
+  filter(!is.na(agesplit), Category != "N/A") %>%
+  mutate(agesplit = factor(agesplit,
+                           labels=c("<12 Months", ">12 Months")))
+```
+
+```{r}
+samp.grid <- expand.grid(dataset=unique(all.data$dataset),
+                         split.var=c("agesplit"),
+                         group.var=c("Category","word"),
+                         stringsAsFactors=FALSE)
+
+samp.helper <- function(set,split.var,group.var) 
+  entropy.diff.samps(filter(all.data,dataset==set),
+                     split.var,group.var)
+
+ent.diffs <-mapply(samp.helper,samp.grid$dataset,
+                   samp.grid$split.var,samp.grid$group.var)
+
+
+
+samp.grid <- expand.grid(dataset=unique(all.data$dataset),
+                         split.var=c("agesplit"),
+                         group.var=c("Category","word"),
+                         stringsAsFactors=FALSE)
+
+samp.helper <- function(dataset,split.var,group.var) 
+  entropy.diff.samps(filter(all.data),
+                     split.var,group.var)
+
+ent.diffs <-mapply(samp.helper,samp.grid$dataset,
+                   samp.grid$split.var,samp.grid$group.var)
+
+ent.samples <- cbind(samp.grid,
+                     as.data.frame(t(ent.diffs),rownames==NULL)) %>%
+  gather(sample,value,V1:V1000) %>%
+  group_by(dataset,split.var,group.var) %>%
+  summarise(mean = mean(value),
+            ci.high = quantile(value,.975),
+            ci.low = quantile(value,.025))
+```
+
+---
+Hurdle Model
+---
+```{r}
+hurdle.baselines <- left_join(mrc.phones,childes.freqs)
+hurdle.baselines[is.na(hurdle.baselines[,"input.freq"]),"input.freq"] <-0 
+
+sample.hurdle.params <- function(wordlist,num.children,num.samples=1000) {
+
+  # Get phone coefficient from a poisson regression
+  hurd.phones <- function(data) {
+    model <- glm(n ~ phones + log(input.freq+1), data = data,
+                 family="poisson")
+    return(model$coefficients["phones"])
+  }
+  
+  # Get freq coefficient from a poisson regression
+  hurd.freqs <- function(data) {
+    model <- glm(n ~ phones + log(input.freq+1), data = data,
+                 family="poisson")
+    return(model$coefficients["log(input.freq + 1)"])
+  }
+
+  # Resample children from a null distribution, compute predictors
+  sample.hurd.params <- function(data,n.samples) {
+    d.frame <- data %>%
+      dplyr::sample_n(n.samples,replace = TRUE) %>% #resample kids
+      dplyr::group_by(word,phones,input.freq) %>%
+      dplyr::summarise(n = n()) 
+    
+    # Add back in the null dataframe in case any observations are 0
+    d.frame <- left_join(mutate(data,n=0),d.frame,
+                         by=c("word","phones","input.freq")) %>%
+      rowwise() %>%
+      dplyr::mutate(n = as.numeric(ifelse(is.na(n.y),0,n.y))) %>%
+      dplyr::select(-n.x,-n.y) %>%
+      ungroup() 
+    
+    # Get coefficients
+    d.phones <- d.frame %>%
+      do(phones = hurd.phones(.))
+    d.freqs <- d.frame %>%
+      do(freqs = hurd.freqs(.))
+    
+    # bind together all coefficients
+    return(c(unlist(d.phones),unlist(d.freqs)))
+  }
+
+  # Replicate
+  params <- replicate(num.samples, sample.hurd.params(wordlist,num.children),simplify=FALSE)
+
+  # Make a dataframe of the coefficients from each run
+  Reduce(rbind,params)
+}
+
+params <- sample.hurdle.params(hurdle.baselines,num.children = nrow(d),num.samples = 200)
+
+d.first.freq <- d %>%
+  dplyr::select(word_standard,Category,dataset) %>%
+  filter(Category != "N/A", Category != "NaN") %>%
+  mutate(word = tolower(word_standard),
+         subj = 1:nrow(.)) %>%
+  group_by(subj) %>%
+  mutate(word = if(word == "baba") "baa baa"
+         else if(word == "bad dog") "dog"
+         else if(word == "bike") "bicycle"
+         else if(word == "bubble") "bubbles"
+         else if(word == "choo") "choo choo"
+         else if(word == "go dog") "dog"
+         else if(word == "grandpa grandma hungry") "grandpa"
+         else if(word == "kissy") "kiss"
+         else if(word == "love you") "love"
+         else if(word == "mama") "mommy"
+         else if(word == "mama look") "mommy"
+         else if(word == "mamas") "mommy"
+         else if(word == "moocow") "cow"
+         else if(word == "oh no") "uh oh"
+         else if(word == "peek") "peekaboo"
+         else if(word == "plane") "airplane"
+         else if(word == "quack") "quack quack"
+         else if(word == "want") "wanna"
+         else if(word == "what's that") "what"
+         else if(word == "woof") "woof woof"
+         else if(word == "yeah") "yes"
+         else if(word == "brown bear") "bear"
+         else if(word == "more water") "water"
+         else if(word == "yuck") "yucky"
+         else if(word == "i love you") "love"
+         else word) %>%
+  filter(word %in% as.character(unique(mrc.phones$word))) %>%
+  group_by(dataset,word) %>%
+  summarise(n = n())%>%
+  dplyr::select(dataset,word,n)
+
+all.first.freq <- d.first.freq
+
+predictors <- expand.grid(word = childes.freqs$word,
+                          dataset = unique(all.first.freq$dataset))
+predictors <- left_join(predictors,childes.freqs)
+predictors <- left_join(predictors,mrc.phones) %>%
+  mutate(input.freq = ifelse(is.na(input.freq),0,input.freq))
+
+all.first.freq <- left_join(predictors,all.first.freq) %>%
+    mutate(n = ifelse(is.na(n),0,n))
+
+datasets = unique(all.first.freq$dataset)
+components = c("count","zero")
+params = c("num.phones","log.freq")
+
+predict.params <- expand.grid(dataset = datasets,
+                              component = components,
+                              param = params)%>%
+  arrange(dataset,component,param)
+
+outputs <- NULL
+
+for(set in datasets)
+  for(component in components) {
+    hurd <- hurdle(n ~ phones + log(input.freq+1), 
+                 data = filter(all.first.freq,dataset==set))
+
+    model.outs <- summary(hurd)$coefficients[as.character(component)][[1]]
+    
+    outputs <- rbind(outputs,model.outs[c("phones","log(input.freq + 1)"),
+                                        c("Estimate", "Std. Error","Pr(>|z|)")])
+  }
+colnames(outputs) = c("estimate","se","p")
+
+predict.params <- cbind(predict.params,outputs) %>%
+  mutate(ci = 1.96*se) %>%
+  mutate(component = factor(component, labels = c("Count Estimate", "Hurdle")),
+         param = factor(param, labels=c("Num. Phones", "Log Freq.")))
+
+
+quartz(width=5.5,height=5)
+ggplot(data = predict.params, 
+       aes(x = dataset, y = estimate, fill=dataset))+
+  geom_bar(stat="identity",position="identity")+
+  geom_linerange(aes(ymax =estimate+ci,
+                      ymin = estimate-ci)) +
+  facet_grid(component ~ param)+
+  ylab("Parameter Estimate (+/- 95% CI)")+
+  xlab("Dataset") + 
+  geom_hline(yintercept=0, lty=2,size=.7) + 
+  #scale_color_brewer(name="Dataset",palette="Set1")+
+  scale_fill_brewer(palette="Set1")+
+  theme_bw(base_size=14) +
+  theme(legend.position="none",
+        axis.text.x = element_text(angle=-45, hjust = 0),
+        axis.title.x = element_text(vjust=-0.5),
+        panel.grid = element_blank())
+
+# Now compare to understood words
+cdi.first.freq.preds <- left_join(predictors,wds.produced.bykid) %>%
+  filter(!is.na(child.id)) %>%
+  mutate(input.freq = log(input.freq+1)) %>%
+  summarise_each(funs(mean,ci.high,ci.low),c(input.freq,phones))
+
+
+cdi.understood.freq.preds <- left_join(predictors,wds.understood.bykidword) %>%
+  filter(!is.na(child.id)) %>%
+  mutate(input.freq = log(input.freq+1)) %>%
+  group_by(child.id) %>%
+  summarise_each(funs(mean),c(input.freq,phones)) %>%
+  summarise_each(funs(mean,ci.high,ci.low),c(input.freq,phones))
+
+```
+
+
+
+
+
+-----
+Old Code 
+-----
 interface for pulling data out of wordbank
 ```{r}
 url <- 'https://raw.githubusercontent.com/langcog/wordbank/master/shiny_apps/data_loading.R'
