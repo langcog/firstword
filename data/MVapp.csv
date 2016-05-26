@@ -1,1 +1,249 @@
-name,language,age,agesplit,word,english,word_standard,cdi_catWill,American English,12,12,down,down,Down,ActionT.,American English,11,<12,see,see,See,ActionJoan,American English,"[11,12]",12,up,up,Up,ActionJonathan,American English,15,>12,see,see,See,ActionEmily,American English,13,>12,up,up,Up,ActionHoost,Dutch,"[20,21]",>12,stop,stop,Stop,ActionRaivo,Estonian-English bilingual,"[13,14]",>12,viska,throw,Throw,ActionAtte,Finnish,17,>12,anna,give,Give,ActionEelis,Finnish,"[18,19]",>12,anna,give,Give,ActionEelis,Finnish,"[18,19]",>12,kiikkuu,swinging,Swing,ActionJoel,Finnish,"[13,15]",>12,anna,give,Give,ActionSiri,Finnish,"[10,13]",12,kiikaa,swinging,Swing,ActionCharles,French,11,<12,"donne, tiens",give/here,Give,ActionLaurent,French,10,<12,donne,give (it),Give,ActionLaurent,French,10,<12,tiens,"here, take it",Take,ActionNicola,Italian,"[10,16]",12,nanna,to sleep,Sleep,ActionEmi,Japanese,14,>12,sleep,sleep,Sleep,ActionKazuko,Japanese,13,>12,N/A,sleep,Sleep,ActionStig,Swedish,16,>12,titta,look,Look,ActionHanna,Swedish,11,<12,titta,look,Look,ActionLina,Swedish,10,<12,titta,look,Look,ActionFflur,Welsh,13,>12,agor,open,Open,ActionElen,Welsh,"[13,14]",>12,[sit],sit,Sit,ActionDaniel,American English,20,>12,squirrel,squirrel,Squirrel,AnimalJonah,American English,13,>12,bow(wow),bow(wow),Bow-Wow,AnimalSean,American English,12,12,woof,woof,Dog,AnimalSean,American English,12,12,dog,dog,Dog,AnimalLeslie,American English,11,<12,doggie,doggie,Dog,AnimalSarah,American English,11,<12,doggie,doggie,Dog,AnimalT.,American English,11,<12,dog,dog,Dog,AnimalTimmy,American English,11,<12,kitty,kitty,Kitty,AnimalTimmy,American English,11,<12,quack-quack,quack-quack,Quack-quack,AnimalDeborah,American English,10,<12,monkey,monkey,Monkey,AnimalThomas,Dutch,15,>12,part,hors(i)e,Horse,AnimalThomas,Dutch,15,>12,pus,cat,Cat,AnimalHoost,Dutch,"[20,21]",>12,kikker,frog,Frog,AnimalHoost,Dutch,"[20,21]",>12,paard,horse,Horse,AnimalMaarja,Estonian-English bilingual,"[12,14]",>12,auh-auh,bowwow; doggy,Dog,AnimalAtte,Finnish,17,>12,haua,doggy,Dog,AnimalAtte,Finnish,17,>12,heppa,horse,Horse,AnimalEelis,Finnish,"[18,19]",>12,heppa,horsie,Horse,AnimalSiri,Finnish,"[10,13]",12,kissa,cat,Cat,AnimalNina,Italian,"[13,18]",>12,baubau,bow-wow,Dog,AnimalAnna,Italian,"[10,13]",12,cavallo,horse,Horse,AnimalEmi,Japanese,14,>12,doggie,doggie,Dog,AnimalKazuko,Japanese,13,>12,N/A,doggie,Dog,AnimalKenji,Japanese,12,12,N/A,kitty,Kitty,AnimalKenji,Japanese,12,12,N/A,meow,Meow,AnimalTomos,UK English,17,>12,badger,badger,Badger,AnimalElen,Welsh,"[13,14]",>12,gogalw,bird (family word),Bird,AnimalElen,Welsh,"[13,14]",>12,[kw_kkw_k],quack-quack,Quack-quack,AnimalDaniel,American English,20,>12,nose,nose,Nose,Body PartsHoost,Dutch,"[20,21]",>12,mond,mouth,Mouth,Body PartsLuca,Italian,"[10,13]",12,occhio,eye,Eye,Body PartsFflur,Welsh,13,>12,ceg,mouth,Mouth,Body PartsWill,American English,12,12,shoes,shoes,Shoe,ClothingEmily,American English,13,>12,beads,beads,Beads,ClothingRaivo,Estonian-English bilingual,"[13,14]",>12,shoe,shoe,Shoe,ClothingSiri,Finnish,"[10,13]",12,nappi,button,Buttpm,ClothingHaruo,Japanese,15,>12,N/A,shoe(s),Shoe,ClothingFflur,Welsh,13,>12,sannau,socks,Sock,ClothingFflur,Welsh,13,>12,sgidie,shoes,Shoe,ClothingEeriku,Estonian,17,>12,suur,big,Big,DescriptiveMaarja,Estonian-English bilingual,"[12,14]",>12,[pai],nice,Nice,DescriptiveCharles,French,11,<12,beau,"beautiful, good",Beautiful,DescriptiveHildegard,German-English bilingual,"[10,12]",12,[p_iti],pretty,Pretty,DescriptiveLuca,Italian,"[10,13]",12,bella,"beautiful, nice",Beautiful,DescriptiveJacob,American English,13,>12,toast,toast,Toast,Food and DrinkDaniel,American English,12,12,banana,banana,Banana,Food and DrinkSarah,American English,11,<12,juice,juice,Juice,Food and DrinkMolly,American English,"[10,11]",<12,cracker,cracker,Cracker,Food and DrinkJonathan,American English,15,>12,juice,juice,Juice,Food and DrinkEeriku,Estonian,17,>12,tiss,nursing (nursery word),Nursing,Food and DrinkJoel,Finnish,"[13,15]",>12,vett_,water,Water,Food and DrinkSiri,Finnish,"[10,13]",12,vett_,water,Water,Food and DrinkLaurent,French,10,<12,l'eau-l'eau,bottle (nursery word),Bottle,Food and DrinkHans,German,14,>12,birne,pear,Pear,Food and DrinkAnnalena,German,[8-9],<12,ei,egg,Egg,Food and DrinkNina,Italian,"[13,18]",>12,caff,coffee,Coffee,Food and DrinkAnna,Italian,"[10,13]",12,caff,coffee,Coffee,Food and DrinkLuca,Italian,"[10,13]",12,acqua,water,Water,Food and DrinkHaruo,Japanese,15,>12,N/A,milk (request drink),Milk,Food and DrinkLina,Swedish,10,<12,bulle,bun,Bun,Food and DrinkDaniel,American English,20,>12,"goodbye, byebye","goodbye, byebye",Bye,Games and RoutinesDaniel,American English,20,>12,hello,hello,Hello,Games and RoutinesDaniel,American English,20,>12,hi,hi,Hi,Games and RoutinesDaniel,American English,20,>12,no,no,No,Games and RoutinesJacob,American English,13,>12,no,no,No,Games and RoutinesJacob,American English,13,>12,thankyou,thankyou,Thank You,Games and RoutinesDaniel,American English,12,12,uh-oh,uh-oh,Uh-Oh,Games and RoutinesSean,American English,12,12,all gone,all gone,All Gone,Games and RoutinesWill,American English,12,12,all-done,all-done,All Done,Games and RoutinesWill,American English,12,12,uh-oh,uh-oh,Uh-Oh,Games and RoutinesLeslie,American English,11,<12,patty(-cake),patty(-cake),Patty-cake,Games and RoutinesSarah,American English,11,<12,byebye,byebye,Bye,Games and RoutinesT.,American English,11,<12,hi,hi,Hi,Games and RoutinesDeborah,American English,10,<12,"hi, hiya","hi, hiya",Hi,Games and RoutinesDeborah,American English,10,<12,uh-oh,uh-oh,Uh-Oh,Games and RoutinesAlice,American English,"[9,10]",<12,hi,hi,Hi,Games and RoutinesAlice,American English,"[9,10]",<12,no,no,No,Games and RoutinesMolly,American English,"[10,11]",<12,night-night,night-night,Night,Games and RoutinesJonathan,American English,15,>12,hi,hi,Hi,Games and RoutinesJonathan,American English,15,>12,no,no,No,Games and RoutinesVirve,Estonian,10,<12,ait_h,thanks,Thanks,Games and RoutinesVirve,Estonian,10,<12,[hai],hi (English),Hi,Games and RoutinesVirve,Estonian,10,<12,tere,hello,Hello,Games and RoutinesRaivo,Estonian-English bilingual,"[13,14]",>12,ait_h,thanks,Thanks,Games and RoutinesRaivo,Estonian-English bilingual,"[13,14]",>12,ei,no,No,Games and RoutinesMaarja,Estonian-English bilingual,"[12,14]",>12,ait_h,thanks,Thanks,Games and RoutinesMaarja,Estonian-English bilingual,"[12,14]",>12,kuku,"peek-a-boo, uh-oh",N/A,Games and RoutinesEelis,Finnish,"[18,19]",>12,ei,no,No,Games and RoutinesJoel,Finnish,"[13,15]",>12,heihei,bye-bye,Bye,Games and RoutinesJoel,Finnish,"[13,15]",>12,loppu,all gone,All Gone,Games and RoutinesNo•l,French,13,>12,coucou,peek-a-boo,Peek-a-boo,Games and RoutinesCharles,French,11,<12,non,no,No,Games and RoutinesCharles,French,11,<12,au-revoir,byebye,Bye,Games and RoutinesLaurent,French,10,<12,allo,hello,Hello,Games and RoutinesLaurent,French,10,<12,non,no,No,Games and RoutinesAnnalena,German,[8-9],<12,nein,no,No,Games and RoutinesHaruo,Japanese,15,>12,N/A,"all gone, no-no",All Gone,Games and RoutinesEmi,Japanese,14,>12,peekaboo,peekaboo,Peek-a-boo,Games and RoutinesKenji,Japanese,12,12,N/A,thank you,Thank You,Games and RoutinesKenji,Japanese,12,12,N/A,"all gone, put away",All Gone,Games and RoutinesTaro,Japanese,"[14,15]",>12,N/A,no,No,Games and RoutinesHanna,Swedish,11,<12,tacktack,thanks,Thanks,Games and RoutinesHanna,Swedish,11,<12,tittut,peekaboo,Peek-a-boo,Games and RoutinesLina,Swedish,10,<12,oj,oh,Oh,Games and RoutinesTomos,UK English,17,>12,hiya,hiya,Hi,Games and RoutinesTomos,UK English,17,>12,no,no,No,Games and RoutinesTomos,UK English,17,>12,ta 'thank you',ta 'thank you',Thank You,Games and RoutinesFflur,Welsh,13,>12,na,no,No,Games and RoutinesElen,Welsh,"[13,14]",>12,tata,bye-bye,Bye,Games and RoutinesJonah,American English,13,>12,Edgar (dog's name),Edgar (dog's name),Edgar,N/AJonah,American English,13,>12,"this, there","this, there",N/A,N/AJoan,American English,"[11,12]",12,"bang, bottle","bang, bottle",N/A,N/AJoan,American English,"[11,12]",12,"bus, box","bus, box",N/A,N/AEmily,American English,13,>12,"baa, bow-wow","baa, bow-wow",N/A,N/AThomas,Dutch,15,>12,hap,a (little) bite,N/A,N/AMaarja,Estonian-English bilingual,"[12,14]",>12,momm-momm,teddy,N/A,N/ACarole,French,11,<12,Mickey,Mickey Mouse,Mickey Mouse,N/AHans,German,14,>12,wewe,weewee,Weewee,N/AHildegard,German-English bilingual,"[10,12]",12,ticktack,ticktock,Ticktock,N/AHaruo,Japanese,15,>12,N/A,"we got it, it's gone in",We Got It,N/AEmi,Japanese,14,>12,"we got it, it's gone it","we got it, it's gone it",N/A,N/AKenji,Japanese,12,12,N/A,"here you are, if you please",N/A,N/ATaro,Japanese,"[14,15]",>12,N/A,"we got it, it's gone in",We Got It,N/ATaro,Japanese,"[14,15]",>12,N/A,(switched) on,On,N/AElen,Welsh,"[13,14]",>12,t_n,fire,Fire,N/AJonah,American English,13,>12,rock-rock,rock-rock,Rock,Outside ThingsDaniel,American English,12,12,light,light,Light,Outside ThingsWill,American English,12,12,light,light,Light,Outside ThingsEelis,Finnish,"[18,19]",>12,kukka,flower,Flower,Outside ThingsSiri,Finnish,"[10,13]",12,kukka,flower,Flower,Outside ThingsHans,German,14,>12,gasse,street,Street,Outside ThingsStig,Swedish,16,>12,blomma,flower,Flower,Outside ThingsLina,Swedish,10,<12,blomma,flower,Flower,Outside ThingsFflur,Welsh,13,>12,blodyn,flower,Flower,Outside ThingsFflur,Welsh,13,>12,golau,lights,Light,Outside ThingsJacob,American English,13,>12,Jacob,Jacob,Jacob,PeopleLeslie,American English,11,<12,daddy,daddy,Dada,PeopleLeslie,American English,11,<12,mommy,mommy,Mama,PeopleSarah,American English,11,<12,baby,baby,Baby,PeopleSarah,American English,11,<12,mamma,mamma,Mama,PeopleT.,American English,11,<12,daddy,daddy,Dada,PeopleDeborah,American English,10,<12,baby,baby,Baby,PeopleAlice,American English,"[9,10]",<12,baby,baby,Baby,PeopleAlice,American English,"[9,10]",<12,daddy,daddy,Dada,PeopleAlice,American English,"[9,10]",<12,mommy,mommy,Mama,PeopleMolly,American English,"[10,11]",<12,baby,baby,Baby,PeopleEmily,American English,13,>12,daddy,daddy,Dada,PeopleEeriku,Estonian,17,>12,tita,little girl,Girl,PeopleEeriku,Estonian,17,>12,onu,"uncle, man",Uncle,PeopleEeriku,Estonian,17,>12,p_kapikk,elf,Elf,PeopleVirve,Estonian,10,<12,isa,daddy,Dada,PeopleMaarja,Estonian-English bilingual,"[12,14]",>12,daddy,daddy,Dada,PeopleAtte,Finnish,17,>12,mummo,grandmom,Grandma,PeopleAtte,Finnish,17,>12,pappa,grandpa,Grandpa,PeopleEelis,Finnish,"[18,19]",>12,_iti,mother,Mama,PeopleJoel,Finnish,"[13,15]",>12,_iti,mother,Mama,PeopleNo•l,French,13,>12,papa,papa,Dada,PeopleCarole,French,11,<12,b_b_,baby,Baby,PeopleCarole,French,11,<12,papa,papa,Dada,PeopleCharles,French,11,<12,mama,mama,Mama,PeopleHans,German,14,>12,mama,mama,Mama,PeopleHans,German,14,>12,papa,papa,Dada,PeopleAnnalena,German,[8-9],<12,Mama,mama,Mama,PeopleAnnalena,German,[8-9],<12,papa,papa,Dada,PeopleHildegard,German-English bilingual,"[10,12]",12,opa,grandfather,Grandpa,PeopleHildegard,German-English bilingual,"[10,12]",12,papa,papa,Dada,PeopleNina,Italian,"[13,18]",>12,mamma,mama,Mama,PeopleNina,Italian,"[13,18]",>12,zia,aunt,Aunt,PeopleNicola,Italian,"[10,16]",12,mamma,mama,Mama,PeopleNicola,Italian,"[10,16]",12,bimba,child,Child,PeopleNicola,Italian,"[10,16]",12,nonna,granny,Grandma,PeopleNicola,Italian,"[10,16]",12,Vale,(name),Vale,PeopleNicola,Italian,"[10,16]",12,pap_,papa,Dada,PeopleAnna,Italian,"[10,13]",12,beb,baby,Baby,PeopleAnna,Italian,"[10,13]",12,mamma,mama,Mama,PeopleLuca,Italian,"[10,13]",12,beb,baby,Baby,PeopleLuca,Italian,"[10,13]",12,bimba,child,Child,PeopleLuca,Italian,"[10,13]",12,mamma,mama,Mama,PeopleEmi,Japanese,14,>12,mama,mama,Mama,PeopleDaniel,American English,12,12,what's that,what's that,What's That,PhraseJoan,American English,"[11,12]",12,put on,put on,Put On,PhraseJacob,American English,13,>12,there,there,There,Prepositions and LocationsJonathan,American English,15,>12,"that, there","that, there",N/A,Prepositions and LocationsAnnalena,German,[8-9],<12,da,there,There,Prepositions and LocationsHildegard,German-English bilingual,"[10,12]",12,da,there,There,Prepositions and LocationsStig,Swedish,16,>12,dar,there,There,Prepositions and LocationsHanna,Swedish,11,<12,dar,there,There,Prepositions and LocationsJoan,American English,"[11,12]",12,that,that,That,PronounsVirve,Estonian,10,<12,see,this,This,PronounsHans,German,14,>12,das,that,That,PronounsNina,Italian,"[13,18]",>12,mio,mine,Mine,PronounsKenji,Japanese,12,12,N/A,this,This,PronounsHoost,Dutch,"[20,21]",>12,klok,clock,Clock,Small Household ObjectsEeriku,Estonian,17,>12,paber,paper,Paper,Small Household ObjectsStig,Swedish,16,>12,klocka,"clock, watch",Clock,Small Household ObjectsSean,American English,12,12,boo,boo,Boo,Sound EffectsSean,American English,12,12,tick,tick,Tick,Sound EffectsDeborah,American English,10,<12,baa,baa,Baa,Sound EffectsMolly,American English,"[10,11]",<12,moo,moo,Moo,Sound EffectsRaivo,Estonian-English bilingual,"[13,14]",>12,pomm,boom,Boom,Sound EffectsNo•l,French,13,>12,miam,yum,Yum,Sound EffectsNo•l,French,13,>12,poum,boom,Boom,Sound EffectsCharles,French,11,<12,boum,boom,Boom,Sound EffectsAnna,Italian,"[10,13]",12,dindon,ding-dong (bells),Ding-Dong,Sound EffectsHaruo,Japanese,15,>12,N/A,sound of rolling object,N/A,Sound EffectsKazuko,Japanese,13,>12,N/A,bang,Bang,Sound EffectsKazuko,Japanese,13,>12,N/A,car sound,N/A,Sound EffectsTaro,Japanese,"[14,15]",>12,N/A,oof,Oof,Sound EffectsLina,Swedish,10,<12,brum,vroom,Vroom,Sound EffectsTomos,UK English,17,>12,bang,bang,Bang,Sound EffectsElen,Welsh,"[13,14]",>12,[t_ut_u],choochoo,Choochoo,Sound EffectsTimmy,American English,11,<12,ball,ball,Ball,ToyTimmy,American English,11,<12,block,block,Block,ToyRaivo,Estonian-English bilingual,"[13,14]",>12,pall,ball,Ball,ToyCarole,French,11,<12,balle,ball,Ball,ToyCarole,French,11,<12,nounours,teddy bear,Teddy Bear,ToyHildegard,German-English bilingual,"[10,12]",12,balle,ball,Ball,ToyAnna,Italian,"[10,13]",12,bambola,doll,Doll,ToyHanna,Swedish,11,<12,bok,book,Book,ToyLina,Swedish,10,<12,boll,ball,Ball,ToyTimmy,American English,11,<12,car,car,Car,VehiclesThomas,Dutch,15,>12,auto,car,Car,VehiclesKenji,Japanese,12,12,N/A,car,Car,VehiclesTaro,Japanese,"[14,15]",>12,N/A,car,Car,VehiclesStig,Swedish,16,>12,(skol)buss,(school)bus,Bus,Vehicles
+name,language,age,agesplit,word,english,word_standard,cdi_cat
+Will,American English,12,12,down,down,Down,Action
+T.,American English,11,<12,see,see,See,Action
+Joan,American English,11.5,12,up,up,Up,Action
+Jonathan,American English,15,>12,see,see,See,Action
+Emily,American English,13,>12,up,up,Up,Action
+Hoost,Dutch,20.5,>12,stop,stop,Stop,Action
+Raivo,Estonian-English bilingual,13.5,>12,viska,throw,Throw,Action
+Atte,Finnish,17,>12,anna,give,Give,Action
+Eelis,Finnish,18.5,>12,anna,give,Give,Action
+Eelis,Finnish,18.5,>12,kiikkuu,swinging,Swing,Action
+Joel,Finnish,14,>12,anna,give,Give,Action
+Siri,Finnish,11.5,12,kiikaa,swinging,Swing,Action
+Charles,French,11,<12,"donne, tiens",give/here,Give,Action
+Laurent,French,10,<12,donne,give (it),Give,Action
+Laurent,French,10,<12,tiens,"here, take it",Take,Action
+Nicola,Italian,13,12,nanna,to sleep,Sleep,Action
+Emi,Japanese,14,>12,sleep,sleep,Sleep,Action
+Kazuko,Japanese,13,>12,N/A,sleep,Sleep,Action
+Stig,Swedish,16,>12,titta,look,Look,Action
+Hanna,Swedish,11,<12,titta,look,Look,Action
+Lina,Swedish,10,<12,titta,look,Look,Action
+Fflur,Welsh,13,>12,agor,open,Open,Action
+Elen,Welsh,13.5,>12,[sit],sit,Sit,Action
+Daniel,American English,20,>12,squirrel,squirrel,Squirrel,Animal
+Jonah,American English,13,>12,bow(wow),bow(wow),Bow-Wow,Animal
+Sean,American English,12,12,woof,woof,Dog,Animal
+Sean,American English,12,12,dog,dog,Dog,Animal
+Leslie,American English,11,<12,doggie,doggie,Dog,Animal
+Sarah,American English,11,<12,doggie,doggie,Dog,Animal
+T.,American English,11,<12,dog,dog,Dog,Animal
+Timmy,American English,11,<12,kitty,kitty,Kitty,Animal
+Timmy,American English,11,<12,quack-quack,quack-quack,Quack-quack,Animal
+Deborah,American English,10,<12,monkey,monkey,Monkey,Animal
+Thomas,Dutch,15,>12,part,hors(i)e,Horse,Animal
+Thomas,Dutch,15,>12,pus,cat,Cat,Animal
+Hoost,Dutch,20.5,>12,kikker,frog,Frog,Animal
+Hoost,Dutch,20.5,>12,paard,horse,Horse,Animal
+Maarja,Estonian-English bilingual,13,>12,auh-auh,bowwow; doggy,Dog,Animal
+Atte,Finnish,17,>12,haua,doggy,Dog,Animal
+Atte,Finnish,17,>12,heppa,horse,Horse,Animal
+Eelis,Finnish,18.5,>12,heppa,horsie,Horse,Animal
+Siri,Finnish,12,12,kissa,cat,Cat,Animal
+Nina,Italian,15.5,>12,baubau,bow-wow,Dog,Animal
+Anna,Italian,11.5,12,cavallo,horse,Horse,Animal
+Emi,Japanese,14,>12,doggie,doggie,Dog,Animal
+Kazuko,Japanese,13,>12,N/A,doggie,Dog,Animal
+Kenji,Japanese,12,12,N/A,kitty,Kitty,Animal
+Kenji,Japanese,12,12,N/A,meow,Meow,Animal
+Tomos,UK English,17,>12,badger,badger,Badger,Animal
+Elen,Welsh,13.5,>12,gogalw,bird (family word),Bird,Animal
+Elen,Welsh,13.5,>12,[kw_kkw_k],quack-quack,Quack-quack,Animal
+Daniel,American English,20,>12,nose,nose,Nose,Body Parts
+Hoost,Dutch,20.5,>12,mond,mouth,Mouth,Body Parts
+Luca,Italian,11.5,12,occhio,eye,Eye,Body Parts
+Fflur,Welsh,13,>12,ceg,mouth,Mouth,Body Parts
+Will,American English,12,12,shoes,shoes,Shoe,Clothing
+Emily,American English,13,>12,beads,beads,Beads,Clothing
+Raivo,Estonian-English bilingual,13.5,>12,shoe,shoe,Shoe,Clothing
+Siri,Finnish,11.5,12,nappi,button,Buttpm,Clothing
+Haruo,Japanese,15,>12,N/A,shoe(s),Shoe,Clothing
+Fflur,Welsh,13,>12,sannau,socks,Sock,Clothing
+Fflur,Welsh,13,>12,sgidie,shoes,Shoe,Clothing
+Eeriku,Estonian,17,>12,suur,big,Big,Descriptive
+Maarja,Estonian-English bilingual,13,>12,[pai],nice,Nice,Descriptive
+Charles,French,11,<12,beau,"beautiful, good",Beautiful,Descriptive
+Hildegard,German-English bilingual,11,12,[p_iti],pretty,Pretty,Descriptive
+Luca,Italian,11.5,12,bella,"beautiful, nice",Beautiful,Descriptive
+Jacob,American English,13,>12,toast,toast,Toast,Food and Drink
+Daniel,American English,12,12,banana,banana,Banana,Food and Drink
+Sarah,American English,11,<12,juice,juice,Juice,Food and Drink
+Molly,American English,10.5,<12,cracker,cracker,Cracker,Food and Drink
+Jonathan,American English,15,>12,juice,juice,Juice,Food and Drink
+Eeriku,Estonian,17,>12,tiss,nursing (nursery word),Nursing,Food and Drink
+Joel,Finnish,14,>12,vett_,water,Water,Food and Drink
+Siri,Finnish,11.5,12,vett_,water,Water,Food and Drink
+Laurent,French,10,<12,l'eau-l'eau,bottle (nursery word),Bottle,Food and Drink
+Hans,German,14,>12,birne,pear,Pear,Food and Drink
+Annalena,German,8.5,<12,ei,egg,Egg,Food and Drink
+Nina,Italian,15.5,>12,caff,coffee,Coffee,Food and Drink
+Anna,Italian,11.5,12,caff,coffee,Coffee,Food and Drink
+Luca,Italian,11.5,12,acqua,water,Water,Food and Drink
+Haruo,Japanese,15,>12,N/A,milk (request drink),Milk,Food and Drink
+Lina,Swedish,10,<12,bulle,bun,Bun,Food and Drink
+Daniel,American English,20,>12,"goodbye, byebye","goodbye, byebye",Bye,Games and Routines
+Daniel,American English,20,>12,hello,hello,Hello,Games and Routines
+Daniel,American English,20,>12,hi,hi,Hi,Games and Routines
+Daniel,American English,20,>12,no,no,No,Games and Routines
+Jacob,American English,13,>12,no,no,No,Games and Routines
+Jacob,American English,13,>12,thankyou,thankyou,Thank You,Games and Routines
+Daniel,American English,12,12,uh-oh,uh-oh,Uh-Oh,Games and Routines
+Sean,American English,12,12,all gone,all gone,All Gone,Games and Routines
+Will,American English,12,12,all-done,all-done,All Done,Games and Routines
+Will,American English,12,12,uh-oh,uh-oh,Uh-Oh,Games and Routines
+Leslie,American English,11,<12,patty(-cake),patty(-cake),Patty-cake,Games and Routines
+Sarah,American English,11,<12,byebye,byebye,Bye,Games and Routines
+T.,American English,11,<12,hi,hi,Hi,Games and Routines
+Deborah,American English,10,<12,"hi, hiya","hi, hiya",Hi,Games and Routines
+Deborah,American English,10,<12,uh-oh,uh-oh,Uh-Oh,Games and Routines
+Alice,American English,9.5,<12,hi,hi,Hi,Games and Routines
+Alice,American English,9.5,<12,no,no,No,Games and Routines
+Molly,American English,10.5,<12,night-night,night-night,Night,Games and Routines
+Jonathan,American English,15,>12,hi,hi,Hi,Games and Routines
+Jonathan,American English,15,>12,no,no,No,Games and Routines
+Virve,Estonian,10,<12,ait_h,thanks,Thanks,Games and Routines
+Virve,Estonian,10,<12,[hai],hi (English),Hi,Games and Routines
+Virve,Estonian,10,<12,tere,hello,Hello,Games and Routines
+Raivo,Estonian-English bilingual,13.5,>12,ait_h,thanks,Thanks,Games and Routines
+Raivo,Estonian-English bilingual,13.5,>12,ei,no,No,Games and Routines
+Maarja,Estonian-English bilingual,13,>12,ait_h,thanks,Thanks,Games and Routines
+Maarja,Estonian-English bilingual,13,>12,kuku,"peek-a-boo, uh-oh",N/A,Games and Routines
+Eelis,Finnish,18.5,>12,ei,no,No,Games and Routines
+Joel,Finnish,14,>12,heihei,bye-bye,Bye,Games and Routines
+Joel,Finnish,14,>12,loppu,all gone,All Gone,Games and Routines
+No¥l,French,13,>12,coucou,peek-a-boo,Peek-a-boo,Games and Routines
+Charles,French,11,<12,non,no,No,Games and Routines
+Charles,French,11,<12,au-revoir,byebye,Bye,Games and Routines
+Laurent,French,10,<12,allo,hello,Hello,Games and Routines
+Laurent,French,10,<12,non,no,No,Games and Routines
+Annalena,German,8.5,<12,nein,no,No,Games and Routines
+Haruo,Japanese,15,>12,N/A,"all gone, no-no",All Gone,Games and Routines
+Emi,Japanese,14,>12,peekaboo,peekaboo,Peek-a-boo,Games and Routines
+Kenji,Japanese,12,12,N/A,thank you,Thank You,Games and Routines
+Kenji,Japanese,12,12,N/A,"all gone, put away",All Gone,Games and Routines
+Taro,Japanese,14.5,>12,N/A,no,No,Games and Routines
+Hanna,Swedish,11,<12,tacktack,thanks,Thanks,Games and Routines
+Hanna,Swedish,11,<12,tittut,peekaboo,Peek-a-boo,Games and Routines
+Lina,Swedish,10,<12,oj,oh,Oh,Games and Routines
+Tomos,UK English,17,>12,hiya,hiya,Hi,Games and Routines
+Tomos,UK English,17,>12,no,no,No,Games and Routines
+Tomos,UK English,17,>12,ta 'thank you',ta 'thank you',Thank You,Games and Routines
+Fflur,Welsh,13,>12,na,no,No,Games and Routines
+Elen,Welsh,13.5,>12,tata,bye-bye,Bye,Games and Routines
+Jonah,American English,13,>12,Edgar (dog's name),Edgar (dog's name),Edgar,N/A
+Jonah,American English,13,>12,"this, there","this, there",N/A,N/A
+Joan,American English,11.5,12,"bang, bottle","bang, bottle",N/A,N/A
+Joan,American English,11.5,12,"bus, box","bus, box",N/A,N/A
+Emily,American English,13,>12,"baa, bow-wow","baa, bow-wow",N/A,N/A
+Thomas,Dutch,15,>12,hap,a (little) bite,N/A,N/A
+Maarja,Estonian-English bilingual,13,>12,momm-momm,teddy,N/A,N/A
+Carole,French,11,<12,Mickey,Mickey Mouse,Mickey Mouse,N/A
+Hans,German,14,>12,wewe,weewee,Weewee,N/A
+Hildegard,German-English bilingual,11,12,ticktack,ticktock,Ticktock,N/A
+Haruo,Japanese,15,>12,N/A,"we got it, it's gone in",We Got It,N/A
+Emi,Japanese,14,>12,"we got it, it's gone it","we got it, it's gone it",N/A,N/A
+Kenji,Japanese,12,12,N/A,"here you are, if you please",N/A,N/A
+Taro,Japanese,14.5,>12,N/A,"we got it, it's gone in",We Got It,N/A
+Taro,Japanese,14.5,>12,N/A,(switched) on,On,N/A
+Elen,Welsh,13.5,>12,t_n,fire,Fire,N/A
+Jonah,American English,13,>12,rock-rock,rock-rock,Rock,Outside Things
+Daniel,American English,12,12,light,light,Light,Outside Things
+Will,American English,12,12,light,light,Light,Outside Things
+Eelis,Finnish,18.5,>12,kukka,flower,Flower,Outside Things
+Siri,Finnish,11.5,12,kukka,flower,Flower,Outside Things
+Hans,German,14,>12,gasse,street,Street,Outside Things
+Stig,Swedish,16,>12,blomma,flower,Flower,Outside Things
+Lina,Swedish,10,<12,blomma,flower,Flower,Outside Things
+Fflur,Welsh,13,>12,blodyn,flower,Flower,Outside Things
+Fflur,Welsh,13,>12,golau,lights,Light,Outside Things
+Jacob,American English,13,>12,Jacob,Jacob,Jacob,People
+Leslie,American English,11,<12,daddy,daddy,Dada,People
+Leslie,American English,11,<12,mommy,mommy,Mama,People
+Sarah,American English,11,<12,baby,baby,Baby,People
+Sarah,American English,11,<12,mamma,mamma,Mama,People
+T.,American English,11,<12,daddy,daddy,Dada,People
+Deborah,American English,10,<12,baby,baby,Baby,People
+Alice,American English,9.5,<12,baby,baby,Baby,People
+Alice,American English,9.5,<12,daddy,daddy,Dada,People
+Alice,American English,9.5,<12,mommy,mommy,Mama,People
+Molly,American English,10.5,<12,baby,baby,Baby,People
+Emily,American English,13,>12,daddy,daddy,Dada,People
+Eeriku,Estonian,17,>12,tita,little girl,Girl,People
+Eeriku,Estonian,17,>12,onu,"uncle, man",Uncle,People
+Eeriku,Estonian,17,>12,p_kapikk,elf,Elf,People
+Virve,Estonian,10,<12,isa,daddy,Dada,People
+Maarja,Estonian-English bilingual,13,>12,daddy,daddy,Dada,People
+Atte,Finnish,17,>12,mummo,grandmom,Grandma,People
+Atte,Finnish,17,>12,pappa,grandpa,Grandpa,People
+Eelis,Finnish,18.5,>12,_iti,mother,Mama,People
+Joel,Finnish,14,>12,_iti,mother,Mama,People
+No¥l,French,13,>12,papa,papa,Dada,People
+Carole,French,11,<12,b_b_,baby,Baby,People
+Carole,French,11,<12,papa,papa,Dada,People
+Charles,French,11,<12,mama,mama,Mama,People
+Hans,German,14,>12,mama,mama,Mama,People
+Hans,German,14,>12,papa,papa,Dada,People
+Annalena,German,8.5,<12,Mama,mama,Mama,People
+Annalena,German,8.5,<12,papa,papa,Dada,People
+Hildegard,German-English bilingual,11,12,opa,grandfather,Grandpa,People
+Hildegard,German-English bilingual,11,12,papa,papa,Dada,People
+Nina,Italian,15.5,>12,mamma,mama,Mama,People
+Nina,Italian,15.5,>12,zia,aunt,Aunt,People
+Nicola,Italian,13,12,mamma,mama,Mama,People
+Nicola,Italian,13,12,bimba,child,Child,People
+Nicola,Italian,13,12,nonna,granny,Grandma,People
+Nicola,Italian,13,12,Vale,(name),Vale,People
+Nicola,Italian,13,12,pap_,papa,Dada,People
+Anna,Italian,11.5,12,beb,baby,Baby,People
+Anna,Italian,11.5,12,mamma,mama,Mama,People
+Luca,Italian,11.5,12,beb,baby,Baby,People
+Luca,Italian,11.5,12,bimba,child,Child,People
+Luca,Italian,11.5,12,mamma,mama,Mama,People
+Emi,Japanese,14,>12,mama,mama,Mama,People
+Daniel,American English,12,12,what's that,what's that,What's That,Phrase
+Joan,American English,11.5,12,put on,put on,Put On,Phrase
+Jacob,American English,13,>12,there,there,There,Prepositions and Locations
+Jonathan,American English,15,>12,"that, there","that, there",N/A,Prepositions and Locations
+Annalena,German,8.5,<12,da,there,There,Prepositions and Locations
+Hildegard,German-English bilingual,11,12,da,there,There,Prepositions and Locations
+Stig,Swedish,16,>12,dar,there,There,Prepositions and Locations
+Hanna,Swedish,11,<12,dar,there,There,Prepositions and Locations
+Joan,American English,11.5,12,that,that,That,Pronouns
+Virve,Estonian,10,<12,see,this,This,Pronouns
+Hans,German,14,>12,das,that,That,Pronouns
+Nina,Italian,15.5,>12,mio,mine,Mine,Pronouns
+Kenji,Japanese,12,12,N/A,this,This,Pronouns
+Hoost,Dutch,20.5,>12,klok,clock,Clock,Small Household Objects
+Eeriku,Estonian,17,>12,paber,paper,Paper,Small Household Objects
+Stig,Swedish,16,>12,klocka,"clock, watch",Clock,Small Household Objects
+Sean,American English,12,12,boo,boo,Boo,Sound Effects
+Sean,American English,12,12,tick,tick,Tick,Sound Effects
+Deborah,American English,10,<12,baa,baa,Baa,Sound Effects
+Molly,American English,10.5,<12,moo,moo,Moo,Sound Effects
+Raivo,Estonian-English bilingual,13.5,>12,pomm,boom,Boom,Sound Effects
+No¥l,French,13,>12,miam,yum,Yum,Sound Effects
+No¥l,French,13,>12,poum,boom,Boom,Sound Effects
+Charles,French,11,<12,boum,boom,Boom,Sound Effects
+Anna,Italian,11.5,12,dindon,ding-dong (bells),Ding-Dong,Sound Effects
+Haruo,Japanese,15,>12,N/A,sound of rolling object,N/A,Sound Effects
+Kazuko,Japanese,13,>12,N/A,bang,Bang,Sound Effects
+Kazuko,Japanese,13,>12,N/A,car sound,N/A,Sound Effects
+Taro,Japanese,14.5,>12,N/A,oof,Oof,Sound Effects
+Lina,Swedish,10,<12,brum,vroom,Vroom,Sound Effects
+Tomos,UK English,17,>12,bang,bang,Bang,Sound Effects
+Elen,Welsh,13.5,>12,[t_ut_u],choochoo,Choochoo,Sound Effects
+Timmy,American English,11,<12,ball,ball,Ball,Toy
+Timmy,American English,11,<12,block,block,Block,Toy
+Raivo,Estonian-English bilingual,13.5,>12,pall,ball,Ball,Toy
+Carole,French,11,<12,balle,ball,Ball,Toy
+Carole,French,11,<12,nounours,teddy bear,Teddy Bear,Toy
+Hildegard,German-English bilingual,11,12,balle,ball,Ball,Toy
+Anna,Italian,11.5,12,bambola,doll,Doll,Toy
+Hanna,Swedish,11,<12,bok,book,Book,Toy
+Lina,Swedish,10,<12,boll,ball,Ball,Toy
+Timmy,American English,11,<12,car,car,Car,Vehicles
+Thomas,Dutch,15,>12,auto,car,Car,Vehicles
+Kenji,Japanese,12,12,N/A,car,Car,Vehicles
+Taro,Japanese,14.5,>12,N/A,car,Car,Vehicles
+Stig,Swedish,16,>12,(skol)buss,(school)bus,Bus,Vehicles

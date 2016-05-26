@@ -228,7 +228,7 @@ wordbank.data$Category %<>%
   str_replace("descriptive_words", "Descriptive") %>%
   str_replace("pronouns", "Pronouns") %>%
   str_replace("locations", "Locations")
-
+  
 wordbank.data$word %<>%
   str_replace("daddy*", "dada") %>%
   str_replace("mommy*", "mama")
@@ -319,6 +319,31 @@ wg.producers %<>%
 
 ```
 
+```{r}
+n.samps <- 1
+
+wg.producers <- wg.data %>%
+ group_by(age) %>%
+  summarise(prop = sum(productive > 0)/n()) %>%
+  mutate(dataset = "Wordbank")
+
+sample.producers <- function(df) {
+  df %<>%
+    sample_n(nrow(df), replace = TRUE) %>% # resampling step
+    group_by(age) %>%
+    summarise(prop = sum(productive > 0)/n()) 
+  return(df$prop)
+}
+
+samps <- replicate(n.samps, sample.producers(wg.data))
+wg.producers$ci.low <- apply(samps, 1, function(x) {quantile(x, .025)})
+wg.producers$ci.high <- apply(samps, 1, function(x) {quantile(x, .975)})
+
+
+```
+
+
+
 Now do the resampling for the others.
 
 ```{r}
@@ -392,11 +417,11 @@ cat.by.age <- d %>%
 #analysis over entire dataset
 cat.by.age %<>%
   filter(!is.na(agesplit), Category != "N/A", word_standard != "Mama", word_standard != "Dada") %>%
-  group_by(dataset, agesplit, Category) %>%
+  # group_by(dataset, agesplit, Category) %>%
 # mutate(n.real = real == "Real") %>%
   summarise(n = n()) %>%
   group_by(dataset, agesplit, add=FALSE) %>%
-  mutate(prop = n / sum(n),
+  mutate(prop = n / sum(n))
          Category = factor(Category,
                            levels = Category[order(prop,Category,
                                                    decreasing=TRUE)])) %>%
@@ -421,6 +446,8 @@ duplicate_cdi <- function(dataset)
 cdi_duplicated <- bind_rows(sapply(unique(cat.by.age$dataset), function(x) duplicate_cdi(x),
                                           simplify = FALSE))
 
+cat.by.age %<>%
+  
 
 #Plot
 quartz(width=8,height=4)

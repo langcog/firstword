@@ -1,1 +1,681 @@
-cdi_cat,word,word_standardSound Effects,baa baa,Baa BaaSound Effects,choo choo ,Choo ChooSound Effects,cockadoodledoo,CockadoodledooSound Effects,grrr,GrrrSound Effects,meow,MeowSound Effects,moo,MooSound Effects,ouch,OuchSound Effects,quack quack,Quack QuackSound Effects,uh oh,Uh OhSound Effects,vroom,VroomSound Effects,woof woof,Woof WoofSound Effects,yum yum,Yum YumAnimals,alligator,AlligatorAnimals,animal,AnimalAnimals,ant,AntAnimals,bear,BearAnimals,bee,BeeAnimals,bird,BirdAnimals,bug,BugAnimals,bunny,BunnyAnimals,butterfly ,ButterflyAnimals,cat,CatAnimals,chicken,ChickenAnimals,cow,CowAnimals,deer,DeerAnimals,dog,DogAnimals,donkey,DonkeyAnimals,duck,DuckAnimals,elephant,ElephantAnimals,fish,FishAnimals,frog,FrogAnimals,giraffe,GiraffeAnimals,goose,GooseAnimals,hen,HenAnimals,horse,HorseAnimals,kitty,KittyAnimals,lamb,LambAnimals,lion,LionAnimals,monkey,MonkeyAnimals,moose,MooseAnimals,mouse,MouseAnimals,owl,OwlAnimals,penguin,PenguinAnimals,pig,PigAnimals,pony,PonyAnimals,puppy,PuppyAnimals,rooster,RoosterAnimals,sheep,SheepAnimals,squirrel,SquirrelAnimals,teddybear,TeddybearAnimals,tiger,TigerAnimals,turkey,TurkeyAnimals,turtle,TurtleAnimals,wolf,WolfAnimals,zebra,ZebraVehicles,airplane,AirplaneVehicles,bicycle,BicycleVehicles,boat,BoatVehicles,bus,BusVehicles,car,CarVehicles,firetruck,FiretruckVehicles,helicopter,HelicopterVehicles,motorcycle,MotorcycleVehicles,sled,SledVehicles,stroller,StrollerVehicles,tractor,TractorVehicles,train,TrainVehicles,tricycle,TricycleVehicles,truck,TruckToys,ball,BallToys,balloon,BalloonToys,bat,BatToys,block,BlockToys,book,BookToys,bubbles,BubblesToys,chalk,ChalkToys,crayon,CrayonToys,doll,DollToys,game,GameToys,glue,GlueToys,pen,PenToys,pencil,PencilToys,play dough,Play DoughToys,present,PresentToys,puzzle,PuzzleToys,story,StoryToys,toy,ToyFood and Drink,apple,AppleFood and Drink,applesauce,ApplesauceFood and Drink,banana,BananaFood and Drink,beans,BeansFood and Drink,bread,BreadFood and Drink,butter,ButterFood and Drink,cake,CakeFood and Drink,candy,CandyFood and Drink,carrots,CarrotsFood and Drink,cereal,CerealFood and Drink,cheerios,CheeriosFood and Drink,cheese,CheeseFood and Drink,chicken,ChickenFood and Drink,chocolate,ChocolateFood and Drink,coffee,CoffeeFood and Drink,coke,CokeFood and Drink,cookie,CookieFood and Drink,corn,CornFood and Drink,cracker,CrackerFood and Drink,donut,DonutFood and Drink,drink,DrinkFood and Drink,egg,EggFood and Drink,fish,FishFood and Drink,food,FoodFood and Drink,french fries,French FriesFood and Drink,grapes,GrapesFood and Drink,green beans,Green BeansFood and Drink,gum,GumFood and Drink,hamburger,HamburgerFood and Drink,ice,IceFood and Drink,ice cream,Ice CreamFood and Drink,jello,JelloFood and Drink,jelly,JellyFood and Drink,juice,JuiceFood and Drink,lollipop,LollipopFood and Drink,meat,MeatFood and Drink,melon,MelonFood and Drink,milk,MilkFood and Drink,muffin,MuffinFood and Drink,noodles,NoodlesFood and Drink,nuts,NutsFood and Drink,orange,OrangeFood and Drink,pancake,PancakeFood and Drink,peanut butter,Peanut ButterFood and Drink,peas,PeasFood and Drink,pickle,PickleFood and Drink,pizza,PizzaFood and Drink,popcorn,PopcornFood and Drink,popsicle,PopsicleFood and Drink,potato,PotatoFood and Drink,potato chip,Potato ChipFood and Drink,pretzel,PretzelFood and Drink,pudding,PuddingFood and Drink,pumpkin,PumpkinFood and Drink,raisin,RaisinFood and Drink,salt,SaltFood and Drink,sandwich,SandwichFood and Drink,sauce,SauceFood and Drink,soda/pop,SodaFood and Drink,soup,SoupFood and Drink,spaghetti,SpaghettiFood and Drink,strawberry,StrawberryFood and Drink,toast,ToastFood and Drink,tuna,TunaFood and Drink,vanilla,VanillaFood and Drink,vitamins,VitaminsFood and Drink,water,WaterFood and Drink,yogurt,YogurtClothing,beads,BeadsClothing,belt,BeltClothing,bib,BibClothing,boots,BootsClothing,button,ButtonClothing,coat,CoatClothing,diaper,DiaperClothing,dress,DressClothing,gloves,GlovesClothing,hat,HatClothing,jacket,JacketClothing,jeans,JeansClothing,mittens,MittensClothing,necklace,NecklaceClothing,pajamas,PajamasClothing,pants,PantsClothing,scarf,ScarfClothing,shirt,ShirtClothing,shoe,ShoeClothing,shorts,ShortsClothing,slipper,SlipperClothing,sneaker,SneakerClothing,snowsuit,SnowsuitClothing,sock,SockClothing,sweater,SweaterClothing,tights,TightsClothing,underpants,UnderpantsClothing,zipper,ZipperBody Parts,ankle,AnkleBody Parts,arm,ArmBody Parts,belly button,Belly ButtonBody Parts,buttocks/bottom,ButtBody Parts,cheek,CheekBody Parts,chin,ChinBody Parts,ear,EarBody Parts,eye,EyeBody Parts,face,FaceBody Parts,feet,FeetBody Parts,hair,HairBody Parts,hand,HandBody Parts,head,HeadBody Parts,knee,KneeBody Parts,leg,LegBody Parts,lips,LipsBody Parts,mouth,MouthBody Parts,nose,NoseBody Parts,owie/boo ,BooBody Parts,penis,PenisBody Parts,shoulder,ShoulderBody Parts,tooth,ToothBody Parts,toe,ToeBody Parts,tongue,TongueBody Parts,tummy,TummyBody Parts,vagina,VaginaSmall Household Objects Items,basket,BasketSmall Household Objects Items,blanket,BlanketSmall Household Objects Items,bottle,BottleSmall Household Objects Items,box,BoxSmall Household Objects Items,bowl,BowlSmall Household Objects Items,broom,BroomSmall Household Objects Items,brush,BrushSmall Household Objects Items,bucket,BucketSmall Household Objects Items,camera,CameraSmall Household Objects Items,can,CanSmall Household Objects Items,clock,ClockSmall Household Objects Items,comb,CombSmall Household Objects Items,cup,CupSmall Household Objects Items,dish,DishSmall Household Objects Items,fork,ForkSmall Household Objects Items,garbage,GarbageSmall Household Objects Items,glass,GlassSmall Household Objects Items,glasses,GlassesSmall Household Objects Items,hammer,HammerSmall Household Objects Items,jar,JarSmall Household Objects Items,keys,KeysSmall Household Objects Items,knife,KnifeSmall Household Objects Items,lamp,LampSmall Household Objects Items,light,LightSmall Household Objects Items,medicine,MedicineSmall Household Objects Items,money,MoneySmall Household Objects Items,mop,MopSmall Household Objects Items,nail,NailSmall Household Objects Items,napkin,NapkinSmall Household Objects Items,paper,PaperSmall Household Objects Items,penny,PennySmall Household Objects Items,picture,PictureSmall Household Objects Items,pillow,PillowSmall Household Objects Items,plant,PlantSmall Household Objects Items,late,LateSmall Household Objects Items,purse,PurseSmall Household Objects Items,radio,RadioSmall Household Objects Items,scissors,ScissorsSmall Household Objects Items,soap,SoapSmall Household Objects Items,spoon,SpoonSmall Household Objects Items,tape,TapeSmall Household Objects Items,telephone,TelephoneSmall Household Objects Items,tissue/kleenex,TissueSmall Household Objects Items,toothbrush,ToothbrushSmall Household Objects Items,towel,TowelSmall Household Objects Items,trash,TrashSmall Household Objects Items,tray,TraySmall Household Objects Items,vacuum,VacuumSmall Household Objects Items,walker,WalkerSmall Household Objects Items,watch,WatchFurniture and Rooms,basement,BasementFurniture and Rooms,bathroom,BathroomFurniture and Rooms,bathtub,BathtubFurniture and Rooms,bed,BedFurniture and Rooms,bedroom,BedroomFurniture and Rooms,bench,BenchFurniture and Rooms,chair,ChairFurniture and Rooms,closet,ClosetFurniture and Rooms,couch,CouchFurniture and Rooms,crib,CribFurniture and Rooms,door,DoorFurniture and Rooms,drawer,DrawerFurniture and Rooms,dryer,DryerFurniture and Rooms,garage,GarageFurniture and Rooms,high chair,High ChairFurniture and Rooms,kitchen,KitchenFurniture and Rooms,living room,Living RoomFurniture and Rooms,oven,OvenFurniture and Rooms,play pen,PlayPenFurniture and Rooms,porch,PorchFurniture and Rooms,potty,PottyFurniture and Rooms,refrigerator,RefrigeratorFurniture and Rooms,rocking chair,Rocking ChairFurniture and Rooms,room,RoomFurniture and Rooms,shower,ShowerFurniture and Rooms,sink,SinkFurniture and Rooms,sofa,SofaFurniture and Rooms,stairs,StairsFurniture and Rooms,stove,StoveFurniture and Rooms,table,TableFurniture and Rooms,TV,TvFurniture and Rooms,washing machine,Washing MachineFurniture and Rooms,window,WindowOutside Things,backyard,BackyardOutside Things,cloud,CloudOutside Things,flag,FlagOutside Things,flower,FlowerOutside Things,garden,GardenOutside Things,grass,GrassOutside Things,hose,HoseOutside Things,ladder,LadderOutside Things,lawn mower,Lawn MowerOutside Things,moon,MoonOutside Things,pool,PoolOutside Things,rain,RainOutside Things,rock,RockOutside Things,roof,RoofOutside Things,sandbox,SandboxOutside Things,shovel,ShovelOutside Things,sidewalk,SidewalkOutside Things,sky,SkyOutside Things,slide,SlideOutside Things,snow,SnowOutside Things,snowman,SnowmanOutside Things,sprinkler,SprinklerOutside Things,star,StarOutside Things,stick,StickOutside Things,stone,StoneOutside Things,street,StreetOutside Things,sun,SunOutside Things,swing,SwingOutside Things,tree,TreeOutside Things,water,WaterOutside Things,wind,WindPlaces to Go,beach,BeachPlaces to Go,camping,CampingPlaces to Go,church,ChurchPlaces to Go,circus,CircusPlaces to Go,country,CountryPlaces to Go,downtown,DowntownPlaces to Go,farm,FarmPlaces to Go,gas station,GasStationPlaces to Go,home,HomePlaces to Go,house,HousePlaces to Go,movie,MoviePlaces to Go,outside,OutsidePlaces to Go,park,ParkPlaces to Go,party,PartyPlaces to Go,picnic,PicnicPlaces to Go,playground,PlaygroundPlaces to Go,school,SchoolPlaces to Go,store,StorePlaces to Go,woods,WoodsPlaces to Go,work,WorkPlaces to Go,yard,YardPlaces to Go,zoo,ZooPeople,aunt,AuntPeople,baby,BabyPeople,babysitter,BabysitterPeople,babysitter (name),Babysitter (Name)People,boy,BoyPeople,brother,BrotherPeople,child,ChildPeople,clown,ClownPeople,cowboy,CowboyPeople,daddy,DaddyPeople,doctor,DoctorPeople,fireman,FiremanPeople,friend,FriendPeople,girl,GirlPeople,grandma,GrandmaPeople,grandpa,GrandpaPeople,lady,LadyPeople,mailman,MailmanPeople,man,ManPeople,mommy,MommyPeople,nurse,NursePeople,child (name),Child (Name)People,people,PeoplePeople,person,PersonPeople,pet (name),Pet (Name)People,police,PolicePeople,sister,SisterPeople,teacher,TeacherPeople,uncle,UncleGames and Routines,bath,BathGames and Routines,breakfast,BreakfastGames and Routines,bye,ByeGames and Routines,Call,CallGames and Routines,dinner,DinnerGames and Routines,give me five,Give Me FiveGames and Routines,gonna get you,Gonna Get YouGames and Routines,go potty,Go PottyGames and Routines,hi,HiGames and Routines,hello,HelloGames and Routines,lunch,LunchGames and Routines,nap,NapGames and Routines,night night,Night NightGames and Routines,no,NoGames and Routines,patty cake,Patty CakeGames and Routines,peekaboo,PeekabooGames and Routines,please,PleaseGames and Routines,Hush,HushGames and Routines,shopping,ShoppingGames and Routines,snack,SnackGames and Routines,so big,SoBigGames and Routines,thank you,Than kYouGames and Routines,this little piggy,This Little PiggyGames and Routines,turn around,Turn AroundGames and Routines,yes,YesAction,bite,BiteAction,blow,BlowAction,break,BreakAction,bring,BringAction,build,BuildAction,bump,BumpAction,buy,BuyAction,carry,CarryAction,catch,CatchAction,chase,ChaseAction,clap,ClapAction,clean,CleanAction,climb,ClimbAction,close,CloseAction,cook,CookAction,cover,CoverAction,cry,CryAction,cut,CutAction,dance,DanceAction,draw,DrawAction,drink,DrinkAction,drive,DriveAction,drop,DropAction,dry,DryAction,dump,DumpAction,eat,EatAction,fall,FallAction,feed,FeedAction,find,FindAction,finish,FinishAction,fit,FitAction,fix,FixAction,get,GetAction,give,GiveAction,go,GoAction,hate,HateAction,have,HaveAction,hear,HearAction,help,HelpAction,hide,HideAction,hit,HitAction,hold,HoldAction,hug,HugAction,hurry,HurryAction,jump,JumpAction,kick,KickAction,kiss,KissAction,knock,KnockAction,lick,LickAction,like,LikeAction,listen,ListenAction,look,LookAction,love,LoveAction,make,MakeAction,open,OpenAction,paint,PaintAction,pick,PickAction,play,PlayAction,pour,PourAction,pretend,PretendAction,pull,PullAction,push,PushAction,put,PutAction,read,ReadAction,ride,RideAction,rip,RipAction,run,RunAction,say,SayAction,see,SeeAction,shake,ShakeAction,share,ShareAction,show,ShowAction,sing,SingAction,sit,SitAction,skate,SkateAction,sleep,SleepAction,slide,SlideAction,smile,SmileAction,spill,SpillAction,splash,SplashAction,stand,StandAction,stay,StayAction,stop,StopAction,sweep,SweepAction,swim,SwimAction,swing,SwingAction,take,TakeAction,talk,TalkAction,taste,TasteAction,tear,TearAction,think,ThinkAction,throw,ThrowAction,tickle,TickleAction,touch,TouchAction,wait,WaitAction,wake,WakeAction,walk,WalkAction,wash,WashAction,watch,WatchAction,wipe,WipeAction,wish,WishAction,work,WorkAction,write,WriteDescriptive,allgone,All GoneDescriptive,asleep,AsleepDescriptive,awake,AwakeDescriptive,bad,BadDescriptive,better,BetterDescriptive,big,BigDescriptive,black,BlackDescriptive,blue,BlueDescriptive,broken,BrokenDescriptive,brown,BrownDescriptive,careful,CarefulDescriptive,clean,CleanDescriptive,cold,ColdDescriptive,cute,CuteDescriptive,dark,DarkDescriptive,dirty,DirtyDescriptive,dry,DryDescriptive,empty,EmptyDescriptive,fast,FastDescriptive,fine,FineDescriptive,first,FirstDescriptive,full,FullDescriptive,gentle,GentleDescriptive,good,GoodDescriptive,green,GreenDescriptive,happy,HappyDescriptive,hard,HardDescriptive,heavy,HeavyDescriptive,high,HighDescriptive,hot,HotDescriptive,hungry,HungryDescriptive,hurt,HurtDescriptive,last,LastDescriptive,little,LittleDescriptive,long,LongDescriptive,loud,LoudDescriptive,mad,MadDescriptive,naughty,NaughtyDescriptive,new,NewDescriptive,nice,NiceDescriptive,noisy,NoisyDescriptive,old,OldDescriptive,orange,OrangeDescriptive,poor,PoorDescriptive,pretty,PrettyDescriptive,quiet,QuietDescriptive,red,RedDescriptive,sad,SadDescriptive,scared,ScaredDescriptive,sick,SickDescriptive,sleepy,SleepyDescriptive,slow,SlowDescriptive,soft,SoftDescriptive,sticky,StickyDescriptive,stuck,StuckDescriptive,thirsty,ThirstyDescriptive,tiny,TinyDescriptive,tired,TiredDescriptive,wet,WetDescriptive,white,WhiteDescriptive,windy,WindyDescriptive,yellow,YellowDescriptive,yucky,YuckyTime,after,AfterTime,before,BeforeTime,day,DayTime,later,LaterTime,morning,MorningTime,night,NightTime,now,NowTime,time,TimeTime,today,TodayTime,tomorrow,TomorrowTime,tonight,TonightTime,yesterday,YesterdayPronouns,he,HePronouns,her,HerPronouns,hers,HersPronouns,him,HimPronouns,his,HisPronouns,I,IPronouns,it,ItPronouns,me,MePronouns,mine,MinePronouns,my,MyPronouns,myself,MyselfPronouns,our,OurPronouns,she,ShePronouns,that,ThatPronouns,their,TheirPronouns,them,ThemPronouns,these,ThesePronouns,they,TheyPronouns,this,ThisPronouns,those,ThosePronouns,us,UsPronouns,we,WePronouns,you,YouPronouns,your,YourPronouns,yourself,YourselfQuestion Words,how,HowQuestion Words,what,WhatQuestion Words,when,WhenQuestion Words,where,WhereQuestion Words,which,WhichQuestion Words,who,WhoQuestion Words,why,WhyPrepositions and Locations,about,AboutPrepositions and Locations,above,AbovePrepositions and Locations,around,AroundPrepositions and Locations,at,AtPrepositions and Locations,away,AwayPrepositions and Locations,back,BackPrepositions and Locations,behind,BehindPrepositions and Locations,beside,BesidePrepositions and Locations,by,ByPrepositions and Locations,down,DownPrepositions and Locations,for,ForPrepositions and Locations,here,HerePrepositions and Locations,In,InPrepositions and Locations,into,IntoPrepositions and Locations,next to,NextToPrepositions and Locations,of,OfPrepositions and Locations,off,OffPrepositions and Locations,on,OnPrepositions and Locations,on top of,On Top OfPrepositions and Locations,out,OutPrepositions and Locations,over,OverPrepositions and Locations,there,TherePrepositions and Locations,to,ToPrepositions and Locations,under,UnderPrepositions and Locations,up,UpPrepositions and Locations,with,WithQuantifiers,a,AQuantifiers,all,AllQuantifiers,a lot ,A LotQuantifiers,an,AnQuantifiers,another,AnotherQuantifiers,any,AnyQuantifiers,each,EachQuantifiers,every,EveryQuantifiers,more,MoreQuantifiers,much,MuchQuantifiers,not,NotQuantifiers,none,NoneQuantifiers,other,OtherQuantifiers,same,SameQuantifiers,some,SomeQuantifiers,the,TheQuantifiers,too,TooHelping Verbs,am,AmHelping Verbs,are,AreHelping Verbs,be,BeHelping Verbs,can,CanHelping Verbs,could,CouldHelping Verbs,Did,DidHelping Verbs,do,DoHelping Verbs,does,DoesHelping Verbs,don't,Don'tHelping Verbs,Going,GoingHelping Verbs,Got to,Got ToHelping Verbs,Have to,HaveToHelping Verbs,is,IsHelping Verbs,Let me,Let MeHelping Verbs,Need,NeedHelping Verbs,Try,TryHelping Verbs,Want To,Want ToHelping Verbs,Wanna,WannaHelping Verbs,was,WasHelping Verbs,were,WereHelping Verbs,will,WillHelping Verbs,would,WouldConnecting Words,and,AndConnecting Words,because,BecauseConnecting Words,but,ButConnecting Words,if,IfConnecting Words,so,SoConnecting Words,then,Then
+cdi_cat,word,word_standard
+Sound Effects,baa baa,Baa Baa
+Sound Effects,choo choo ,Choo Choo
+Sound Effects,cockadoodledoo,Cockadoodledoo
+Sound Effects,grrr,Grrr
+Sound Effects,meow,Meow
+Sound Effects,moo,Moo
+Sound Effects,ouch,Ouch
+Sound Effects,quack quack,Quack Quack
+Sound Effects,uh oh,Uh Oh
+Sound Effects,vroom,Vroom
+Sound Effects,woof woof,Woof Woof
+Sound Effects,yum yum,Yum Yum
+Animals,alligator,Alligator
+Animals,animal,Animal
+Animals,ant,Ant
+Animals,bear,Bear
+Animals,bee,Bee
+Animals,bird,Bird
+Animals,bug,Bug
+Animals,bunny,Bunny
+Animals,butterfly ,Butterfly
+Animals,cat,Cat
+Animals,chicken,Chicken
+Animals,cow,Cow
+Animals,deer,Deer
+Animals,dog,Dog
+Animals,donkey,Donkey
+Animals,duck,Duck
+Animals,elephant,Elephant
+Animals,fish,Fish
+Animals,frog,Frog
+Animals,giraffe,Giraffe
+Animals,goose,Goose
+Animals,hen,Hen
+Animals,horse,Horse
+Animals,kitty,Kitty
+Animals,lamb,Lamb
+Animals,lion,Lion
+Animals,monkey,Monkey
+Animals,moose,Moose
+Animals,mouse,Mouse
+Animals,owl,Owl
+Animals,penguin,Penguin
+Animals,pig,Pig
+Animals,pony,Pony
+Animals,puppy,Puppy
+Animals,rooster,Rooster
+Animals,sheep,Sheep
+Animals,squirrel,Squirrel
+Animals,teddybear,Teddybear
+Animals,tiger,Tiger
+Animals,turkey,Turkey
+Animals,turtle,Turtle
+Animals,wolf,Wolf
+Animals,zebra,Zebra
+Vehicles,airplane,Airplane
+Vehicles,bicycle,Bicycle
+Vehicles,boat,Boat
+Vehicles,bus,Bus
+Vehicles,car,Car
+Vehicles,firetruck,Firetruck
+Vehicles,helicopter,Helicopter
+Vehicles,motorcycle,Motorcycle
+Vehicles,sled,Sled
+Vehicles,stroller,Stroller
+Vehicles,tractor,Tractor
+Vehicles,train,Train
+Vehicles,tricycle,Tricycle
+Vehicles,truck,Truck
+Toys,ball,Ball
+Toys,balloon,Balloon
+Toys,bat,Bat
+Toys,block,Block
+Toys,book,Book
+Toys,bubbles,Bubbles
+Toys,chalk,Chalk
+Toys,crayon,Crayon
+Toys,doll,Doll
+Toys,game,Game
+Toys,glue,Glue
+Toys,pen,Pen
+Toys,pencil,Pencil
+Toys,play dough,Play Dough
+Toys,present,Present
+Toys,puzzle,Puzzle
+Toys,story,Story
+Toys,toy,Toy
+Food and Drink,apple,Apple
+Food and Drink,applesauce,Applesauce
+Food and Drink,banana,Banana
+Food and Drink,beans,Beans
+Food and Drink,bread,Bread
+Food and Drink,butter,Butter
+Food and Drink,cake,Cake
+Food and Drink,candy,Candy
+Food and Drink,carrots,Carrots
+Food and Drink,cereal,Cereal
+Food and Drink,cheerios,Cheerios
+Food and Drink,cheese,Cheese
+Food and Drink,chicken,Chicken
+Food and Drink,chocolate,Chocolate
+Food and Drink,coffee,Coffee
+Food and Drink,coke,Coke
+Food and Drink,cookie,Cookie
+Food and Drink,corn,Corn
+Food and Drink,cracker,Cracker
+Food and Drink,donut,Donut
+Food and Drink,drink,Drink
+Food and Drink,egg,Egg
+Food and Drink,fish,Fish
+Food and Drink,food,Food
+Food and Drink,french fries,French Fries
+Food and Drink,grapes,Grapes
+Food and Drink,green beans,Green Beans
+Food and Drink,gum,Gum
+Food and Drink,hamburger,Hamburger
+Food and Drink,ice,Ice
+Food and Drink,ice cream,Ice Cream
+Food and Drink,jello,Jello
+Food and Drink,jelly,Jelly
+Food and Drink,juice,Juice
+Food and Drink,lollipop,Lollipop
+Food and Drink,meat,Meat
+Food and Drink,melon,Melon
+Food and Drink,milk,Milk
+Food and Drink,muffin,Muffin
+Food and Drink,noodles,Noodles
+Food and Drink,nuts,Nuts
+Food and Drink,orange,Orange
+Food and Drink,pancake,Pancake
+Food and Drink,peanut butter,Peanut Butter
+Food and Drink,peas,Peas
+Food and Drink,pickle,Pickle
+Food and Drink,pizza,Pizza
+Food and Drink,popcorn,Popcorn
+Food and Drink,popsicle,Popsicle
+Food and Drink,potato,Potato
+Food and Drink,potato chip,Potato Chip
+Food and Drink,pretzel,Pretzel
+Food and Drink,pudding,Pudding
+Food and Drink,pumpkin,Pumpkin
+Food and Drink,raisin,Raisin
+Food and Drink,salt,Salt
+Food and Drink,sandwich,Sandwich
+Food and Drink,sauce,Sauce
+Food and Drink,soda/pop,Soda
+Food and Drink,soup,Soup
+Food and Drink,spaghetti,Spaghetti
+Food and Drink,strawberry,Strawberry
+Food and Drink,toast,Toast
+Food and Drink,tuna,Tuna
+Food and Drink,vanilla,Vanilla
+Food and Drink,vitamins,Vitamins
+Food and Drink,water,Water
+Food and Drink,yogurt,Yogurt
+Clothing,beads,Beads
+Clothing,belt,Belt
+Clothing,bib,Bib
+Clothing,boots,Boots
+Clothing,button,Button
+Clothing,coat,Coat
+Clothing,diaper,Diaper
+Clothing,dress,Dress
+Clothing,gloves,Gloves
+Clothing,hat,Hat
+Clothing,jacket,Jacket
+Clothing,jeans,Jeans
+Clothing,mittens,Mittens
+Clothing,necklace,Necklace
+Clothing,pajamas,Pajamas
+Clothing,pants,Pants
+Clothing,scarf,Scarf
+Clothing,shirt,Shirt
+Clothing,shoe,Shoe
+Clothing,shorts,Shorts
+Clothing,slipper,Slipper
+Clothing,sneaker,Sneaker
+Clothing,snowsuit,Snowsuit
+Clothing,sock,Sock
+Clothing,sweater,Sweater
+Clothing,tights,Tights
+Clothing,underpants,Underpants
+Clothing,zipper,Zipper
+Body Parts,ankle,Ankle
+Body Parts,arm,Arm
+Body Parts,belly button,Belly Button
+Body Parts,buttocks/bottom,Butt
+Body Parts,cheek,Cheek
+Body Parts,chin,Chin
+Body Parts,ear,Ear
+Body Parts,eye,Eye
+Body Parts,face,Face
+Body Parts,feet,Feet
+Body Parts,hair,Hair
+Body Parts,hand,Hand
+Body Parts,head,Head
+Body Parts,knee,Knee
+Body Parts,leg,Leg
+Body Parts,lips,Lips
+Body Parts,mouth,Mouth
+Body Parts,nose,Nose
+Body Parts,owie/boo ,Boo
+Body Parts,penis,Penis
+Body Parts,shoulder,Shoulder
+Body Parts,tooth,Tooth
+Body Parts,toe,Toe
+Body Parts,tongue,Tongue
+Body Parts,tummy,Tummy
+Body Parts,vagina,Vagina
+Small Household Objects Items,basket,Basket
+Small Household Objects Items,blanket,Blanket
+Small Household Objects Items,bottle,Bottle
+Small Household Objects Items,box,Box
+Small Household Objects Items,bowl,Bowl
+Small Household Objects Items,broom,Broom
+Small Household Objects Items,brush,Brush
+Small Household Objects Items,bucket,Bucket
+Small Household Objects Items,camera,Camera
+Small Household Objects Items,can,Can
+Small Household Objects Items,clock,Clock
+Small Household Objects Items,comb,Comb
+Small Household Objects Items,cup,Cup
+Small Household Objects Items,dish,Dish
+Small Household Objects Items,fork,Fork
+Small Household Objects Items,garbage,Garbage
+Small Household Objects Items,glass,Glass
+Small Household Objects Items,glasses,Glasses
+Small Household Objects Items,hammer,Hammer
+Small Household Objects Items,jar,Jar
+Small Household Objects Items,keys,Keys
+Small Household Objects Items,knife,Knife
+Small Household Objects Items,lamp,Lamp
+Small Household Objects Items,light,Light
+Small Household Objects Items,medicine,Medicine
+Small Household Objects Items,money,Money
+Small Household Objects Items,mop,Mop
+Small Household Objects Items,nail,Nail
+Small Household Objects Items,napkin,Napkin
+Small Household Objects Items,paper,Paper
+Small Household Objects Items,penny,Penny
+Small Household Objects Items,picture,Picture
+Small Household Objects Items,pillow,Pillow
+Small Household Objects Items,plant,Plant
+Small Household Objects Items,late,Late
+Small Household Objects Items,purse,Purse
+Small Household Objects Items,radio,Radio
+Small Household Objects Items,scissors,Scissors
+Small Household Objects Items,soap,Soap
+Small Household Objects Items,spoon,Spoon
+Small Household Objects Items,tape,Tape
+Small Household Objects Items,telephone,Telephone
+Small Household Objects Items,tissue/kleenex,Tissue
+Small Household Objects Items,toothbrush,Toothbrush
+Small Household Objects Items,towel,Towel
+Small Household Objects Items,trash,Trash
+Small Household Objects Items,tray,Tray
+Small Household Objects Items,vacuum,Vacuum
+Small Household Objects Items,walker,Walker
+Small Household Objects Items,watch,Watch
+Furniture and Rooms,basement,Basement
+Furniture and Rooms,bathroom,Bathroom
+Furniture and Rooms,bathtub,Bathtub
+Furniture and Rooms,bed,Bed
+Furniture and Rooms,bedroom,Bedroom
+Furniture and Rooms,bench,Bench
+Furniture and Rooms,chair,Chair
+Furniture and Rooms,closet,Closet
+Furniture and Rooms,couch,Couch
+Furniture and Rooms,crib,Crib
+Furniture and Rooms,door,Door
+Furniture and Rooms,drawer,Drawer
+Furniture and Rooms,dryer,Dryer
+Furniture and Rooms,garage,Garage
+Furniture and Rooms,high chair,High Chair
+Furniture and Rooms,kitchen,Kitchen
+Furniture and Rooms,living room,Living Room
+Furniture and Rooms,oven,Oven
+Furniture and Rooms,play pen,PlayPen
+Furniture and Rooms,porch,Porch
+Furniture and Rooms,potty,Potty
+Furniture and Rooms,refrigerator,Refrigerator
+Furniture and Rooms,rocking chair,Rocking Chair
+Furniture and Rooms,room,Room
+Furniture and Rooms,shower,Shower
+Furniture and Rooms,sink,Sink
+Furniture and Rooms,sofa,Sofa
+Furniture and Rooms,stairs,Stairs
+Furniture and Rooms,stove,Stove
+Furniture and Rooms,table,Table
+Furniture and Rooms,TV,Tv
+Furniture and Rooms,washing machine,Washing Machine
+Furniture and Rooms,window,Window
+Outside Things,backyard,Backyard
+Outside Things,cloud,Cloud
+Outside Things,flag,Flag
+Outside Things,flower,Flower
+Outside Things,garden,Garden
+Outside Things,grass,Grass
+Outside Things,hose,Hose
+Outside Things,ladder,Ladder
+Outside Things,lawn mower,Lawn Mower
+Outside Things,moon,Moon
+Outside Things,pool,Pool
+Outside Things,rain,Rain
+Outside Things,rock,Rock
+Outside Things,roof,Roof
+Outside Things,sandbox,Sandbox
+Outside Things,shovel,Shovel
+Outside Things,sidewalk,Sidewalk
+Outside Things,sky,Sky
+Outside Things,slide,Slide
+Outside Things,snow,Snow
+Outside Things,snowman,Snowman
+Outside Things,sprinkler,Sprinkler
+Outside Things,star,Star
+Outside Things,stick,Stick
+Outside Things,stone,Stone
+Outside Things,street,Street
+Outside Things,sun,Sun
+Outside Things,swing,Swing
+Outside Things,tree,Tree
+Outside Things,water,Water
+Outside Things,wind,Wind
+Places to Go,beach,Beach
+Places to Go,camping,Camping
+Places to Go,church,Church
+Places to Go,circus,Circus
+Places to Go,country,Country
+Places to Go,downtown,Downtown
+Places to Go,farm,Farm
+Places to Go,gas station,GasStation
+Places to Go,home,Home
+Places to Go,house,House
+Places to Go,movie,Movie
+Places to Go,outside,Outside
+Places to Go,park,Park
+Places to Go,party,Party
+Places to Go,picnic,Picnic
+Places to Go,playground,Playground
+Places to Go,school,School
+Places to Go,store,Store
+Places to Go,woods,Woods
+Places to Go,work,Work
+Places to Go,yard,Yard
+Places to Go,zoo,Zoo
+People,aunt,Aunt
+People,baby,Baby
+People,babysitter,Babysitter
+People,babysitter (name),Babysitter (Name)
+People,boy,Boy
+People,brother,Brother
+People,child,Child
+People,clown,Clown
+People,cowboy,Cowboy
+People,daddy,Daddy
+People,doctor,Doctor
+People,fireman,Fireman
+People,friend,Friend
+People,girl,Girl
+People,grandma,Grandma
+People,grandpa,Grandpa
+People,lady,Lady
+People,mailman,Mailman
+People,man,Man
+People,mommy,Mommy
+People,nurse,Nurse
+People,child (name),Child (Name)
+People,people,People
+People,person,Person
+People,pet (name),Pet (Name)
+People,police,Police
+People,sister,Sister
+People,teacher,Teacher
+People,uncle,Uncle
+Games and Routines,bath,Bath
+Games and Routines,breakfast,Breakfast
+Games and Routines,bye,Bye
+Games and Routines,Call,Call
+Games and Routines,dinner,Dinner
+Games and Routines,give me five,Give Me Five
+Games and Routines,gonna get you,Gonna Get You
+Games and Routines,go potty,Go Potty
+Games and Routines,hi,Hi
+Games and Routines,hello,Hello
+Games and Routines,lunch,Lunch
+Games and Routines,nap,Nap
+Games and Routines,night night,Night Night
+Games and Routines,no,No
+Games and Routines,patty cake,Patty Cake
+Games and Routines,peekaboo,Peekaboo
+Games and Routines,please,Please
+Games and Routines,Hush,Hush
+Games and Routines,shopping,Shopping
+Games and Routines,snack,Snack
+Games and Routines,so big,SoBig
+Games and Routines,thank you,Than kYou
+Games and Routines,this little piggy,This Little Piggy
+Games and Routines,turn around,Turn Around
+Games and Routines,yes,Yes
+Action,bite,Bite
+Action,blow,Blow
+Action,break,Break
+Action,bring,Bring
+Action,build,Build
+Action,bump,Bump
+Action,buy,Buy
+Action,carry,Carry
+Action,catch,Catch
+Action,chase,Chase
+Action,clap,Clap
+Action,clean,Clean
+Action,climb,Climb
+Action,close,Close
+Action,cook,Cook
+Action,cover,Cover
+Action,cry,Cry
+Action,cut,Cut
+Action,dance,Dance
+Action,draw,Draw
+Action,drink,Drink
+Action,drive,Drive
+Action,drop,Drop
+Action,dry,Dry
+Action,dump,Dump
+Action,eat,Eat
+Action,fall,Fall
+Action,feed,Feed
+Action,find,Find
+Action,finish,Finish
+Action,fit,Fit
+Action,fix,Fix
+Action,get,Get
+Action,give,Give
+Action,go,Go
+Action,hate,Hate
+Action,have,Have
+Action,hear,Hear
+Action,help,Help
+Action,hide,Hide
+Action,hit,Hit
+Action,hold,Hold
+Action,hug,Hug
+Action,hurry,Hurry
+Action,jump,Jump
+Action,kick,Kick
+Action,kiss,Kiss
+Action,knock,Knock
+Action,lick,Lick
+Action,like,Like
+Action,listen,Listen
+Action,look,Look
+Action,love,Love
+Action,make,Make
+Action,open,Open
+Action,paint,Paint
+Action,pick,Pick
+Action,play,Play
+Action,pour,Pour
+Action,pretend,Pretend
+Action,pull,Pull
+Action,push,Push
+Action,put,Put
+Action,read,Read
+Action,ride,Ride
+Action,rip,Rip
+Action,run,Run
+Action,say,Say
+Action,see,See
+Action,shake,Shake
+Action,share,Share
+Action,show,Show
+Action,sing,Sing
+Action,sit,Sit
+Action,skate,Skate
+Action,sleep,Sleep
+Action,slide,Slide
+Action,smile,Smile
+Action,spill,Spill
+Action,splash,Splash
+Action,stand,Stand
+Action,stay,Stay
+Action,stop,Stop
+Action,sweep,Sweep
+Action,swim,Swim
+Action,swing,Swing
+Action,take,Take
+Action,talk,Talk
+Action,taste,Taste
+Action,tear,Tear
+Action,think,Think
+Action,throw,Throw
+Action,tickle,Tickle
+Action,touch,Touch
+Action,wait,Wait
+Action,wake,Wake
+Action,walk,Walk
+Action,wash,Wash
+Action,watch,Watch
+Action,wipe,Wipe
+Action,wish,Wish
+Action,work,Work
+Action,write,Write
+Descriptive,allgone,All Gone
+Descriptive,asleep,Asleep
+Descriptive,awake,Awake
+Descriptive,bad,Bad
+Descriptive,better,Better
+Descriptive,big,Big
+Descriptive,black,Black
+Descriptive,blue,Blue
+Descriptive,broken,Broken
+Descriptive,brown,Brown
+Descriptive,careful,Careful
+Descriptive,clean,Clean
+Descriptive,cold,Cold
+Descriptive,cute,Cute
+Descriptive,dark,Dark
+Descriptive,dirty,Dirty
+Descriptive,dry,Dry
+Descriptive,empty,Empty
+Descriptive,fast,Fast
+Descriptive,fine,Fine
+Descriptive,first,First
+Descriptive,full,Full
+Descriptive,gentle,Gentle
+Descriptive,good,Good
+Descriptive,green,Green
+Descriptive,happy,Happy
+Descriptive,hard,Hard
+Descriptive,heavy,Heavy
+Descriptive,high,High
+Descriptive,hot,Hot
+Descriptive,hungry,Hungry
+Descriptive,hurt,Hurt
+Descriptive,last,Last
+Descriptive,little,Little
+Descriptive,long,Long
+Descriptive,loud,Loud
+Descriptive,mad,Mad
+Descriptive,naughty,Naughty
+Descriptive,new,New
+Descriptive,nice,Nice
+Descriptive,noisy,Noisy
+Descriptive,old,Old
+Descriptive,orange,Orange
+Descriptive,poor,Poor
+Descriptive,pretty,Pretty
+Descriptive,quiet,Quiet
+Descriptive,red,Red
+Descriptive,sad,Sad
+Descriptive,scared,Scared
+Descriptive,sick,Sick
+Descriptive,sleepy,Sleepy
+Descriptive,slow,Slow
+Descriptive,soft,Soft
+Descriptive,sticky,Sticky
+Descriptive,stuck,Stuck
+Descriptive,thirsty,Thirsty
+Descriptive,tiny,Tiny
+Descriptive,tired,Tired
+Descriptive,wet,Wet
+Descriptive,white,White
+Descriptive,windy,Windy
+Descriptive,yellow,Yellow
+Descriptive,yucky,Yucky
+Time,after,After
+Time,before,Before
+Time,day,Day
+Time,later,Later
+Time,morning,Morning
+Time,night,Night
+Time,now,Now
+Time,time,Time
+Time,today,Today
+Time,tomorrow,Tomorrow
+Time,tonight,Tonight
+Time,yesterday,Yesterday
+Pronouns,he,He
+Pronouns,her,Her
+Pronouns,hers,Hers
+Pronouns,him,Him
+Pronouns,his,His
+Pronouns,I,I
+Pronouns,it,It
+Pronouns,me,Me
+Pronouns,mine,Mine
+Pronouns,my,My
+Pronouns,myself,Myself
+Pronouns,our,Our
+Pronouns,she,She
+Pronouns,that,That
+Pronouns,their,Their
+Pronouns,them,Them
+Pronouns,these,These
+Pronouns,they,They
+Pronouns,this,This
+Pronouns,those,Those
+Pronouns,us,Us
+Pronouns,we,We
+Pronouns,you,You
+Pronouns,your,Your
+Pronouns,yourself,Yourself
+Question Words,how,How
+Question Words,what,What
+Question Words,when,When
+Question Words,where,Where
+Question Words,which,Which
+Question Words,who,Who
+Question Words,why,Why
+Prepositions and Locations,about,About
+Prepositions and Locations,above,Above
+Prepositions and Locations,around,Around
+Prepositions and Locations,at,At
+Prepositions and Locations,away,Away
+Prepositions and Locations,back,Back
+Prepositions and Locations,behind,Behind
+Prepositions and Locations,beside,Beside
+Prepositions and Locations,by,By
+Prepositions and Locations,down,Down
+Prepositions and Locations,for,For
+Prepositions and Locations,here,Here
+Prepositions and Locations,In,In
+Prepositions and Locations,into,Into
+Prepositions and Locations,next to,NextTo
+Prepositions and Locations,of,Of
+Prepositions and Locations,off,Off
+Prepositions and Locations,on,On
+Prepositions and Locations,on top of,On Top Of
+Prepositions and Locations,out,Out
+Prepositions and Locations,over,Over
+Prepositions and Locations,there,There
+Prepositions and Locations,to,To
+Prepositions and Locations,under,Under
+Prepositions and Locations,up,Up
+Prepositions and Locations,with,With
+Quantifiers,a,A
+Quantifiers,all,All
+Quantifiers,a lot ,A Lot
+Quantifiers,an,An
+Quantifiers,another,Another
+Quantifiers,any,Any
+Quantifiers,each,Each
+Quantifiers,every,Every
+Quantifiers,more,More
+Quantifiers,much,Much
+Quantifiers,not,Not
+Quantifiers,none,None
+Quantifiers,other,Other
+Quantifiers,same,Same
+Quantifiers,some,Some
+Quantifiers,the,The
+Quantifiers,too,Too
+Helping Verbs,am,Am
+Helping Verbs,are,Are
+Helping Verbs,be,Be
+Helping Verbs,can,Can
+Helping Verbs,could,Could
+Helping Verbs,Did,Did
+Helping Verbs,do,Do
+Helping Verbs,does,Does
+Helping Verbs,don't,Don't
+Helping Verbs,Going,Going
+Helping Verbs,Got to,Got To
+Helping Verbs,Have to,HaveTo
+Helping Verbs,is,Is
+Helping Verbs,Let me,Let Me
+Helping Verbs,Need,Need
+Helping Verbs,Try,Try
+Helping Verbs,Want To,Want To
+Helping Verbs,Wanna,Wanna
+Helping Verbs,was,Was
+Helping Verbs,were,Were
+Helping Verbs,will,Will
+Helping Verbs,would,Would
+Connecting Words,and,And
+Connecting Words,because,Because
+Connecting Words,but,But
+Connecting Words,if,If
+Connecting Words,so,So
+Connecting Words,then,Then
