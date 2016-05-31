@@ -52,7 +52,7 @@ ci.high <- function(x,na.rm=T) {
 
 Load original datasets
 ```{r}
-df_turk=read.csv("../data/FW_TurkData.csv")%>%
+df_turk=read.csv("../data/FW_fulldata.csv")%>%
   dplyr::select(-date, -subject, - addressee)%>%
   rename(language = lang,
          Category = cdi_cat)%>%#Turk data
